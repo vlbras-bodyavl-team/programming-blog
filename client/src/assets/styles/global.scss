@@ -1,0 +1,16 @@
+@import url(./_fonts.scss);
+@import url(./reset.scss);
+
+body {
+  font-family: Source Sans Pro, sans-serif;
+  --color-background: #ffffff;
+  --color-foreground: #1e1e1e;
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    --color-background: #1a1a1a;
+    --color-foreground: #fdfdfd;
+  }
+}
