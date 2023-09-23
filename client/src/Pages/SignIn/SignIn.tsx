@@ -1,8 +1,7 @@
-import React from "react";
-import FormSignIn from "../../Widget/FormSignUp/FormSignUp";
+import FormSignIn from "../../Widget/FormSignIn/FormSignIn";
 
 const SignIn = () => {
-  return <></>;
+  return <FormSignIn />;
 };
 
 export default SignIn;

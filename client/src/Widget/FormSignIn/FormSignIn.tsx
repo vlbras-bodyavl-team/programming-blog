@@ -1,11 +1,10 @@
 import { FormEvent } from "react";
-
+import { REDUCER_ACTION_TYPE, useSignIn } from "../../hooks/useSignIn";
 import { Button, Container, Form } from "react-bootstrap";
-import { REDUCER_ACTION_TYPE, useSignUp } from "../../hooks/useSignUp";
 import { Link } from "react-router-dom";
 
-const FormSignUp = () => {
-  const [state, dispatch] = useSignUp();
+const FormSignIn = () => {
+  const [state, dispatch] = useSignIn();
 
   const handleValidation = () => {
     let formIsValid = true;
@@ -31,21 +30,6 @@ const FormSignUp = () => {
         type: REDUCER_ACTION_TYPE.SET_PASSWORD_ERROR,
         payload:
           "Password length must best min 8 Chracters and Max 22 Chracters",
-      });
-
-      return false;
-    } else {
-      dispatch({
-        type: REDUCER_ACTION_TYPE.SET_PASSWORD_ERROR,
-        payload: "",
-      });
-      formIsValid = true;
-    }
-
-    if (state.confirmPassword !== state.password) {
-      dispatch({
-        type: REDUCER_ACTION_TYPE.SET_PASSWORD_ERROR,
-        payload: "Passwords should match",
       });
 
       return false;
@@ -102,28 +86,14 @@ const FormSignUp = () => {
           <Form.Text className="text-danger">{state.passwordError}</Form.Text>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="confirmPassword">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Confirm Password"
-            onChange={(e) =>
-              dispatch({
-                type: REDUCER_ACTION_TYPE.SET_CONFIRM_PASSWORD,
-                payload: e.target.value,
-              })
-            }
-          />
-        </Form.Group>
-
         <div className="d-grid gap-2">
           <Button variant="primary" type="submit">
             Submit
           </Button>
           <Form.Text>
-            Already have an account?{" "}
-            <Link to="/auth/signin" className="link-primary">
-              Sign in
+            Dont have an account?{" "}
+            <Link to="/auth/signup" className="link-primary">
+              Sign up
             </Link>
           </Form.Text>
         </div>
@@ -132,4 +102,4 @@ const FormSignUp = () => {
   );
 };
 
-export default FormSignUp;
+export default FormSignIn;
