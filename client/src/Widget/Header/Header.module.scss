@@ -6,8 +6,9 @@
   align-items: center;
   justify-content: space-between;
   .burger {
-    width: auto;
-    height: 30px;
+    cursor: pointer;
+  }
+  .logout {
+    cursor: pointer;
   }
 }
-
