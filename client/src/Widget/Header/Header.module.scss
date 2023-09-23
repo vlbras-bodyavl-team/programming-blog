@@ -1,14 +1,42 @@
 .container {
   height: 70px;
+  width: 100%;
   background-color: #1e1e1e;
   padding: 0 35px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   .burger {
     cursor: pointer;
   }
+  .logo {
+    margin: auto;
+  }
+  .links {
+    display: none;
+  }
   .logout {
     cursor: pointer;
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    justify-content: space-between;
+    .burger {
+      display: block;
+    }
+    .logo {
+      display: none;
+    }
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+    }
+    .logout {
+      display: block;
+    }
   }
 }
