@@ -117,7 +117,7 @@ const FormSignUp = () => {
         </Form.Group>
 
         <div className="d-grid gap-2">
-          <Button variant="primary" type="submit">
+          <Button variant="dark" type="submit">
             Submit
           </Button>
           <Form.Text>
