@@ -35,8 +35,10 @@ const Header = () => {
       <ReactSVG src={isLaptop ? burger : menu} className={s.burger} />
       <ReactSVG src={logo} className={s.logo} />
       <div className={s.links}>
-        {links.map((link) => (
-          <HeaderLink href={link.href}>{link.title}</HeaderLink>
+        {links.map((link, index) => (
+          <HeaderLink key={index} href={link.href}>
+            {link.title}
+          </HeaderLink>
         ))}
       </div>
       <ReactSVG src={logout} className={s.logout} />

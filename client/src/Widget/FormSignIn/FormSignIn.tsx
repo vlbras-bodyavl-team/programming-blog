@@ -92,7 +92,7 @@ const FormSignIn = () => {
           </Button>
           <Form.Text>
             Dont have an account?{" "}
-            <Link to="/auth/signup" className="link-primary">
+            <Link to="/signup" className="link-primary">
               Sign up
             </Link>
           </Form.Text>
