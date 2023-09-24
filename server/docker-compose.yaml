@@ -7,3 +7,9 @@ services:
       - .env
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
