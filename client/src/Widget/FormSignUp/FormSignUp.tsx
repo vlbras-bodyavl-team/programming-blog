@@ -66,7 +66,8 @@ const FormSignUp = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      handleValidation();
+      const isCorrect = handleValidation();
+      if (!isCorrect) return;
       const response = await signUp(state.email, state.password);
 
       const data: JwtTokens = response.data;
@@ -80,7 +81,7 @@ const FormSignUp = () => {
       if (axios.isAxiosError(error)) {
         dispatch({
           type: REDUCER_ACTION_TYPE.SET_EMAIL_ERROR,
-          payload: error.message,
+          payload: error.response?.data.message,
         });
       }
     }
