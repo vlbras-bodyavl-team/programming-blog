@@ -4,6 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { AccessTokenGuard } from './core/guards/access-token.guard';
+import { TopicsModule } from './topics/topics.module';
+import { PostsModule } from './posts/posts.module';
+import { IsUUIDGuard } from './core/guards/is-uuid.guard';
 
 @Module({
   imports: [
@@ -20,12 +23,18 @@ import { AccessTokenGuard } from './core/guards/access-token.guard';
     }),
     UsersModule,
     AuthModule,
+    TopicsModule,
+    PostsModule,
   ],
   providers: [
     {
       provide: 'APP_GUARD',
       useClass: AccessTokenGuard,
     },
+    {
+      provide: 'APP_GUARD',
+      useClass: IsUUIDGuard,
+    }
   ],
 })
 export class AppModule {}
