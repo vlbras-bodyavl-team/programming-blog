@@ -7,6 +7,8 @@ import { AccessTokenGuard } from './core/guards/access-token.guard';
 import { TopicsModule } from './topics/topics.module';
 import { PostsModule } from './posts/posts.module';
 import { IsUUIDGuard } from './core/guards/is-uuid.guard';
+import { CacheModule } from '@nestjs/cache-manager';
+import * as redisStore from 'cache-manager-redis-store';
 
 @Module({
   imports: [
@@ -20,6 +22,13 @@ import { IsUUIDGuard } from './core/guards/is-uuid.guard';
       database: process.env.POSTGRES_DB,
       autoLoadEntities: true,
       synchronize: true,
+    }),
+    CacheModule.register({
+      store: redisStore,
+      host: process.env.REDIS_HOST,
+      port: +process.env.REDIS_PORT,
+      ttl: parseInt(process.env.REDIS_TTL),
+      isGlobal: true,
     }),
     UsersModule,
     AuthModule,

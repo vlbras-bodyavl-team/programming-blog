@@ -1,5 +1,6 @@
 import {
   ConflictException,
+  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -7,12 +8,15 @@ import { UpdateTopicDto } from './dto/update-topic.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Topic } from './entities/topic.entity';
 import { Repository } from 'typeorm';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class TopicsService {
   constructor(
     @InjectRepository(Topic)
     private topicsRepository: Repository<Topic>,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
   findAll(): Promise<Topic[]> {
@@ -34,8 +38,11 @@ export class TopicsService {
   async update(id: string, updateTopicDto: UpdateTopicDto): Promise<Topic> {
     const topic = await this.findOne(id);
     try {
-      this.topicsRepository.merge(topic, updateTopicDto);
-      return await this.topicsRepository.save(topic);
+      const updatedTopic = this.topicsRepository.merge(topic, updateTopicDto);
+      await this.topicsRepository.save(topic);
+      await this.cacheManager.del('topics');
+      
+      return updatedTopic;
     } 
     catch (error) {
       throw new ConflictException('Topic already exists');
@@ -44,11 +51,14 @@ export class TopicsService {
 
   async remove(id: string): Promise<Topic> {
     const topic = await this.findOne(id);
+    await this.cacheManager.del('topics');
+
     return await this.topicsRepository.remove(topic);
   }
 
   async preload(name: string): Promise<Topic> {
     const existingTopic = await this.topicsRepository.findOneBy({ name });
+    await this.cacheManager.del('topics');
 
     if (existingTopic) {
       return existingTopic;
