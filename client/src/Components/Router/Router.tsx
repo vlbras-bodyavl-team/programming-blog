@@ -3,11 +3,13 @@ import Home, { homeLoader } from "../../Pages/Home/Home";
 import SignIn from "../../Pages/SignIn/SignIn";
 import SignUp from "../../Pages/SignUp/SignUp";
 import { BasicLayout, AuthLayout } from "../Layouts";
+import Error from "../../Pages/Error/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <BasicLayout />,
+    errorElement: <Error />,
     children: [
       {
         index: true,
@@ -17,7 +19,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/auth",
+    path: "/",
     element: <AuthLayout />,
     children: [
       {

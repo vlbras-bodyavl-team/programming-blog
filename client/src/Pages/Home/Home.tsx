@@ -7,7 +7,7 @@ const Home = () => {
 export default Home;
 
 export const homeLoader = () => {
-  if (!localStorage.access_token && !localStorage.refresh_token)
-    return redirect("/auth/signin");
+  if (!localStorage.accessToken && !localStorage.refreshToken)
+    return redirect("/signin");
   return null;
 };

@@ -1,11 +1,14 @@
 import { FormEvent } from "react";
-
 import { Button, Container, Form } from "react-bootstrap";
 import { REDUCER_ACTION_TYPE, useSignUp } from "../../hooks/useSignUp";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { signUp } from "../../services";
+import { JwtTokens } from "../../interfaces";
 
 const FormSignUp = () => {
   const [state, dispatch] = useSignUp();
+  const navigate = useNavigate();
 
   const handleValidation = () => {
     let formIsValid = true;
@@ -60,9 +63,27 @@ const FormSignUp = () => {
     return formIsValid;
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    handleValidation();
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    try {
+      e.preventDefault();
+      handleValidation();
+      const response = await signUp(state.email, state.password);
+
+      const data: JwtTokens = response.data;
+      const { accessToken, refreshToken } = data;
+
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+
+      navigate("/");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        dispatch({
+          type: REDUCER_ACTION_TYPE.SET_EMAIL_ERROR,
+          payload: error.message,
+        });
+      }
+    }
   };
 
   return (
@@ -122,7 +143,7 @@ const FormSignUp = () => {
           </Button>
           <Form.Text>
             Already have an account?{" "}
-            <Link to="/auth/signin" className="link-primary">
+            <Link to="/signin" className="link-primary">
               Sign in
             </Link>
           </Form.Text>
