@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./assets/styles/global.scss";
+import { Provider } from "react-redux";
+import { store } from "./store/store.ts";
 
 const htmlElement = document.querySelector("html");
 if (htmlElement?.getAttribute("data-bs-theme") === "auto") {
@@ -21,6 +23,8 @@ if (htmlElement?.getAttribute("data-bs-theme") === "auto") {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );

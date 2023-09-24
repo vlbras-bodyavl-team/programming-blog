@@ -7,6 +7,8 @@ import { useMediaQuery } from "react-responsive";
 
 import { ReactSVG } from "react-svg";
 import { HeaderLink } from "../../Components/UI";
+import { useAppDispatch } from "../../store/store";
+import { toggle } from "../../store/features/isOpenDrawerSlice";
 
 const links: { title: string; href: string }[] = [
   {
@@ -27,12 +29,18 @@ const links: { title: string; href: string }[] = [
   },
 ];
 const Header = () => {
+  const dispatch = useAppDispatch();
+
   const isLaptop = useMediaQuery({
     query: "screen and (min-width: 768px)",
   });
   return (
     <div className={s.container}>
-      <ReactSVG src={isLaptop ? burger : menu} className={s.burger} />
+      <ReactSVG
+        src={isLaptop ? burger : menu}
+        className={s.burger}
+        onClick={() => dispatch(toggle())}
+      />
       <ReactSVG src={logo} className={s.logo} />
       <div className={s.links}>
         {links.map((link, index) => (
