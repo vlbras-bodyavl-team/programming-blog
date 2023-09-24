@@ -44,11 +44,11 @@ export class UsersService {
   }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
+    const user = await this.findOne(id);
+    if (updateUserDto.password) {
+      updateUserDto.password = await hash(updateUserDto.password);
+    }
     try {
-      const user = await this.findOne(id);
-      if (updateUserDto.password) {
-        updateUserDto.password = await hash(updateUserDto.password);
-      }
       this.usersRepository.merge(user, updateUserDto);
       return await this.usersRepository.save(user);
     } 
