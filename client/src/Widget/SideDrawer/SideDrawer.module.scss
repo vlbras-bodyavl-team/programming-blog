@@ -1,18 +1,37 @@
 .drawer {
-  height: inherit;
+  --bg-color: #f7f7f7;
+  height: 100vh;
+  background-color: var(--bg-color);
   position: relative;
-  top: 0;
-  left: 0;
-  width: 30%;
-  box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
-  border-right: 1px solid grey;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-out;
+  display: flex;
+  width: 0;
+  transition: width 500ms ease-out;
+  overflow: hidden;
   .content {
-    transition: none;
+    margin: 50px 20px 0px 25px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-wrap: nowrap;
   }
 }
 
 .drawer.open {
-  transform: translateX(0);
+  width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .drawer {
+    --bg-color: #0c0c0c;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .drawer.open {
+    width: 300px;
+    .content {
+      display: flex;
+    }
+  }
 }
