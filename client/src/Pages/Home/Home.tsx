@@ -1,7 +1,13 @@
+import s from "./Home.module.scss";
 import { redirect } from "react-router-dom";
+import SideDrawer from "../../Widget/SideDrawer/SideDrawer";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div className={s.container}>
+      <SideDrawer />
+    </div>
+  );
 };
 
 export default Home;

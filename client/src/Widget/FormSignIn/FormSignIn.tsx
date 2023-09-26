@@ -1,10 +1,14 @@
 import { FormEvent } from "react";
 import { REDUCER_ACTION_TYPE, useSignIn } from "../../hooks/useSignIn";
 import { Button, Container, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signIn } from "../../services";
+import { JwtTokens } from "../../interfaces";
+import axios from "axios";
 
 const FormSignIn = () => {
   const [state, dispatch] = useSignIn();
+  const navigate = useNavigate();
 
   const handleValidation = () => {
     let formIsValid = true;
@@ -44,9 +48,28 @@ const FormSignIn = () => {
     return formIsValid;
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    handleValidation();
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    try {
+      e.preventDefault();
+      const isCorrect = handleValidation();
+      if (!isCorrect) return;
+      const response = await signIn(state.email, state.password);
+
+      const data: JwtTokens = response.data;
+      const { accessToken, refreshToken } = data;
+
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+
+      navigate("/");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        dispatch({
+          type: REDUCER_ACTION_TYPE.SET_EMAIL_ERROR,
+          payload: error.response?.data.message,
+        });
+      }
+    }
   };
 
   return (

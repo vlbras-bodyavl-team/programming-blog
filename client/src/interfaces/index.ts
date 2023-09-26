@@ -9,3 +9,16 @@ export interface JwtTokens {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface IPost {
+  id: string;
+  title: string;
+  content: string;
+  topic: string;
+}
+
+export interface ITopic {
+  id: string;
+  name: string;
+  posts: IPost[];
+}
