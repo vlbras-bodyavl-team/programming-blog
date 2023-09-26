@@ -32,6 +32,8 @@ export class PostsController {
     return this.postsService.findAll(topicId);
   }
 
+  @UseGuards(RoleGuard)
+  @Role(Roles.ADMIN)
   @Get('posts/:id')
   findOne(@Param('id') id: string): Promise<PostEntity> {
     return this.postsService.findOne(id);
