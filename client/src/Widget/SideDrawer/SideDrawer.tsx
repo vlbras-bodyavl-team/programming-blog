@@ -1,6 +1,6 @@
 import s from "./SideDrawer.module.scss";
 import { useAppSelector } from "../../store/store";
-import Topic from "../../Components/UI/Topic/Topic";
+import Topic from "../../components/UI/Topic/Topic";
 import { ITopic } from "../../interfaces";
 
 interface ISideDrawerProps {
