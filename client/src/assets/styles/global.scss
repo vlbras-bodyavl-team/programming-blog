@@ -19,11 +19,9 @@ body {
   background-color: var(--color-background);
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    --color-background: #000000;
-    --color-foreground: #fdfdfd;
-  }
+body.dark {
+  --color-background: #000000;
+  --color-foreground: #fdfdfd;
 }
 
 img {

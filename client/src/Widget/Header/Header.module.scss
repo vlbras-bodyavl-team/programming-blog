@@ -6,6 +6,11 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  .buttons {
+    display: flex;
+    gap: 70px;
+    align-items: center;
+  }
   .burger {
     cursor: pointer;
   }
@@ -34,6 +39,7 @@
       display: flex;
       justify-content: center;
       gap: 80px;
+      margin: 0 auto;
     }
     .logout {
       display: block;
