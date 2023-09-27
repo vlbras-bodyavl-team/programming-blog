@@ -3,42 +3,19 @@ import { useAppSelector } from "../../store/store";
 import Topic from "../../Components/UI/Topic/Topic";
 import { ITopic } from "../../interfaces";
 
-const mockTopic: ITopic = {
-  id: "id",
-  name: "Topic",
-  posts: [
-    {
-      id: "id",
-      title: "test",
-      content: "test",
-      topic: "id",
-    },
-    {
-      id: "id",
-      title: "test",
-      content: "test",
-      topic: "id",
-    },
-    {
-      id: "id",
-      title: "test",
-      content: "test",
-      topic: "id",
-    },
-  ],
-};
-
-const SideDrawer = () => {
+interface ISideDrawerProps {
+  topics: ITopic[];
+}
+const SideDrawer = ({ topics }: ISideDrawerProps) => {
   const isOpen = useAppSelector((state) => state.isOpenDrawer.value);
 
   return (
     <div className={isOpen ? `${s.drawer} ${s.open}` : s.drawer}>
-      <div className={s.content}>
-        <Topic topic={mockTopic} />
-        <Topic topic={mockTopic} />
-        <Topic topic={mockTopic} />
-        <Topic topic={mockTopic} />
-      </div>
+      <ul className={s.content}>
+        {topics.map((topic, i) => (
+          <Topic key={i} topic={topic} />
+        ))}
+      </ul>
     </div>
   );
 };
