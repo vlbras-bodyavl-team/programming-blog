@@ -8,10 +8,11 @@ interface ISideDrawerProps {
 }
 const SideDrawer = ({ topics }: ISideDrawerProps) => {
   const isOpen = useAppSelector((state) => state.isOpenDrawer.value);
+  const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
 
   return (
     <div className={isOpen ? `${s.drawer} ${s.open}` : s.drawer}>
-      <ul className={s.content}>
+      <ul className={isDarkMode ? `${s.content} ${s.dark}` : s.content}>
         {topics.map((topic, i) => (
           <Topic key={i} topic={topic} />
         ))}

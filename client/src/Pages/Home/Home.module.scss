@@ -1,9 +1,7 @@
 .container {
   display: flex;
   justify-content: space-between;
-
   .posts {
-    transition: margin-left 3s;
     margin: 30px 20px;
   }
 }

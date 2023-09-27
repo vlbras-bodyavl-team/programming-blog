@@ -1,16 +1,14 @@
-import { useMediaQuery } from "react-responsive";
 import { ITopic } from "../../../interfaces";
 import s from "./Topic.module.scss";
 import { useState } from "react";
+import { useAppSelector } from "../../../store/store";
 
 interface ITopicProps {
   topic: ITopic;
 }
 const Topic = ({ topic }: ITopicProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const isDarkMode = useMediaQuery({
-    query: "screen and (prefers-color-scheme: dark)",
-  });
+  const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
 
   return (
     <li className={isOpen ? `${s.mainContainer} ${s.open}` : s.mainContainer}>

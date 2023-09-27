@@ -4,9 +4,8 @@ import logout from "../../assets/images/logout.svg";
 import logo from "../../assets/images/logo.svg";
 import menu from "../../assets/images/menu.svg";
 import { useMediaQuery } from "react-responsive";
-
 import { ReactSVG } from "react-svg";
-import { HeaderLink } from "../../Components/UI";
+import { HeaderLink, ThemeToggle } from "../../Components/UI";
 import { useAppDispatch } from "../../store/store";
 import { toggle } from "../../store/features/isOpenDrawerSlice";
 
@@ -34,6 +33,7 @@ const Header = () => {
   const isLaptop = useMediaQuery({
     query: "screen and (min-width: 768px)",
   });
+
   return (
     <div className={s.container}>
       <ReactSVG
@@ -49,7 +49,10 @@ const Header = () => {
           </HeaderLink>
         ))}
       </div>
-      <ReactSVG src={logout} className={s.logout} />
+      <div className={s.buttons}>
+        <ThemeToggle />
+        <ReactSVG src={logout} className={s.logout} />
+      </div>
     </div>
   );
 };
