@@ -1,8 +1,9 @@
 import s from "./Home.module.scss";
 import { redirect } from "react-router-dom";
-import SideDrawer from "../../Widget/SideDrawer/SideDrawer";
+import SideDrawer from "../../widget/SideDrawer/SideDrawer";
 import { ITopic } from "../../interfaces";
-import Post from "../../Components/UI/Post/Post";
+import Post from "../../components/UI/Post/Post";
+import { getTokensFromStorage } from "../../utils";
 
 const mockTopic: ITopic = {
   id: "id",
@@ -48,7 +49,6 @@ const Home = () => {
 export default Home;
 
 export const homeLoader = () => {
-  if (!localStorage.accessToken && !localStorage.refreshToken)
-    return redirect("/signin");
+  if (!getTokensFromStorage()) return redirect("/signin");
   return null;
 };

@@ -3,7 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useAppDispatch } from "../../../store/store";
 import { useMediaQuery } from "react-responsive";
 import { useEffect } from "react";
-import { getColorTheme, setColorTheme } from "../../../utils";
+import {
+  getColorTheme,
+  setColorTheme,
+  updateBootStrapTheme,
+} from "../../../utils";
 import { setTheme } from "../../../store/features/isDarkModeSlice";
 
 const AuthLayout = () => {
@@ -17,7 +21,7 @@ const AuthLayout = () => {
       setColorTheme(currentColorSceme);
       dispatch(setTheme(currentColorSceme));
     } else {
-      setColorTheme(getColorTheme() === "dark" ? "dark" : "light");
+      updateBootStrapTheme(getColorTheme() === "dark" ? "dark" : "light");
     }
   }, []);
   return <Outlet />;

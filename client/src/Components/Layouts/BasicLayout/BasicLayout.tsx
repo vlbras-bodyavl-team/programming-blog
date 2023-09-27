@@ -1,5 +1,5 @@
-import Header from "../../../Widget/Header/Header";
 import { Outlet } from "react-router-dom";
+import { Header } from "../../../widget";
 
 const BasicLayout = () => {
   return (
