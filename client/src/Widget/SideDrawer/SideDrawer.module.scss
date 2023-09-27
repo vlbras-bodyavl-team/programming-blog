@@ -1,8 +1,10 @@
 .drawer {
+  flex-shrink: 0.1;
   --bg-color: #f7f7f7;
+  z-index: 200;
   height: 100vh;
-  background-color: var(--bg-color);
-  position: relative;
+  background: var(--bg-color);
+  position: fixed;
   display: flex;
   width: 0;
   transition: width 500ms ease-out;
@@ -28,10 +30,10 @@
 }
 
 @media screen and (min-width: 768px) {
+  .drawer {
+    position: relative;
+  }
   .drawer.open {
     width: 300px;
-    .content {
-      display: flex;
-    }
   }
 }

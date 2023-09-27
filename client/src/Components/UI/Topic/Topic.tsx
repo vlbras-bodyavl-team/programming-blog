@@ -13,7 +13,7 @@ const Topic = ({ topic }: ITopicProps) => {
   });
 
   return (
-    <div className={isOpen ? `${s.mainContainer} ${s.open}` : s.mainContainer}>
+    <li className={isOpen ? `${s.mainContainer} ${s.open}` : s.mainContainer}>
       <div
         className={isOpen ? `${s.container} ${s.open}` : s.container}
         onClick={() => setIsOpen(!isOpen)}
@@ -42,7 +42,7 @@ const Topic = ({ topic }: ITopicProps) => {
           </div>
         ))}
       </div>
-    </div>
+    </li>
   );
 };
 
