@@ -1,15 +1,2 @@
-.container {
-  display: flex;
-  justify-content: space-between;
-  .posts {
-    margin: 30px 20px;
-  }
-}
 
-@media screen and (min-width: 1024px) {
-  .container {
-    .posts {
-      margin: 40px 170px 0 100px;
-    }
-  }
-}
+
