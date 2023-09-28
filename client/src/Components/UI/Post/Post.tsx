@@ -1,3 +1,4 @@
+import { Title } from "..";
 import { IPost } from "../../../interfaces";
 import s from "./Post.module.scss";
 
@@ -7,7 +8,7 @@ interface IPostProps {
 const Post = ({ post }: IPostProps) => {
   return (
     <li className={s.container}>
-      <h3 className={s.title}>{post.title}</h3>
+      <Title>{post.title}</Title>
       <article className={s.content}>{post.content}</article>
     </li>
   );

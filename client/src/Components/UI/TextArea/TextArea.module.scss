@@ -1,0 +1,13 @@
+.textarea {
+  border-radius: 5px;
+  border: 1px solid #1e1e1e;
+  background: #f5f5f5;
+  min-height: 400px;
+  width: 100%;
+  flex-basis: 100%;
+}
+
+.textarea.dark {
+  color: #fdfdfd;
+  background: #1e1e1e;
+}

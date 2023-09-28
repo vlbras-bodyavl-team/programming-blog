@@ -3,6 +3,7 @@
 html {
   box-sizing: border-box;
   height: 100%;
+  width: 100%;
 }
 *,
 *:before,
@@ -12,6 +13,7 @@ html {
 
 body {
   height: 100%;
+  width: 100%;
   font-family: Source Sans Pro, sans-serif;
   --color-background: #ffffff;
   --color-foreground: #1e1e1e;
