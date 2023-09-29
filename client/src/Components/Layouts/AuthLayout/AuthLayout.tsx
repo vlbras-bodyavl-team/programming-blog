@@ -8,7 +8,7 @@ import {
   setColorTheme,
   updateBootStrapTheme,
 } from "../../../utils";
-import { setTheme } from "../../../store/features/isDarkModeSlice";
+import { setTheme } from "../../../store/features/themeModeSlice";
 
 const AuthLayout = () => {
   const dispatch = useAppDispatch();

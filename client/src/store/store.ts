@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import isOpenDrawerReducer from "./features/isOpenDrawerSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import themeReducer from "./features/isDarkModeSlice";
+import themeReducer from "./features/themeModeSlice";
 
 export const store = configureStore({
   reducer: {
