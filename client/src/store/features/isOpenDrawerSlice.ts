@@ -7,7 +7,7 @@ export const isOpenDrawerSlice = createSlice({
   },
   reducers: {
     toggle: (state) => {
-      state.value = !state.value;
+      return { value: !state.value };
     },
   },
 });

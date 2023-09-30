@@ -1,19 +1,62 @@
 import { FormEvent } from "react";
 import { Button, Input, TextArea, Title } from "../../components/UI";
 import s from "./AddPost.module.scss";
+import { addPost } from "../../services";
+import { REDUCER_ACTION_TYPE, usePost } from "../../hooks/usePost";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddPost = () => {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const [state, dispatch] = usePost();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    try {
+      e.preventDefault();
+
+      await addPost(state);
+
+      navigate("/");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        alert(error.response?.data.message);
+      } else throw error;
+    }
   };
   return (
     <form onSubmit={handleSubmit} className={s.container}>
       <Title>Add Post</Title>
       <div className={s.inputs}>
-        <Input placeholder="Title" style={{ width: "300px" }} />
-        <Input placeholder="Topic" style={{ width: "160px" }} />
+        <Input
+          placeholder="Title"
+          style={{ width: "300px" }}
+          onChange={(e) =>
+            dispatch({
+              type: REDUCER_ACTION_TYPE.SET_TITLE,
+              payload: e.currentTarget.value,
+            })
+          }
+        />
+        <Input
+          placeholder="Topic"
+          style={{ width: "160px" }}
+          onChange={(e) =>
+            dispatch({
+              type: REDUCER_ACTION_TYPE.SET_TOPIC,
+              payload: e.currentTarget.value,
+            })
+          }
+        />
       </div>
-      <TextArea placeholder="Content" />
+      <TextArea
+        placeholder="Content"
+        onChange={(e) =>
+          dispatch({
+            type: REDUCER_ACTION_TYPE.SET_CONTENT,
+            payload: e.currentTarget.value,
+          })
+        }
+      />
       <Button>Submit</Button>
     </form>
   );
