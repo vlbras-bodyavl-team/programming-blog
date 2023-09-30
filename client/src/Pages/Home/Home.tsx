@@ -1,15 +1,28 @@
 import s from "./Home.module.scss";
-import { redirect } from "react-router-dom";
-import { ITopic } from "../../interfaces";
+import {
+  LoaderFunctionArgs,
+  redirect,
+  useLoaderData,
+  useSearchParams,
+} from "react-router-dom";
+
 import Post from "../../components/UI/Post/Post";
 import { getTokensFromStorage } from "../../utils";
-import { mockTopic } from "../../components/Layouts/BasicLayout/BasicLayout";
+
+import { useAppSelector } from "../../store/store";
+import { useEffect, useState } from "react";
+import { IPost, ITopic } from "../../interfaces";
+import { getPostsForTopic } from "../../services";
 
 const Home = () => {
-  const topic: ITopic = mockTopic;
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const posts = useLoaderData() as IPost[];
+
+  useEffect(() => {});
   return (
     <ul className={s.posts}>
-      {topic.posts.map((post, i) => (
+      {posts?.map((post, i) => (
         <Post key={i} post={post} />
       ))}
     </ul>
@@ -18,7 +31,8 @@ const Home = () => {
 
 export default Home;
 
-export const homeLoader = () => {
+export const homeLoader = async ({ params }: LoaderFunctionArgs<any>) => {
   if (!getTokensFromStorage()) return redirect("/signin");
-  return null;
+  const response = await getPostsForTopic(params.topicId);
+  return response.data;
 };

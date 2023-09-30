@@ -1,14 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import { getTokensFromStorage } from "../utils";
-import { PostState } from "../hooks/usePost";
 
-export const addPost = async (
-  post: PostState
+export const getPostsForTopic = (
+  topicId: string | undefined
 ): Promise<AxiosResponse<any, any>> => {
   const token = getTokensFromStorage()?.accessToken;
-  const response = await axios.post(
-    `${import.meta.env.VITE_API_URL}/posts`,
-    post,
+  const response = axios.get(
+    `${import.meta.env.VITE_API_URL}/topics/${topicId}/posts`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

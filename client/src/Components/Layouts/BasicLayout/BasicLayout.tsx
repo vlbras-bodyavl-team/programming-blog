@@ -3,6 +3,10 @@ import { Header } from "../../../widget";
 import s from "./BasicLayout.module.scss";
 import { SideDrawer } from "../../../widget";
 import { ITopic } from "../../../interfaces";
+import { getTopics } from "../../../services";
+import { useAppDispatch, useAppSelector } from "../../../store/store";
+import { setTopics } from "../../../store/features/topicsSlice";
+import { useEffect } from "react";
 
 export const mockTopic: ITopic = {
   id: "id",
@@ -33,11 +37,12 @@ export const mockTopic: ITopic = {
 };
 
 const BasicLayout = () => {
+  const topics = useAppSelector((state) => state.topics.topics);
   return (
     <>
       <Header />
       <div className={s.container}>
-        <SideDrawer topics={[mockTopic, mockTopic, mockTopic]} />
+        <SideDrawer topics={topics} />
         <div className={s.outlet}>
           <Outlet />
         </div>
