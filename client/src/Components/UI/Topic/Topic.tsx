@@ -1,17 +1,25 @@
 import { ITopic } from "../../../interfaces";
 import s from "./Topic.module.scss";
-import { useState } from "react";
+import { LiHTMLAttributes, useState } from "react";
 import { useAppSelector } from "../../../store/store";
 
-interface ITopicProps {
+interface ITopicProps extends LiHTMLAttributes<HTMLLIElement> {
   topic: ITopic;
+  handlePostClick: (topicId: string, index: number) => void;
 }
-const Topic = ({ topic }: ITopicProps) => {
+const Topic = ({
+  topic,
+  handlePostClick: onPostClick,
+  ...props
+}: ITopicProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
 
   return (
-    <li className={isOpen ? `${s.mainContainer} ${s.open}` : s.mainContainer}>
+    <li
+      className={isOpen ? `${s.mainContainer} ${s.open}` : s.mainContainer}
+      {...props}
+    >
       <div
         className={isOpen ? `${s.container} ${s.open}` : s.container}
         onClick={() => setIsOpen(!isOpen)}
@@ -35,7 +43,11 @@ const Topic = ({ topic }: ITopicProps) => {
       </div>
       <div className={s.posts}>
         {topic.posts.map((post, index) => (
-          <div key={index} className={s.post}>
+          <div
+            key={index}
+            className={s.post}
+            onClick={() => onPostClick(topic.id, index)}
+          >
             {post.title}
           </div>
         ))}
