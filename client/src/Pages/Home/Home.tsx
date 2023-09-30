@@ -5,13 +5,10 @@ import {
   useLoaderData,
   useSearchParams,
 } from "react-router-dom";
-
 import Post from "../../components/UI/Post/Post";
 import { getTokensFromStorage } from "../../utils";
-
-import { useAppSelector } from "../../store/store";
-import { useEffect, useState } from "react";
-import { IPost, ITopic } from "../../interfaces";
+import { useEffect } from "react";
+import { IPost } from "../../interfaces";
 import { getPostsForTopic } from "../../services";
 
 const Home = () => {
