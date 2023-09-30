@@ -21,12 +21,18 @@ const Router = () => {
       children: [
         {
           element: <BasicLayout />,
+          loader: async () => {
+            if (topics.length > 0) return null;
+
+            const response = await getTopics();
+            dispatch(setTopics(response.data));
+
+            return null;
+          },
           children: [
             {
               index: true,
               loader: async () => {
-                const response = await getTopics();
-                dispatch(setTopics(response.data));
                 return redirect(`/topic/${topics[0].id}`);
               },
             },
