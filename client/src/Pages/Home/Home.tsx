@@ -30,6 +30,6 @@ export default Home;
 
 export const homeLoader = async ({ params }: LoaderFunctionArgs<any>) => {
   if (!getTokensFromStorage()) return redirect("/signin");
-  const response = await getPostsForTopic(params.topicId);
+  const response = await getPostsForTopic(params.id);
   return response.data;
 };

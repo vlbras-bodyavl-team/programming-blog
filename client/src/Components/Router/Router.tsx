@@ -31,7 +31,7 @@ const Router = () => {
               },
             },
             {
-              path: "/topic/:topicId",
+              path: "/topic/:id",
               element: <Home />,
               loader: homeLoader,
             },
