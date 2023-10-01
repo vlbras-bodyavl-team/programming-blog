@@ -1,7 +1,6 @@
 import s from "./SideDrawer.module.scss";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import Topic from "../../components/UI/Topic/Topic";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { toggle } from "../../store/features/isOpenDrawerSlice";
 
@@ -13,16 +12,8 @@ const SideDrawer = () => {
 
   const isTablet = useMediaQuery({ query: "screen and (max-width: 768px)" });
 
-  const { id } = useParams<{ id: string }>();
-  const [_, setSearchParams] = useSearchParams();
-
-  const navigate = useNavigate();
-
-  const handlePostClick = (topicId: string, index: number) => {
+  const handlePostClick = () => {
     if (isTablet) dispatch(toggle());
-
-    if (topicId === id) setSearchParams({ postId: `${index}` });
-    else navigate(`/topic/${topicId}/posts?postId=${index}`);
   };
 
   return (
