@@ -21,9 +21,9 @@ const Input = ({ dropdownItems, ...props }: IInputProps) => {
   };
 
   return (
-    <div className={s.container}>
+    <div className={isDark ? `${s.container} ${s.dark}` : s.container}>
       <input
-        className={isDark ? `${s.input} ${s.dark}` : s.input}
+        className={s.input}
         type="text"
         ref={inputRef}
         value={value}
