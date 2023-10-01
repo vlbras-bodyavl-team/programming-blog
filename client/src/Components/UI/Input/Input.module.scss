@@ -12,12 +12,13 @@
   }
   .dropdown {
     display: none;
+    overflow: hidden;
     background-color: #1e1e1e;
     border-radius: 0px 0px 5px 5px;
     width: 100%;
     color: white;
     position: absolute;
-    top: 22px;
+    top: 21px;
     .dropdownItem {
       cursor: pointer;
       padding: 5px;
@@ -35,6 +36,7 @@
   .input {
     color: #fdfdfd;
     border-radius: 5px;
+    border: none;
     background: #1e1e1e;
   }
 }
