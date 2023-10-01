@@ -7,7 +7,7 @@
   display: flex;
   width: 0;
   transition: width 500ms ease-out;
-  overflow: hidden;
+  overflow: overlay;
   .content {
     padding: 50px 20px 0px 25px;
     --bg-color: #f7f7f7;
