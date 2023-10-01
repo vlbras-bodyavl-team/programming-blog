@@ -20,8 +20,8 @@ import { Roles } from "src/core/enums/roles.enum";
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
-  // @UseGuards(RoleGuard)
-  // @Role(Roles.ADMIN)
+  @UseGuards(RoleGuard)
+  @Role(Roles.ADMIN)
   @Post("posts")
   async create(@Body() createPostDto: CreatePostDto): Promise<PostEntity> {
     return this.postsService.create(createPostDto);

@@ -5,10 +5,12 @@ import { addPost } from "../../services";
 import { REDUCER_ACTION_TYPE, usePost } from "../../hooks/usePost";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../store/store";
 
 const AddPost = () => {
   const [state, dispatch] = usePost();
   const navigate = useNavigate();
+  const topics = useAppSelector((store) => store.topics.topics);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     try {
@@ -46,6 +48,7 @@ const AddPost = () => {
               payload: e.currentTarget.value,
             })
           }
+          dropdownItems={topics.map((topic) => topic.name)}
         />
       </div>
       <TextArea
