@@ -2,16 +2,13 @@ import { ITopic } from "../../../interfaces";
 import s from "./Topic.module.scss";
 import { LiHTMLAttributes, useState } from "react";
 import { useAppSelector } from "../../../store/store";
+import { HashLink } from "react-router-hash-link";
 
 interface ITopicProps extends LiHTMLAttributes<HTMLLIElement> {
   topic: ITopic;
   handlePostClick: (topicId: string, index: number) => void;
 }
-const Topic = ({
-  topic,
-  handlePostClick: onPostClick,
-  ...props
-}: ITopicProps) => {
+const Topic = ({ topic, handlePostClick, ...props }: ITopicProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
 
@@ -43,13 +40,14 @@ const Topic = ({
       </div>
       <div className={s.posts}>
         {topic.posts.map((post, index) => (
-          <div
+          <HashLink
             key={index}
+            smooth
+            to={`/topic/${topic.id}/posts#${index}`}
             className={s.post}
-            onClick={() => onPostClick(topic.id, index)}
           >
             {post.title}
-          </div>
+          </HashLink>
         ))}
       </div>
     </li>

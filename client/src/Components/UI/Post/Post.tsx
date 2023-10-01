@@ -1,15 +1,15 @@
-import { forwardRef } from "react";
+import { LiHTMLAttributes, forwardRef } from "react";
 import { Title } from "..";
 import { IPost } from "../../../interfaces";
 import s from "./Post.module.scss";
 
-interface IPostProps {
+interface IPostProps extends LiHTMLAttributes<HTMLLIElement> {
   post: IPost;
 }
 const Post = forwardRef<HTMLLIElement, IPostProps>(
-  ({ post }: IPostProps, ref) => {
+  ({ post, ...props }: IPostProps, ref) => {
     return (
-      <li ref={ref} className={s.container}>
+      <li ref={ref} className={s.container} {...props}>
         <Title>{post.title}</Title>
         <article className={s.content}>{post.content}</article>
       </li>

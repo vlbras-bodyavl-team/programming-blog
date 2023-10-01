@@ -1,7 +1,8 @@
 .drawer {
   flex-shrink: 0.1;
   z-index: 200;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   position: fixed;
   display: flex;
   width: 0;

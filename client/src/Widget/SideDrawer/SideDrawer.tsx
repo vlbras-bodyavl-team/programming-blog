@@ -9,7 +9,6 @@ const SideDrawer = () => {
   const isOpen = useAppSelector((state) => state.isOpenDrawer.value);
   const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
   const topics = useAppSelector((state) => state.topics.topics);
-
   const dispatch = useAppDispatch();
 
   const isTablet = useMediaQuery({ query: "screen and (max-width: 768px)" });
@@ -23,7 +22,7 @@ const SideDrawer = () => {
     if (isTablet) dispatch(toggle());
 
     if (topicId === id) setSearchParams({ postId: `${index}` });
-    else navigate(`/topic/${topicId}?postId=${index}`);
+    else navigate(`/topic/${topicId}/posts?postId=${index}`);
   };
 
   return (
