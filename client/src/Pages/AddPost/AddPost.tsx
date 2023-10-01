@@ -32,22 +32,24 @@ const AddPost = () => {
         <Input
           placeholder="Title"
           style={{ width: "300px" }}
-          onChange={(e) =>
+          value={state.title}
+          setValue={(value) => {
             dispatch({
               type: REDUCER_ACTION_TYPE.SET_TITLE,
-              payload: e.currentTarget.value,
-            })
-          }
+              payload: value,
+            });
+          }}
         />
         <Input
           placeholder="Topic"
           style={{ width: "160px" }}
-          onChange={(e) =>
+          value={state.topic}
+          setValue={(value) => {
             dispatch({
               type: REDUCER_ACTION_TYPE.SET_TOPIC,
-              payload: e.currentTarget.value,
-            })
-          }
+              payload: value,
+            });
+          }}
           dropdownItems={topics.map((topic) => topic.name)}
         />
       </div>

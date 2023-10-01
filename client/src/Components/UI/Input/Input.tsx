@@ -1,19 +1,18 @@
-import { ChangeEvent, HTMLAttributes, useRef, useState } from "react";
+import { ChangeEvent, InputHTMLAttributes, useRef } from "react";
 import s from "./Input.module.scss";
 import { useAppSelector } from "../../../store/store";
 
-interface IInputProps extends HTMLAttributes<HTMLInputElement> {
+interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   dropdownItems?: string[];
+  setValue: (value: string) => void;
 }
 
-const Input = ({ dropdownItems, ...props }: IInputProps) => {
+const Input = ({ dropdownItems, setValue, ...props }: IInputProps) => {
   const isDark = useAppSelector((state) => state.theme.isDarkMode);
-  const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
-    if (props.onChange) props.onChange(e);
   };
 
   const handleLiClick = (item: string) => {
@@ -26,7 +25,6 @@ const Input = ({ dropdownItems, ...props }: IInputProps) => {
         className={s.input}
         type="text"
         ref={inputRef}
-        value={value}
         {...props}
         onChange={handleInputChange}
         onBlur={(e) => {
@@ -38,7 +36,9 @@ const Input = ({ dropdownItems, ...props }: IInputProps) => {
       {dropdownItems && (
         <ul className={s.dropdown}>
           {dropdownItems
-            .filter((item) => item.toLowerCase().includes(value.toLowerCase()))
+            .filter((item) =>
+              item.toLowerCase().includes(String(props.value).toLowerCase())
+            )
             .map((item, i) => (
               <li
                 key={i}
