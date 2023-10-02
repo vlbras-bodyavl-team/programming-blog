@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  programming-blog-client:
+    image: programming-blog-client-image
+    container_name: programming-blog-client
+    ports: 
+      - 5173:5173
+    
