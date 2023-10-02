@@ -21,7 +21,7 @@ export class PostsService {
     const topic = await this.topicsService.preload(createPostDto.topic);
     const post = this.postsRepository.create({ ...createPostDto, topic });
 
-    await this.cacheManager.del(`posts-${topic.id}`);
+    await this.deleteCache(topic.id);
     
     return this.postsRepository.save(post);
   }
@@ -60,7 +60,7 @@ export class PostsService {
     const topic = await this.topicsService.preload(updatePostDto.topic);
     const post = await this.findOne(id);
     
-    await this.cacheManager.del(`posts-${topic.id}`);
+    await this.deleteCache(topic.id);
     
     this.postsRepository.merge(post, { ...updatePostDto, topic });
     return this.postsRepository.save(post);
@@ -69,8 +69,13 @@ export class PostsService {
   async remove(id: string): Promise<Post> {
     const post = await this.findOne(id);
 
-    await this.cacheManager.del(`posts-${post.topic.id}`);
+    await this.deleteCache(post.topic.id);
     
     return this.postsRepository.remove(post);
+  }
+
+  private async deleteCache(topicId: string): Promise<void> {
+    await this.cacheManager.del(`posts-${topicId}`);
+    await this.cacheManager.del(`topics`);
   }
 }
