@@ -11,6 +11,7 @@ import { getTopics } from "../../services";
 import { setTopics } from "../../store/features/topicsSlice";
 import { ITopic } from "../../interfaces";
 import EditPost from "../../pages/EditPost/EditPost";
+import axios from "axios";
 
 const Router = () => {
   const dispatch = useAppDispatch();
@@ -24,9 +25,16 @@ const Router = () => {
   const router = createBrowserRouter([
     {
       index: true,
+      errorElement: <Error />,
       loader: async () => {
-        const topics = await fetchTopics();
-        return redirect(`/topic/${topics[0].id}/posts`);
+        try {
+          const topics = await fetchTopics();
+          return redirect(`/topic/${topics[0].id}/posts`);
+        } catch (error) {
+          if (axios.isAxiosError(error) && error.response?.status == 401) {
+            return redirect("/signin");
+          }
+        }
       },
     },
     {
