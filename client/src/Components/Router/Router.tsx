@@ -10,14 +10,15 @@ import { useAppDispatch } from "../../store/store";
 import { getTopics } from "../../services";
 import { setTopics } from "../../store/features/topicsSlice";
 import { ITopic } from "../../interfaces";
+import EditPost from "../../pages/EditPost/EditPost";
 
 const Router = () => {
   const dispatch = useAppDispatch();
 
   const fetchTopics = async (): Promise<ITopic[]> => {
-    const response = await getTopics();
-    dispatch(setTopics(response.data));
-    return response.data;
+    const topics = await getTopics();
+    dispatch(setTopics(topics));
+    return topics;
   };
 
   const router = createBrowserRouter([
@@ -35,13 +36,22 @@ const Router = () => {
       shouldRevalidate: () => false,
       children: [
         {
-          path: "/topic/:id/posts",
+          path: "topic/:id/posts",
           element: <Home />,
           loader: homeLoader,
         },
         {
-          path: "/admin/add-post",
+          path: "admin/topic/:id/posts",
+          element: <Home isAdmin={true} />,
+          loader: homeLoader,
+        },
+        {
+          path: "admin/add-post",
           element: <AddPost />,
+        },
+        {
+          path: "admin/edit-post/:id",
+          element: <EditPost />,
         },
       ],
     },

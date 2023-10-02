@@ -40,9 +40,8 @@ const Topic = ({ topic, handlePostClick, ...props }: ITopicProps) => {
       </div>
       <ul className={s.posts}>
         {topic.posts.map((post, index) => (
-          <li>
+          <li key={index}>
             <HashLink
-              key={index}
               smooth
               scroll={(el) => el.scrollIntoView()}
               onClick={handlePostClick}
