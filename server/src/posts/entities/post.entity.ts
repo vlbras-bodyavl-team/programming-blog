@@ -12,6 +12,6 @@ export class Post {
   @Column({ type: 'text' })
   content: string;
 
-  @ManyToOne(() => Topic, (topic) => topic.posts, { onDelete: 'CASCADE'})
+  @ManyToOne(() => Topic, (topic) => topic.posts, { cascade: true})
   topic: Topic;
 }
