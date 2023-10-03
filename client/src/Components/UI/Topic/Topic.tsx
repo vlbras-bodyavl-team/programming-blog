@@ -43,7 +43,7 @@ const Topic = ({ topic, handlePostClick, ...props }: ITopicProps) => {
           <li key={index}>
             <HashLink
               smooth
-              scroll={(el) => el.scrollIntoView()}
+              scroll={(el: HTMLElement) => el.scrollIntoView()}
               onClick={handlePostClick}
               to={`/topic/${topic.id}/posts#${index}`}
               className={s.post}
