@@ -31,6 +31,7 @@ const links: { title: string; href: string }[] = [
     href: import.meta.env.VITE_DOCS_URL,
   },
 ];
+
 const Header = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

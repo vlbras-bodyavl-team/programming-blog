@@ -1,5 +1,5 @@
 import { Topic } from 'src/topics/entities/topic.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('posts')
 export class Post {
@@ -14,4 +14,7 @@ export class Post {
 
   @ManyToOne(() => Topic, (topic) => topic.posts, { cascade: true})
   topic: Topic;
+  
+  @CreateDateColumn()
+  createdAt: Date;
 }

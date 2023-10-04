@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import { IPost } from "../interfaces";
 
 export enum REDUCER_ACTION_TYPE {
   SET_TITLE,
@@ -6,9 +7,10 @@ export enum REDUCER_ACTION_TYPE {
   SET_CONTENT,
 }
 
-interface ReducerAction {
+export interface ReducerAction {
   type: REDUCER_ACTION_TYPE;
   payload: string;
+  payloadWholePost?: IPost;
 }
 
 export interface PostState {

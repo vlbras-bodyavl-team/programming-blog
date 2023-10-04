@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { getTokensFromStorage } from "../utils";
+import { getTokensFromStorage } from "../../utils";
 
 export const logout = (): Promise<AxiosResponse<any, any>> => {
   const token = getTokensFromStorage()?.accessToken;

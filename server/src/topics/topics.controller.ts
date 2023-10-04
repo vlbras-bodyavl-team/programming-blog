@@ -1,8 +1,11 @@
-import { Controller, Get, Body, Param, Delete, Put, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Body, Param, Delete, Put, UseInterceptors, UseGuards } from '@nestjs/common';
 import { TopicsService } from './topics.service';
 import { UpdateTopicDto } from './dto/update-topic.dto';
 import { Topic } from './entities/topic.entity';
-import { CacheInterceptor, CacheKey, CacheTTL } from '@nestjs/cache-manager';
+import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
+import { RoleGuard } from 'src/core/guards/role.guard';
+import { Role } from 'src/core/decorators/role.decorator';
+import { Roles } from 'src/core/enums/roles.enum';
 
 @Controller('topics')
 export class TopicsController {
@@ -15,6 +18,8 @@ export class TopicsController {
     return this.topicsService.findAll();
   }
 
+  @UseGuards(RoleGuard)
+  @Role(Roles.ADMIN)
   @Put(':id')
   update(
     @Param('id') id: string,
@@ -23,8 +28,10 @@ export class TopicsController {
     return this.topicsService.update(id, updateTopicDto);
   }
 
+  @UseGuards(RoleGuard)
+  @Role(Roles.ADMIN)
   @Delete(':id')
-  remove(@Param('id') id: string): Promise<Topic> {
+  remove(@Param('id') id: string): Promise<void> {
     return this.topicsService.remove(id);
   }
 }

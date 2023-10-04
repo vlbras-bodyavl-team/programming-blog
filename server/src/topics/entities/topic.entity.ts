@@ -1,6 +1,7 @@
 import { Post } from 'src/posts/entities/post.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   Index,
   OneToMany,
@@ -18,4 +19,7 @@ export class Topic {
 
   @OneToMany(() => Post, (post) => post.topic)
   posts: Post[];
+
+  @CreateDateColumn()
+  createdAt: Date;
 }

@@ -6,7 +6,7 @@ import { HashLink } from "react-router-hash-link";
 
 interface ITopicProps extends LiHTMLAttributes<HTMLLIElement> {
   topic: ITopic;
-  handlePostClick: (topicId: string, index: number) => void;
+  handlePostClick: () => void;
 }
 const Topic = ({ topic, handlePostClick, ...props }: ITopicProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -38,18 +38,21 @@ const Topic = ({ topic, handlePostClick, ...props }: ITopicProps) => {
           </svg>
         </div>
       </div>
-      <div className={s.posts}>
+      <ul className={s.posts}>
         {topic.posts.map((post, index) => (
-          <HashLink
-            key={index}
-            smooth
-            to={`/topic/${topic.id}/posts#${index}`}
-            className={s.post}
-          >
-            {post.title}
-          </HashLink>
+          <li key={index}>
+            <HashLink
+              smooth
+              scroll={(el: HTMLElement) => el.scrollIntoView()}
+              onClick={handlePostClick}
+              to={`/topic/${topic.id}/posts#${index}`}
+              className={s.post}
+            >
+              {post.title}
+            </HashLink>
+          </li>
         ))}
-      </div>
+      </ul>
     </li>
   );
 };

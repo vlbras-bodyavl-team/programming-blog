@@ -10,38 +10,69 @@ import { useAppDispatch } from "../../store/store";
 import { getTopics } from "../../services";
 import { setTopics } from "../../store/features/topicsSlice";
 import { ITopic } from "../../interfaces";
+import EditPost, { editPostLoader } from "../../pages/EditPost/EditPost";
+import { catchUnauthorizedError } from "../../utils/router";
 
 const Router = () => {
   const dispatch = useAppDispatch();
 
   const fetchTopics = async (): Promise<ITopic[]> => {
-    const response = await getTopics();
-    dispatch(setTopics(response.data));
-    return response.data;
+    const topics = await getTopics();
+    dispatch(setTopics(topics));
+    return topics;
   };
 
   const router = createBrowserRouter([
     {
       index: true,
+      errorElement: <Error />,
       loader: async () => {
-        const topics = await fetchTopics();
-        return redirect(`/topic/${topics[0].id}/posts`);
+        try {
+          const topics = await fetchTopics();
+
+          return redirect(`/topic/${topics[0].id}/posts`);
+        } catch (error) {
+          return catchUnauthorizedError(error);
+        }
       },
     },
     {
       errorElement: <Error />,
       element: <BasicLayout />,
-      loader: fetchTopics,
-      shouldRevalidate: () => false,
+      loader: async () => {
+        try {
+          await fetchTopics();
+
+          return null;
+        } catch (error) {
+          return catchUnauthorizedError(error);
+        }
+      },
+
       children: [
         {
-          path: "/topic/:id/posts",
+          path: "topic/:id/posts",
           element: <Home />,
           loader: homeLoader,
         },
         {
-          path: "/admin/add-post",
-          element: <AddPost />,
+          path: "admin",
+          children: [
+            {
+              path: "topic/:id/posts",
+              element: <Home isAdmin={true} />,
+              loader: homeLoader,
+            },
+            {
+              path: "add-post",
+              element: <AddPost />,
+            },
+            {
+              path: "edit-post/:id",
+              element: <EditPost />,
+              loader: editPostLoader,
+            },
+          ],
         },
       ],
     },
