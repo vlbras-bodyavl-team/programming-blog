@@ -1,6 +1,6 @@
 import axios from "axios";
-import { IPost } from "../interfaces";
-import { getTokensFromStorage } from "../utils";
+import { IPost } from "../../interfaces";
+import { getTokensFromStorage } from "../../utils";
 
 export const deletePost = async (id: string): Promise<IPost> => {
   const token = getTokensFromStorage()?.accessToken;

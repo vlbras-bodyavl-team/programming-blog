@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import { getTokensFromStorage } from "../utils";
-import { PostState } from "../hooks/usePost";
+import { getTokensFromStorage } from "../../utils";
+import { PostState } from "../../hooks/usePost";
 
 export const addPost = async (
   post: PostState

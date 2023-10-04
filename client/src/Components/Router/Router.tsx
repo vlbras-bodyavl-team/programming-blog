@@ -11,7 +11,7 @@ import { getTopics } from "../../services";
 import { setTopics } from "../../store/features/topicsSlice";
 import { ITopic } from "../../interfaces";
 import EditPost from "../../pages/EditPost/EditPost";
-import axios from "axios";
+import { catchUnauthorizedError } from "../../utils/router";
 
 const Router = () => {
   const dispatch = useAppDispatch();
@@ -29,11 +29,10 @@ const Router = () => {
       loader: async () => {
         try {
           const topics = await fetchTopics();
+
           return redirect(`/topic/${topics[0].id}/posts`);
         } catch (error) {
-          if (axios.isAxiosError(error) && error.response?.status == 401) {
-            return redirect("/signin");
-          }
+          catchUnauthorizedError(error);
         }
       },
     },
@@ -45,9 +44,7 @@ const Router = () => {
           fetchTopics();
           return null;
         } catch (error) {
-          if (axios.isAxiosError(error) && error.response?.status == 401) {
-            return redirect("/signin");
-          }
+          catchUnauthorizedError(error);
         }
       },
       shouldRevalidate: () => false,
@@ -58,17 +55,22 @@ const Router = () => {
           loader: homeLoader,
         },
         {
-          path: "admin/topic/:id/posts",
-          element: <Home isAdmin={true} />,
-          loader: homeLoader,
-        },
-        {
-          path: "admin/add-post",
-          element: <AddPost />,
-        },
-        {
-          path: "admin/edit-post/:id",
-          element: <EditPost />,
+          path: "admin",
+          children: [
+            {
+              path: "topic/:id/posts",
+              element: <Home isAdmin={true} />,
+              loader: homeLoader,
+            },
+            {
+              path: "admin/add-post",
+              element: <AddPost />,
+            },
+            {
+              path: "admin/edit-post/:id",
+              element: <EditPost />,
+            },
+          ],
         },
       ],
     },
