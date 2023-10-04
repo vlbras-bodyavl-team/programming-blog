@@ -13,8 +13,8 @@ export class PostsService {
   constructor(
     @InjectRepository(Post)
     private postsRepository: Repository<Post>,
-    private readonly topicsService: TopicsService,
-    @Inject(CACHE_MANAGER) private cacheManager: Cache
+    private topicsService: TopicsService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
   async create(createPostDto: CreatePostDto): Promise<Post> {
@@ -22,7 +22,7 @@ export class PostsService {
     const post = this.postsRepository.create({ ...createPostDto, topic });
 
     await this.deleteCache(topic.id);
-    
+
     return this.postsRepository.save(post);
   }
 
@@ -35,25 +35,29 @@ export class PostsService {
 
     const topic = await this.topicsService.findOne(topicId);
     const posts = await this.postsRepository.findBy({ topic });
+
     await this.cacheManager.set(`posts-${topicId}`, posts);
 
     return posts;
   }
 
   async findOne(id: string): Promise<Post> {
-    const post = await this.postsRepository
-      .createQueryBuilder("post")
-      .leftJoin("post.topic", "topic")
-
-      .select([
-        "post.id",
-        "post.title",
-        "post.content",
-        "topic.id",
-        "topic.name",
-      ])
-      .where("post.id = :id", { id })
-      .getOne();
+    const [post] = await this.postsRepository.query(
+      /*sql*/ `
+      SELECT
+        p.id,
+        p.title,
+        p.content,
+        json_build_object(
+          'id', t.id,
+          'name', t.name
+        ) AS topic
+      FROM posts p
+      INNER JOIN topics t ON t.id = p."topicId"
+      WHERE p.id = $1;
+    `,
+      [id],
+    );
 
     if (!post) {
       throw new NotFoundException("Post not found");
@@ -65,19 +69,36 @@ export class PostsService {
   async update(id: string, updatePostDto: UpdatePostDto): Promise<Post> {
     const topic = await this.topicsService.preload(updatePostDto.topic);
     const post = await this.findOne(id);
-    
+
     await this.deleteCache(topic.id);
 
-    this.postsRepository.merge(post, { ...updatePostDto, topic });
-    return this.postsRepository.save(post);
+    const updatedPost = {
+      ...post,
+      ...updatePostDto,
+      topic,
+    }
+
+    await this.postsRepository.save(updatedPost);
+    await this.autoDeleteTopic(post.topic.id);
+
+    return updatedPost;
   }
 
-  async remove(id: string): Promise<Post> {
+  async remove(id: string): Promise<void>{
     const post = await this.findOne(id);
 
     await this.deleteCache(post.topic.id);
-    
-    return this.postsRepository.remove(post);
+
+    await this.postsRepository.remove(post);
+    await this.autoDeleteTopic(post.topic.id);
+  }
+
+  private async autoDeleteTopic(topicId: string): Promise<void> {
+    const postsCount = await this.postsRepository.countBy({ topic: { id: topicId } });
+  
+    if (postsCount === 0) {
+      await this.topicsService.remove(topicId);
+    }
   }
 
   private async deleteCache(topicId: string): Promise<void> {
