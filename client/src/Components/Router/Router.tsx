@@ -10,7 +10,7 @@ import { useAppDispatch } from "../../store/store";
 import { getTopics } from "../../services";
 import { setTopics } from "../../store/features/topicsSlice";
 import { ITopic } from "../../interfaces";
-import EditPost from "../../pages/EditPost/EditPost";
+import EditPost, { editPostLoader } from "../../pages/EditPost/EditPost";
 import { catchUnauthorizedError } from "../../utils/router";
 
 const Router = () => {
@@ -32,7 +32,7 @@ const Router = () => {
 
           return redirect(`/topic/${topics[0].id}/posts`);
         } catch (error) {
-          catchUnauthorizedError(error);
+          return catchUnauthorizedError(error);
         }
       },
     },
@@ -41,13 +41,14 @@ const Router = () => {
       element: <BasicLayout />,
       loader: async () => {
         try {
-          fetchTopics();
+          await fetchTopics();
+
           return null;
         } catch (error) {
-          catchUnauthorizedError(error);
+          return catchUnauthorizedError(error);
         }
       },
-      shouldRevalidate: () => false,
+
       children: [
         {
           path: "topic/:id/posts",
@@ -63,12 +64,13 @@ const Router = () => {
               loader: homeLoader,
             },
             {
-              path: "admin/add-post",
+              path: "add-post",
               element: <AddPost />,
             },
             {
-              path: "admin/edit-post/:id",
+              path: "edit-post/:id",
               element: <EditPost />,
+              loader: editPostLoader,
             },
           ],
         },
