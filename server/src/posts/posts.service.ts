@@ -27,15 +27,14 @@ export class PostsService {
   }
 
   async findAll(topicId: string): Promise<Post[]> {
+    await this.topicsService.findOne(topicId);
     const cachedPosts = await this.cacheManager.get<Post[]>(`posts-${topicId}`);
 
     if (cachedPosts) {
       return cachedPosts;
     }
 
-    const topic = await this.topicsService.findOne(topicId);
-    const posts = await this.postsRepository.findBy({ topic });
-
+    const posts = await this.postsRepository.findBy({ topic: { id: topicId } });
     await this.cacheManager.set(`posts-${topicId}`, posts);
 
     return posts;
