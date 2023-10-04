@@ -63,12 +63,14 @@ export class TopicsService {
 
   async remove(id: string): Promise<void> {
     const topic = await this.findOne(id);
+    
     await this.cacheManager.del('topics');
     await this.topicsRepository.remove(topic);
   }
 
   async preload(name: string): Promise<Topic> {
     const existingTopic = await this.topicsRepository.findOneBy({ name });
+
     await this.cacheManager.del('topics');
 
     if (existingTopic) {

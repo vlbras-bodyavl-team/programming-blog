@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 export const signIn = async (
   email: string,
   password: string
-): Promise<AxiosResponse<any, any> | undefined> => {
+): Promise<AxiosResponse<any, any>> => {
   const data = {
     email,
     password,

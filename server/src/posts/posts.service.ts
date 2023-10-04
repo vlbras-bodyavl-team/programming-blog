@@ -1,12 +1,12 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { CreatePostDto } from './dto/create-post.dto';
-import { UpdatePostDto } from './dto/update-post.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Post } from './entities/post.entity';
-import { Repository } from 'typeorm/repository/Repository';
-import { TopicsService } from 'src/topics/topics.service';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Cache } from 'cache-manager';
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
+import { CreatePostDto } from "./dto/create-post.dto";
+import { UpdatePostDto } from "./dto/update-post.dto";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Post } from "./entities/post.entity";
+import { Repository } from "typeorm/repository/Repository";
+import { TopicsService } from "src/topics/topics.service";
+import { CACHE_MANAGER } from "@nestjs/cache-manager";
+import { Cache } from "cache-manager";
 
 @Injectable()
 export class PostsService {
@@ -60,7 +60,7 @@ export class PostsService {
     );
 
     if (!post) {
-      throw new NotFoundException('Post not found');
+      throw new NotFoundException("Post not found");
     }
 
     return post;

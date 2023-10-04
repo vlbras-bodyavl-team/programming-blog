@@ -1,0 +1,14 @@
+.themeToggle {
+  cursor: pointer;
+}
+@media screen and (min-width: 768px) {
+  .themeToggle {
+    position: absolute;
+    right: 100px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .themeToggle {
+    right: 150px;
+  }
+}

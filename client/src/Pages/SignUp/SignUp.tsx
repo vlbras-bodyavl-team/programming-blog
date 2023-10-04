@@ -1,4 +1,4 @@
-import { FormSignUp } from "../../Widget";
+import { FormSignUp } from "../../widget";
 
 const SignUp = () => {
   return <FormSignUp />;

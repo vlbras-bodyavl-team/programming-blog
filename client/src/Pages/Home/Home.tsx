@@ -1,13 +1,39 @@
-import { redirect } from "react-router-dom";
+import s from "./Home.module.scss";
+import { LoaderFunctionArgs, redirect, useLoaderData } from "react-router-dom";
+import Post from "../../components/UI/Post/Post";
+import { getTokensFromStorage } from "../../utils";
+import { IPost } from "../../interfaces";
+import { getPostsForTopic } from "../../services";
+import { Button } from "../../components/UI";
+import { Link } from "react-router-dom";
 
-const Home = () => {
-  return <div>Home</div>;
+interface IHomeProps {
+  isAdmin?: boolean;
+}
+const Home = ({ isAdmin }: IHomeProps) => {
+  const posts = useLoaderData() as IPost[];
+
+  return (
+    <ul className={s.posts}>
+      {posts?.map((post, i) => (
+        <li key={i}>
+          <Post post={post} id={`${i}`} />
+          {isAdmin && (
+            <Link to={`/admin/edit-post/${post.id}`}>
+              <Button>Edit</Button>
+            </Link>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
 };
 
 export default Home;
 
-export const homeLoader = () => {
-  if (!localStorage.accessToken && !localStorage.refreshToken)
-    return redirect("/signin");
-  return null;
+export const homeLoader = async ({ params }: LoaderFunctionArgs<any>) => {
+  if (!getTokensFromStorage()) return redirect("/signin");
+  const posts = await getPostsForTopic(params.id);
+
+  return posts;
 };
