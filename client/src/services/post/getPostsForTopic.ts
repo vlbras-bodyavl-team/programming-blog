@@ -1,6 +1,6 @@
 import axios from "axios";
-import { getTokensFromStorage } from "../utils";
-import { IPost } from "../interfaces";
+import { IPost } from "../../interfaces";
+import { getTokensFromStorage } from "../../utils";
 
 export const getPostsForTopic = async (
   topicId: string | undefined

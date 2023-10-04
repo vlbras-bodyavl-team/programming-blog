@@ -1,6 +1,6 @@
 import axios from "axios";
-import { getTokensFromStorage } from "../utils";
-import { ITopic } from "../interfaces";
+import { ITopic } from "../../interfaces";
+import { getTokensFromStorage } from "../../utils";
 
 export const getTopics = async (): Promise<ITopic[]> => {
   const token = getTokensFromStorage()?.accessToken;

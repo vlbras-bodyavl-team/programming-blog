@@ -1,7 +1,5 @@
-import s from "./Home.module.scss";
-import { LoaderFunctionArgs, redirect, useLoaderData } from "react-router-dom";
+import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import Post from "../../components/UI/Post/Post";
-import { getTokensFromStorage } from "../../utils";
 import { IPost } from "../../interfaces";
 import { getPostsForTopic } from "../../services";
 import { Button } from "../../components/UI";
@@ -14,7 +12,7 @@ const Home = ({ isAdmin }: IHomeProps) => {
   const posts = useLoaderData() as IPost[];
 
   return (
-    <ul className={s.posts}>
+    <ul>
       {posts?.map((post, i) => (
         <li key={i}>
           <Post post={post} id={`${i}`} />
@@ -32,8 +30,6 @@ const Home = ({ isAdmin }: IHomeProps) => {
 export default Home;
 
 export const homeLoader = async ({ params }: LoaderFunctionArgs<any>) => {
-  if (!getTokensFromStorage()) return redirect("/signin");
   const posts = await getPostsForTopic(params.id);
-
   return posts;
 };
