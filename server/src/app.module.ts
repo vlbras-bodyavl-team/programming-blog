@@ -22,6 +22,7 @@ import * as redisStore from 'cache-manager-redis-store';
       database: process.env.POSTGRES_DB,
       autoLoadEntities: true,
       synchronize: true,
+      logging: true,
     }),
     CacheModule.register({
       store: redisStore,

@@ -52,7 +52,7 @@ export class PostsController {
   @UseGuards(RoleGuard)
   @Role(Roles.ADMIN)
   @Delete('posts/:id')
-  remove(@Param('id') id: string): Promise<PostEntity> {
+  remove(@Param('id') id: string): Promise<void> {
     return this.postsService.remove(id);
   }
 }

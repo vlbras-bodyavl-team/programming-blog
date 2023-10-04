@@ -20,11 +20,24 @@ export class TopicsService {
   ) {}
 
   findAll(): Promise<Topic[]> {
-    return this.topicsRepository
-      .createQueryBuilder('topic')
-      .leftJoinAndSelect('topic.posts', 'post')
-      .select(['topic.id', 'topic.name', 'post.id', 'post.title'])
-      .getMany();
+    return this.topicsRepository.query(/*sql*/ `
+      SELECT
+        t.id,
+        t.name,
+        CASE
+          WHEN COUNT(p.id) = 0 THEN '[]'::json
+          ELSE json_agg(
+            json_build_object(
+              'id', p.id,
+              'title', p.title
+            ) ORDER BY p."createdAt" ASC
+          )
+        END AS posts
+      FROM topics t
+      LEFT JOIN posts p ON p."topicId" = t.id
+      GROUP BY t.id, t.name
+      ORDER BY t."createdAt" ASC;
+    `);
   }
 
   async findOne(id: string): Promise<Topic> {
@@ -41,7 +54,6 @@ export class TopicsService {
       const updatedTopic = this.topicsRepository.merge(topic, updateTopicDto);
       await this.topicsRepository.save(topic);
       await this.cacheManager.del('topics');
-      
       return updatedTopic;
     } 
     catch (error) {
@@ -49,11 +61,10 @@ export class TopicsService {
     }
   }
 
-  async remove(id: string): Promise<Topic> {
+  async remove(id: string): Promise<void> {
     const topic = await this.findOne(id);
     await this.cacheManager.del('topics');
-
-    return await this.topicsRepository.remove(topic);
+    await this.topicsRepository.remove(topic);
   }
 
   async preload(name: string): Promise<Topic> {
