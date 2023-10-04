@@ -68,7 +68,7 @@ const FormSignIn = () => {
           type: REDUCER_ACTION_TYPE.SET_EMAIL_ERROR,
           payload: error.response?.data.message,
         });
-      }
+      } else throw error;
     }
   };
 

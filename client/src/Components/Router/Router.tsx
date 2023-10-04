@@ -29,6 +29,10 @@ const Router = () => {
       loader: async () => {
         try {
           const topics = await fetchTopics();
+          if (!topics) {
+            console.log("no posts yet");
+            return null;
+          }
 
           return redirect(`/topic/${topics[0].id}/posts`);
         } catch (error) {
