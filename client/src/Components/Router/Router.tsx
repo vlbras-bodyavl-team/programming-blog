@@ -40,7 +40,16 @@ const Router = () => {
     {
       errorElement: <Error />,
       element: <BasicLayout />,
-      loader: fetchTopics,
+      loader: async () => {
+        try {
+          fetchTopics();
+          return null;
+        } catch (error) {
+          if (axios.isAxiosError(error) && error.response?.status == 401) {
+            return redirect("/signin");
+          }
+        }
+      },
       shouldRevalidate: () => false,
       children: [
         {
