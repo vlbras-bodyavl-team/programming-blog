@@ -1,8 +1,8 @@
 import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
-import Post from "../../components/UI/Post/Post";
+import { Post } from "../../Components/UI";
 import { IPost } from "../../interfaces";
 import { getPostsForTopic } from "../../services";
-import { Button } from "../../components/UI";
+import { Button } from "../../Components/UI";
 import { Link } from "react-router-dom";
 
 interface IHomeProps {

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "../../../widget";
+import { Header } from "../../../Widget";
 import s from "./BasicLayout.module.scss";
-import { SideDrawer } from "../../../widget";
+import { SideDrawer } from "../../../Widget";
 
 const BasicLayout = () => {
   return (

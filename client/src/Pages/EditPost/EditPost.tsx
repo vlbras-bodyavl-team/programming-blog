@@ -8,8 +8,8 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
-import { FormAdmin } from "../../widget";
-import { Button } from "../../components/UI";
+import { FormAdmin } from "../../Widget";
+import { Button } from "../../Components/UI";
 import { IPost } from "../../interfaces";
 import { catchUnauthorizedError } from "../../utils/router";
 

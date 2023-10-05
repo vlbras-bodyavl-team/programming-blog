@@ -1,6 +1,6 @@
 import s from "./SideDrawer.module.scss";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import Topic from "../../components/UI/Topic/Topic";
+import Topic from "../../Components/UI/Topic/Topic";
 import { useMediaQuery } from "react-responsive";
 import { toggle } from "../../store/features/isOpenDrawerSlice";
 

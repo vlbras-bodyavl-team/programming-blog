@@ -1,4 +1,4 @@
-import { Title, Input, TextArea, Button } from "../../components/UI";
+import { Title, Input, TextArea, Button } from "../../Components/UI";
 import { PostState, ReducerAction } from "../../hooks/usePost";
 import { REDUCER_ACTION_TYPE } from "../../hooks/usePost";
 import { useAppSelector } from "../../store/store";

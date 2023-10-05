@@ -5,7 +5,7 @@ import logo from "../../assets/images/logo.svg";
 import menu from "../../assets/images/menu.svg";
 import { useMediaQuery } from "react-responsive";
 import { ReactSVG } from "react-svg";
-import { HeaderLink, ThemeToggle } from "../../components/UI";
+import { HeaderLink, ThemeToggle } from "../../Components/UI";
 import { useAppDispatch } from "../../store/store";
 import { toggle } from "../../store/features/isOpenDrawerSlice";
 import { logout } from "../../services";
