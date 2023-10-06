@@ -1,22 +1,45 @@
 .drawer {
-  flex-shrink: 0.1;
   z-index: 200;
-  height: auto;
-  min-height: 100vh;
+  top: 70px;
+  bottom: 0;
   position: fixed;
   display: flex;
   width: 0;
-  transition: width 500ms ease-out;
-  overflow: overlay;
+  transition: width 300ms ease-out;
+  overflow: hidden;
   .content {
-    padding: 50px 20px 0px 25px;
-    --bg-color: #f7f7f7;
+    .list {
+      margin-bottom: 40px;
+    }
+    scrollbar-gutter: stable;
     background: var(--bg-color);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-wrap: nowrap;
+    padding: 50px 15px 0px 25px;
+    overflow: overlay;
+    overscroll-behavior: contain;
+    --bg-color: #f7f7f7;
+    .logout {
+      background-color: var(--bg-color);
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      position: absolute;
+      margin: auto;
+      padding-bottom: 20px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+  .content::-webkit-scrollbar {
+    width: 6px;
+  }
+  .content::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 5px;
+  }
+  .content:hover::-webkit-scrollbar-thumb {
+    background: rgba($color: #939393, $alpha: 0.5);
   }
   .content.dark {
     --bg-color: #0c0c0c;
@@ -28,8 +51,8 @@
 }
 
 @media screen and (min-width: 768px) {
-  .drawer {
-    position: relative;
+  .logout {
+    display: none;
   }
   .drawer.open {
     width: 300px;

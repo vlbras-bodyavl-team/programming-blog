@@ -1,4 +1,4 @@
-import { Title, Input, TextArea, Button } from "../../components/UI";
+import { Title, InputFormAdmin, TextArea, Button } from "../../Components/UI";
 import { PostState, ReducerAction } from "../../hooks/usePost";
 import { REDUCER_ACTION_TYPE } from "../../hooks/usePost";
 import { useAppSelector } from "../../store/store";
@@ -26,7 +26,7 @@ const FormAdmin = ({
     <form onSubmit={handleSubmit} className={s.container}>
       <Title>{title}</Title>
       <div className={s.inputs}>
-        <Input
+        <InputFormAdmin
           placeholder="Title"
           style={{ width: "300px" }}
           value={state.title}
@@ -37,7 +37,7 @@ const FormAdmin = ({
             });
           }}
         />
-        <Input
+        <InputFormAdmin
           placeholder="Topic"
           style={{ width: "160px" }}
           value={state.topic}

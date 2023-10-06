@@ -21,7 +21,9 @@ body {
   color: var(--color-foreground);
   background-color: var(--color-background);
 }
-
+::placeholder {
+  font-family: Source Sans Pro, sans-serif;
+}
 body.dark {
   --color-background: #000000;
   --color-foreground: #fdfdfd;

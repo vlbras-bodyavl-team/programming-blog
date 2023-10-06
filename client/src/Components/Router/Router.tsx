@@ -4,13 +4,13 @@ import {
   redirect,
 } from "react-router-dom";
 import { BasicLayout, AuthLayout } from "../Layouts";
-import { AddPost, Home, SignIn, SignUp, Error } from "../../pages";
-import { homeLoader } from "../../pages/Home/Home";
+import { AddPost, Home, SignIn, SignUp, Error } from "../../Pages";
+import { homeLoader } from "../../Pages/Home/Home";
 import { useAppDispatch } from "../../store/store";
 import { getTopics } from "../../services";
 import { setTopics } from "../../store/features/topicsSlice";
 import { ITopic } from "../../interfaces";
-import EditPost, { editPostLoader } from "../../pages/EditPost/EditPost";
+import EditPost, { editPostLoader } from "../../Pages/EditPost/EditPost";
 import { catchUnauthorizedError } from "../../utils/router";
 
 const Router = () => {

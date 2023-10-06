@@ -1,4 +1,4 @@
-import Router from "./components/Router/Router";
+import Router from "./Components/Router/Router";
 import { useEffect } from "react";
 import { useAppSelector } from "./store/store";
 

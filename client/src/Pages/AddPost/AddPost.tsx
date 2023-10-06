@@ -3,7 +3,7 @@ import { addPost } from "../../services";
 import { usePost } from "../../hooks/usePost";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { FormAdmin } from "../../widget";
+import { FormAdmin } from "../../Widget";
 
 const AddPost = () => {
   const [state, dispatch] = usePost();
