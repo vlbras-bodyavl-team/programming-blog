@@ -15,11 +15,15 @@ import { Post as PostEntity } from "./entities/post.entity";
 import { RoleGuard } from "src/core/guards/role.guard";
 import { Role } from "src/core/decorators/role.decorator";
 import { Roles } from "src/core/enums/roles.enum";
+import { ApiForbiddenResponse, ApiTags, ApiUnauthorizedResponse } from "@nestjs/swagger";
 
+@ApiTags("posts")
+@ApiUnauthorizedResponse({ description: 'Unauthorized' })
 @Controller()
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
+  @ApiForbiddenResponse({ description: 'Forbidden' })
   @UseGuards(RoleGuard)
   @Role(Roles.ADMIN)
   @Post("posts")
@@ -32,6 +36,7 @@ export class PostsController {
     return this.postsService.findAll(topicId);
   }
 
+  @ApiForbiddenResponse({ description: 'Forbidden' })
   @UseGuards(RoleGuard)
   @Role(Roles.ADMIN)
   @Get("posts/:id")
@@ -39,6 +44,7 @@ export class PostsController {
     return this.postsService.findOne(id);
   }
 
+  @ApiForbiddenResponse({ description: 'Forbidden' })
   @UseGuards(RoleGuard)
   @Role(Roles.ADMIN)
   @Put("posts/:id")
@@ -49,6 +55,7 @@ export class PostsController {
     return this.postsService.update(id, updatePostDto);
   }
 
+  @ApiForbiddenResponse({ description: 'Forbidden' })
   @UseGuards(RoleGuard)
   @Role(Roles.ADMIN)
   @Delete('posts/:id')
