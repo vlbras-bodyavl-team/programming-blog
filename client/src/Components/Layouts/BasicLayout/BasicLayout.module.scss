@@ -4,14 +4,23 @@
   padding-top: 70px;
   .outlet {
     width: 100%;
-    margin: 30px 20px;
+    padding: 30px 20px;
+    transition: margin 300ms ease-out;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    .outlet.open {
+      margin-left: 300px;
+    }
   }
 }
 
 @media screen and (min-width: 1024px) {
   .container {
     .outlet {
-      margin: 40px 160px 0 100px;
+      padding: 40px 160px 0 100px;
     }
   }
 }
