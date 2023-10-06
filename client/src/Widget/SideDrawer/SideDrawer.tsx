@@ -36,18 +36,9 @@ const SideDrawer = () => {
   return (
     <div className={isOpen ? `${s.drawer} ${s.open}` : s.drawer}>
       <div className={isDarkMode ? `${s.content} ${s.dark}` : s.content}>
-        <ul>
+        <ul className={s.list}>
           {topics.map((topic, i) => (
             <>
-              <Topic key={i} topic={topic} handlePostClick={handlePostClick} />
-              <Topic key={i} topic={topic} handlePostClick={handlePostClick} />
-              <Topic key={i} topic={topic} handlePostClick={handlePostClick} />
-              <Topic key={i} topic={topic} handlePostClick={handlePostClick} />
-              <Topic key={i} topic={topic} handlePostClick={handlePostClick} />
-              <Topic key={i} topic={topic} handlePostClick={handlePostClick} />
-              <Topic key={i} topic={topic} handlePostClick={handlePostClick} />
-              <Topic key={i} topic={topic} handlePostClick={handlePostClick} />
-              <Topic key={i} topic={topic} handlePostClick={handlePostClick} />
               <Topic key={i} topic={topic} handlePostClick={handlePostClick} />
             </>
           ))}

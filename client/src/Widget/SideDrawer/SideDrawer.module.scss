@@ -8,22 +8,31 @@
   transition: width 300ms ease-out;
   overflow: hidden;
   .content {
+    .list {
+      margin-bottom: 40px;
+    }
     background: var(--bg-color);
     padding: 50px 20px 0px 25px;
     width: 100%;
     overflow: overlay;
     overscroll-behavior: contain;
     --bg-color: #f7f7f7;
+    .logout {
+      background-color: var(--bg-color);
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      position: absolute;
+      margin: auto;
+      padding-bottom: 20px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
   }
   .content.dark {
     --bg-color: #0c0c0c;
-  }
-  .logout {
-    margin: 20px 0;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
   }
 }
 
