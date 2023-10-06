@@ -1,9 +1,10 @@
 .themeToggle {
   cursor: pointer;
+  position: absolute;
+  right: 35px;
 }
 @media screen and (min-width: 768px) {
   .themeToggle {
-    position: absolute;
     right: 100px;
   }
 }

@@ -6,7 +6,7 @@ import menu from "../../assets/images/menu.svg";
 import { useMediaQuery } from "react-responsive";
 import { ReactSVG } from "react-svg";
 import { HeaderLink, ThemeToggle } from "../../Components/UI";
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import { toggle } from "../../store/features/isOpenDrawerSlice";
 import { logout } from "../../services";
 import { removeTokensFromStorage } from "../../utils";
@@ -34,6 +34,8 @@ const links: { title: string; href: string }[] = [
 
 const Header = () => {
   const dispatch = useAppDispatch();
+  const isOpenDrawer = useAppSelector((state) => state.isOpenDrawer.value);
+
   const navigate = useNavigate();
 
   const isLaptop = useMediaQuery({
@@ -54,11 +56,12 @@ const Header = () => {
 
   return (
     <div className={s.container}>
-      <ReactSVG
-        src={isLaptop ? burger : menu}
-        className={s.burger}
+      <button
+        className={isOpenDrawer ? `${s.burger} ${s.open}` : s.burger}
         onClick={() => dispatch(toggle())}
-      />
+      >
+        <ReactSVG src={isLaptop ? burger : menu} />
+      </button>
       <ReactSVG src={logo} className={s.logo} />
       <div className={s.links}>
         {links.map((link, index) => (
