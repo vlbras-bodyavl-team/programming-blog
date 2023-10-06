@@ -11,9 +11,9 @@
     .list {
       margin-bottom: 40px;
     }
+    scrollbar-gutter: stable;
     background: var(--bg-color);
     padding: 50px 20px 0px 25px;
-    width: 100%;
     overflow: overlay;
     overscroll-behavior: contain;
     --bg-color: #f7f7f7;
@@ -30,6 +30,16 @@
       left: 0;
       right: 0;
     }
+  }
+  .content::-webkit-scrollbar {
+    width: 6px;
+  }
+  .content::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 5px;
+  }
+  .content:hover::-webkit-scrollbar-thumb {
+    background: rgba($color: #939393, $alpha: 0.5);
   }
   .content.dark {
     --bg-color: #0c0c0c;
