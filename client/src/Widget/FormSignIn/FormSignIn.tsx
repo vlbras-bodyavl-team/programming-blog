@@ -1,10 +1,17 @@
 import { FormEvent } from "react";
 import { REDUCER_ACTION_TYPE, useSignIn } from "../../hooks/useSignIn";
-import { Button, Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { signIn } from "../../services";
 import { JwtTokens } from "../../interfaces";
 import axios from "axios";
+import {
+  Button,
+  Form,
+  FormBlock,
+  FormContainer,
+  Input,
+  Text,
+} from "../../Components/UI";
 
 const FormSignIn = () => {
   const [state, dispatch] = useSignIn();
@@ -73,15 +80,10 @@ const FormSignIn = () => {
   };
 
   return (
-    <Container
-      className="d-flex flex-column justify-content-center"
-      fluid="sm"
-      style={{ height: "100vh", maxWidth: "400px" }}
-    >
+    <FormContainer>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
+        <FormBlock>
+          <Input
             type="email"
             placeholder="Enter email"
             onChange={(e) =>
@@ -91,12 +93,12 @@ const FormSignIn = () => {
               })
             }
           />
-          <Form.Text className="text-danger">{state.emailError}</Form.Text>
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+          <Text color="#d62424" fontSize="14px">
+            {state.emailError}
+          </Text>
+        </FormBlock>
+        <FormBlock>
+          <Input
             type="password"
             placeholder="Password"
             onChange={(e) =>
@@ -106,22 +108,19 @@ const FormSignIn = () => {
               })
             }
           />
-          <Form.Text className="text-danger">{state.passwordError}</Form.Text>
-        </Form.Group>
-
-        <div className="d-grid gap-2">
-          <Button variant="dark" type="submit">
-            Submit
-          </Button>
-          <Form.Text>
-            Dont have an account?{" "}
-            <Link to="/signup" className="link-primary">
-              Sign up
-            </Link>
-          </Form.Text>
+          <Text color="#d62424" fontSize="14px">
+            {state.passwordError}
+          </Text>
+        </FormBlock>
+        <Button>Submit</Button>
+        <div>
+          <Text color="#808080">Don't have an account? </Text>
+          <Link to="/signup" className="link-primary">
+            Sign up
+          </Link>
         </div>
       </Form>
-    </Container>
+    </FormContainer>
   );
 };
 

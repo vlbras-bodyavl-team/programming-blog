@@ -1,10 +1,17 @@
 import { FormEvent } from "react";
-import { Button, Container, Form } from "react-bootstrap";
 import { REDUCER_ACTION_TYPE, useSignUp } from "../../hooks/useSignUp";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { signUp } from "../../services";
 import { JwtTokens } from "../../interfaces";
+import {
+  Button,
+  Form,
+  FormBlock,
+  FormContainer,
+  Input,
+  Text,
+} from "../../Components/UI";
 
 const FormSignUp = () => {
   const [state, dispatch] = useSignUp();
@@ -88,15 +95,10 @@ const FormSignUp = () => {
   };
 
   return (
-    <Container
-      className="d-flex flex-column justify-content-center"
-      fluid="sm"
-      style={{ height: "100vh", maxWidth: "400px" }}
-    >
+    <FormContainer>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
+        <FormBlock>
+          <Input
             type="email"
             placeholder="Enter email"
             onChange={(e) =>
@@ -106,12 +108,12 @@ const FormSignUp = () => {
               })
             }
           />
-          <Form.Text className="text-danger">{state.emailError}</Form.Text>
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+          <Text color="#d62424" fontSize="14px">
+            {state.emailError}
+          </Text>
+        </FormBlock>
+        <FormBlock>
+          <Input
             type="password"
             placeholder="Password"
             onChange={(e) =>
@@ -121,12 +123,12 @@ const FormSignUp = () => {
               })
             }
           />
-          <Form.Text className="text-danger">{state.passwordError}</Form.Text>
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="confirmPassword">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
+          <Text color="#d62424" fontSize="14px">
+            {state.passwordError}
+          </Text>
+        </FormBlock>
+        <FormBlock>
+          <Input
             type="password"
             placeholder="Confirm Password"
             onChange={(e) =>
@@ -136,21 +138,17 @@ const FormSignUp = () => {
               })
             }
           />
-        </Form.Group>
+        </FormBlock>
 
-        <div className="d-grid gap-2">
-          <Button variant="dark" type="submit">
-            Submit
-          </Button>
-          <Form.Text>
-            Already have an account?{" "}
-            <Link to="/signin" className="link-primary">
-              Sign in
-            </Link>
-          </Form.Text>
+        <Button>Submit</Button>
+        <div>
+          <Text color="#808080">Already have an account? </Text>
+          <Link to="/signin" className="link-primary">
+            Sign in
+          </Link>
         </div>
       </Form>
-    </Container>
+    </FormContainer>
   );
 };
 
