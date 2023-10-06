@@ -2,7 +2,6 @@
   height: 70px;
   width: 100%;
   background-color: #1e1e1e;
-  padding: 0 35px;
   position: fixed;
   top: 0;
   z-index: 1000;
@@ -16,6 +15,13 @@
   }
   .burger {
     cursor: pointer;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+    width: 100px;
+    transition: width 300ms ease-out, background-color 100ms ease-out;
   }
   .logo {
     margin: auto;
@@ -25,6 +31,8 @@
   }
   .logout {
     cursor: pointer;
+    position: absolute;
+    right: 35px;
     display: none;
   }
 }
@@ -32,9 +40,6 @@
 @media screen and (min-width: 768px) {
   .container {
     justify-content: space-between;
-    .burger {
-      display: block;
-    }
     .logo {
       display: none;
     }
@@ -46,6 +51,17 @@
     }
     .logout {
       display: block;
+    }
+  }
+}
+
+@media screen and (min-width: 1148px) {
+  .container {
+    .burger:hover {
+      background-color: rgba($color: #ababab, $alpha: 0.2);
+    }
+    .burger.open {
+      width: 300px;
     }
   }
 }

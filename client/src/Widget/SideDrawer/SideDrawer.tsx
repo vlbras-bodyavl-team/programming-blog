@@ -38,9 +38,7 @@ const SideDrawer = () => {
       <div className={isDarkMode ? `${s.content} ${s.dark}` : s.content}>
         <ul className={s.list}>
           {topics.map((topic, i) => (
-            <>
-              <Topic key={i} topic={topic} handlePostClick={handlePostClick} />
-            </>
+            <Topic key={i} topic={topic} handlePostClick={handlePostClick} />
           ))}
         </ul>
         <h4 onClick={handleLogoutClick} className={s.logout}>

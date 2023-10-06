@@ -8,15 +8,17 @@
   transition: width 300ms ease-out;
   overflow: hidden;
   .content {
-    .list {
-      margin-bottom: 40px;
-    }
+    text-wrap: nowrap;
+    width: 100%;
     scrollbar-gutter: stable;
     background: var(--bg-color);
     padding: 50px 15px 0px 25px;
     overflow: overlay;
     overscroll-behavior: contain;
     --bg-color: #f7f7f7;
+    .list {
+      margin-bottom: 40px;
+    }
     .logout {
       background-color: var(--bg-color);
       text-align: center;
