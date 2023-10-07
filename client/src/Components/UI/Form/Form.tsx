@@ -1,15 +1,16 @@
-import { FormHTMLAttributes, ReactNode } from "react";
+import { ReactNode } from "react";
+import { FormProps, Form as RouterForm } from "react-router-dom";
 import s from "./Form.module.scss";
 
-interface IFormProps extends FormHTMLAttributes<HTMLFormElement> {
+interface IFormProps extends FormProps {
   children?: ReactNode;
 }
 
 const Form = ({ children, ...props }: IFormProps) => {
   return (
-    <form className={s.form} {...props}>
+    <RouterForm className={s.form} {...props}>
       {children}
-    </form>
+    </RouterForm>
   );
 };
 
