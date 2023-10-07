@@ -1,8 +1,7 @@
-import { FormEvent, useEffect } from "react";
 import { deletePost, getPost, updatePost } from "../../services";
-import { REDUCER_ACTION_TYPE, usePost } from "../../hooks/usePost";
 import axios from "axios";
 import {
+  ActionFunction,
   LoaderFunctionArgs,
   useLoaderData,
   useNavigate,
@@ -14,43 +13,9 @@ import { IPost } from "../../interfaces";
 import { catchUnauthorizedError } from "../../utils/router";
 
 const EditPost = () => {
-  const [state, dispatch] = usePost();
-
   const params = useParams() as { id: string };
   const post = useLoaderData() as IPost;
   const navigate = useNavigate();
-
-  useEffect(() => {
-    async function getPostValues() {
-      dispatch({
-        type: REDUCER_ACTION_TYPE.SET_TITLE,
-        payload: post.title,
-      });
-      dispatch({
-        type: REDUCER_ACTION_TYPE.SET_TOPIC,
-        payload: post.topic,
-      });
-      dispatch({
-        type: REDUCER_ACTION_TYPE.SET_CONTENT,
-        payload: post.content,
-      });
-    }
-    getPostValues();
-  }, []);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    try {
-      e.preventDefault();
-
-      await updatePost({ id: params.id, ...state });
-
-      alert("Successfully updated");
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        alert(error.response?.data.message);
-      } else throw error;
-    }
-  };
 
   const handleDeleteClick = async () => {
     try {
@@ -66,18 +31,36 @@ const EditPost = () => {
 
   return (
     <>
-      <FormAdmin
-        state={state}
-        dispatch={dispatch}
-        handleSubmit={handleSubmit}
-        title={"Edit Post"}
-      >
+      <FormAdmin title={"Edit Post"} defaultValues={post}>
         <Button type="button" onClick={handleDeleteClick}>
           Delete
         </Button>
       </FormAdmin>
     </>
   );
+};
+
+export const editPostAction: ActionFunction = async ({ request, params }) => {
+  try {
+    const formData = await request.formData();
+    const data = Object.fromEntries(formData.entries()) as {
+      title: string;
+      topic: string;
+      content: string;
+    };
+
+    if (!params.id) {
+      alert("No id");
+      return null;
+    }
+
+    await updatePost({ id: params.id, ...data });
+    alert("Successfully updated");
+
+    return null;
+  } catch (error) {
+    return catchUnauthorizedError(error);
+  }
 };
 
 export const editPostLoader = async ({ params }: LoaderFunctionArgs<any>) => {

@@ -1,35 +1,30 @@
-import { FormEvent } from "react";
 import { addPost } from "../../services";
-import { usePost } from "../../hooks/usePost";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { ActionFunction, redirect } from "react-router-dom";
 import { FormAdmin } from "../../Widget";
 
 const AddPost = () => {
-  const [state, dispatch] = usePost();
-  const navigate = useNavigate();
+  return <FormAdmin title="Add Post" />;
+};
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    try {
-      e.preventDefault();
+export const addPostAction: ActionFunction = async ({ request }) => {
+  try {
+    const formData = await request.formData();
+    const data = Object.fromEntries(formData.entries()) as {
+      title: string;
+      topic: string;
+      content: string;
+    };
 
-      await addPost(state);
+    await addPost(data);
 
-      navigate("/");
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        alert(error.response?.data.message);
-      } else throw error;
-    }
-  };
-  return (
-    <FormAdmin
-      state={state}
-      dispatch={dispatch}
-      handleSubmit={handleSubmit}
-      title="Add Post"
-    />
-  );
+    return redirect("/");
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      alert(error.response?.data.message);
+      return null;
+    } else throw error;
+  }
 };
 
 export default AddPost;
