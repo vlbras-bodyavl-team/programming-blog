@@ -10,8 +10,14 @@ import { useAppDispatch } from "../../store/store";
 import { getTopics } from "../../services";
 import { setTopics } from "../../store/features/topicsSlice";
 import { ITopic } from "../../interfaces";
-import EditPost, { editPostLoader } from "../../Pages/EditPost/EditPost";
+import EditPost, {
+  editPostAction,
+  editPostLoader,
+} from "../../Pages/EditPost/EditPost";
 import { catchUnauthorizedError } from "../../utils/router";
+import { formSignInAction } from "../../Widget/FormSignIn/FormSignIn";
+import { formSignUpAction } from "../../Widget/FormSignUp/FormSignUp";
+import { addPostAction } from "../../Pages/AddPost/AddPost";
 
 const Router = () => {
   const dispatch = useAppDispatch();
@@ -70,11 +76,13 @@ const Router = () => {
             {
               path: "add-post",
               element: <AddPost />,
+              action: addPostAction,
             },
             {
               path: "edit-post/:id",
               element: <EditPost />,
               loader: editPostLoader,
+              action: editPostAction,
             },
           ],
         },
@@ -86,10 +94,12 @@ const Router = () => {
         {
           path: "signin",
           element: <SignIn />,
+          action: formSignInAction,
         },
         {
           path: "signup",
           element: <SignUp />,
+          action: formSignUpAction,
         },
       ],
     },
