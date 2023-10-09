@@ -3,6 +3,7 @@ import s from "./Topic.module.scss";
 import { LiHTMLAttributes, useState } from "react";
 import { useAppSelector } from "../../../store/store";
 import { HashLink } from "react-router-hash-link";
+import { useParams } from "react-router-dom";
 
 interface ITopicProps extends LiHTMLAttributes<HTMLLIElement> {
   topic: ITopic;
@@ -11,6 +12,7 @@ interface ITopicProps extends LiHTMLAttributes<HTMLLIElement> {
 const Topic = ({ topic, handlePostClick, ...props }: ITopicProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
+  const { id } = useParams<{ id: string }>();
 
   return (
     <li
@@ -21,7 +23,9 @@ const Topic = ({ topic, handlePostClick, ...props }: ITopicProps) => {
         className={isOpen ? `${s.container} ${s.open}` : s.container}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className={s.name}>{topic.name}</div>
+        <div className={id === topic.id ? `${s.name} ${s.current}` : s.name}>
+          {topic.name}
+        </div>
         <div className={s.arrow}>
           <svg
             width="44"

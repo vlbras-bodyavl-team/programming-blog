@@ -36,6 +36,9 @@
       line-height: normal;
       text-transform: uppercase;
     }
+    .name.current {
+      color: #ed2945;
+    }
     .arrow {
       display: block;
       transition: transform 200ms ease-out;
