@@ -24,7 +24,7 @@ const links: { title: string; href: string }[] = [
   },
   {
     title: "API",
-    href: import.meta.env.VITE_API_URL,
+    href: `${import.meta.env.VITE_API_URL}/api`,
   },
   {
     title: "Documentation",
