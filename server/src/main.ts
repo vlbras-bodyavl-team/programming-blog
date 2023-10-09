@@ -1,6 +1,7 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { Logger, ValidationPipe } from "@nestjs/common";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
@@ -10,6 +11,13 @@ async function bootstrap() {
       transform: true,
     })
   );
+
+  const options = new DocumentBuilder()
+    .setTitle('Programming-Blog')
+    .build()
+  const document = SwaggerModule.createDocument(app, options)
+  SwaggerModule.setup('api', app, document)
+
   await app.listen(process.env.PORT);
   Logger.log(
     `😎 Application is running on port ${process.env.PORT}`,

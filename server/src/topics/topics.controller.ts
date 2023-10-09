@@ -6,7 +6,10 @@ import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 import { RoleGuard } from 'src/core/guards/role.guard';
 import { Role } from 'src/core/decorators/role.decorator';
 import { Roles } from 'src/core/enums/roles.enum';
+import { ApiConflictResponse, ApiForbiddenResponse, ApiNotFoundResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
+@ApiTags('topics')
+@ApiUnauthorizedResponse({ description: 'Unauthorized' })
 @Controller('topics')
 export class TopicsController {
   constructor(private readonly topicsService: TopicsService) {}
@@ -18,6 +21,9 @@ export class TopicsController {
     return this.topicsService.findAll();
   }
 
+  @ApiNotFoundResponse({ description: 'Topic not found' })
+  @ApiForbiddenResponse({ description: 'Forbidden' })
+  @ApiConflictResponse({ description: 'Topic already exists' })
   @UseGuards(RoleGuard)
   @Role(Roles.ADMIN)
   @Put(':id')
@@ -28,6 +34,8 @@ export class TopicsController {
     return this.topicsService.update(id, updateTopicDto);
   }
 
+  @ApiForbiddenResponse({ description: 'Forbidden' })
+  @ApiNotFoundResponse({ description: 'Topic not found' })
   @UseGuards(RoleGuard)
   @Role(Roles.ADMIN)
   @Delete(':id')
