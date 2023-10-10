@@ -1,43 +1,18 @@
-import { deletePost, getPost, updatePost } from "../../services";
-import axios from "axios";
+import { getPost, updatePost } from "../../services";
 import {
   ActionFunction,
   LoaderFunctionArgs,
   useLoaderData,
-  useNavigate,
-  useParams,
 } from "react-router-dom";
-import { FormAdmin } from "../../Widget";
-import { Button } from "../../Components/UI";
-import { IPost } from "../../interfaces";
+import { FormEditPost } from "../../Widget";
+
 import { catchUnauthorizedError } from "../../utils/router";
+import { IPost } from "../../interfaces";
 
 const EditPost = () => {
-  const params = useParams() as { id: string };
   const post = useLoaderData() as IPost;
-  const navigate = useNavigate();
 
-  const handleDeleteClick = async () => {
-    try {
-      await deletePost(params.id);
-
-      navigate("/");
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        alert(error.response?.data.message);
-      } else throw error;
-    }
-  };
-
-  return (
-    <>
-      <FormAdmin title={"Edit Post"} defaultValues={post}>
-        <Button type="button" onClick={handleDeleteClick}>
-          Delete
-        </Button>
-      </FormAdmin>
-    </>
-  );
+  return <FormEditPost defaultValues={post} />;
 };
 
 export const editPostAction: ActionFunction = async ({ request, params }) => {

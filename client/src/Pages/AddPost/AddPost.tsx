@@ -1,10 +1,10 @@
 import { addPost } from "../../services";
 import axios from "axios";
 import { ActionFunction, redirect } from "react-router-dom";
-import { FormAdmin } from "../../Widget";
+import { FormAddPost } from "../../Widget";
 
 const AddPost = () => {
-  return <FormAdmin title="Add Post" />;
+  return <FormAddPost />;
 };
 
 export const addPostAction: ActionFunction = async ({ request }) => {

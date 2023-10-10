@@ -17,8 +17,12 @@ const InputFormAdmin = ({
   const [value, setValue] = useState(initialValue || "");
 
   return (
-    <div className={isDark ? `${s.container} ${s.dark}` : s.container}>
+    <div
+      className={isDark ? `${s.container} ${s.dark}` : s.container}
+      style={props.style}
+    >
       <input
+        autoComplete="off"
         className={s.input}
         type="text"
         ref={inputRef}
