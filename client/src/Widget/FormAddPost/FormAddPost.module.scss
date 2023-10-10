@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 15px;
+  margin: 0 auto;
+  .title {
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    .buttons {
+      position: absolute;
+      top: 105px;
+      right: 110px;
+      width: 200px;
+    }
+  }
+}

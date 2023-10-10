@@ -1,14 +1,15 @@
 .textarea {
-  border-radius: 5px;
-  border: 1px solid #1e1e1e;
-  background: #f5f5f5;
   min-height: 400px;
   width: 100%;
   flex-basis: 100%;
   font-size: 16px;
+  border-radius: 1px;
+  border: 1px solid rgba(137, 137, 137, 0.2);
+  background: #f0f0f0;
 }
 
 .textarea.dark {
   color: #fdfdfd;
-  background: #1e1e1e;
+  border: 1px solid rgba(137, 137, 137, 0.2);
+  background: #282828;
 }

@@ -11,3 +11,5 @@ export { default as Form } from "./Form/Form";
 export { default as FormContainer } from "./FormContainer/FormContainer";
 export { default as FormBlock } from "./FormBlock/FormBlock";
 export { default as Text } from "./Text/Text";
+export { default as Label } from "./Label/Label";
+export { default as BorderButton } from "./BorderButton/BorderButton";
