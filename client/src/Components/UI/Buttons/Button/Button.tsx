@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import s from "./Button.module.scss";
-import { useAppSelector } from "../../../store/store";
+import { useAppSelector } from "../../../../store/store";
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
