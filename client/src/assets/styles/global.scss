@@ -21,9 +21,15 @@ body {
   color: var(--color-foreground);
   background-color: var(--color-background);
 }
+
 ::placeholder {
   font-family: Source Sans Pro, sans-serif;
 }
+
+:disabled {
+  opacity: 0.5;
+}
+
 body.dark {
   --color-background: #000000;
   --color-foreground: #fdfdfd;

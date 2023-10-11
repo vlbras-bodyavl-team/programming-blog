@@ -3,6 +3,7 @@ import {
   Link,
   redirect,
   useActionData,
+  useNavigation,
 } from "react-router-dom";
 import { signIn } from "../../services";
 import { JwtTokens } from "../../interfaces";
@@ -22,22 +23,38 @@ const FormSignIn = () => {
     passwordError?: string;
   };
 
+  const navigation = useNavigation();
+  const isLoading =
+    navigation.state === "submitting" || navigation.state === "loading";
+
   return (
     <FormContainer>
       <Form method="post">
         <FormBlock>
-          <Input type="email" name="email" placeholder="Enter email" />
+          <Input
+            type="email"
+            name="email"
+            placeholder="Enter email"
+            disabled={isLoading}
+          />
           <Text color="#d62424" fontSize="14px">
             {errors?.emailError}
           </Text>
         </FormBlock>
         <FormBlock>
-          <Input type="password" name="password" placeholder="Password" />
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            disabled={isLoading}
+          />
           <Text color="#d62424" fontSize="14px">
             {errors?.passwordError}
           </Text>
         </FormBlock>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={isLoading}>
+          Submit
+        </Button>
         <div>
           <Text color="#808080">Don't have an account? </Text>
           <Link to="/signup" className="link-primary">

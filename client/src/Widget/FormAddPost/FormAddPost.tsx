@@ -1,4 +1,4 @@
-import { Form } from "react-router-dom";
+import { Form, useNavigation } from "react-router-dom";
 import {
   Title,
   InputFormAdmin,
@@ -12,6 +12,10 @@ import s from "./FormAddPost.module.scss";
 const FormAddPost = () => {
   const topics = useAppSelector((store) => store.topics.topics);
 
+  const navigation = useNavigation();
+  const isLoading =
+    navigation.state === "submitting" || navigation.state === "loading";
+
   return (
     <Form method="post" className={s.container}>
       <Title>Add Post</Title>
@@ -22,6 +26,7 @@ const FormAddPost = () => {
         placeholder="Title"
         name="title"
         style={{ width: "300px" }}
+        disabled={isLoading}
       />
 
       <Label htmlFor="topic">Topic:</Label>
@@ -31,11 +36,12 @@ const FormAddPost = () => {
         style={{ width: "160px" }}
         name="topic"
         dropdownItems={topics.map((topic) => topic.name)}
+        disabled={isLoading}
       />
 
-      <TextArea placeholder="Content" name="content" />
+      <TextArea placeholder="Content" name="content" disabled={isLoading} />
       <div className={s.buttons}>
-        <Button>Submit</Button>
+        <Button disabled={isLoading}>Submit</Button>
       </div>
     </Form>
   );

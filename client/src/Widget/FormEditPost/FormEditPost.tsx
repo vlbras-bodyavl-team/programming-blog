@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Form, useNavigate, useParams } from "react-router-dom";
+import { Form, useNavigate, useNavigation, useParams } from "react-router-dom";
 import {
   Title,
   Label,
@@ -20,8 +20,14 @@ interface IFormEditPost {
 
 const FormEditPost: FC<IFormEditPost> = ({ defaultValues }) => {
   const topics = useAppSelector((store) => store.topics.topics);
+
   const params = useParams() as { id: string };
+
   const navigate = useNavigate();
+
+  const navigation = useNavigation();
+  const isLoading =
+    navigation.state === "submitting" || navigation.state === "loading";
 
   const handleDeleteClick = async () => {
     try {
@@ -46,6 +52,7 @@ const FormEditPost: FC<IFormEditPost> = ({ defaultValues }) => {
         initialValue={defaultValues?.title}
         name="title"
         style={{ width: "300px" }}
+        disabled={isLoading}
       />
 
       <Label htmlFor="topic">Topic:</Label>
@@ -56,16 +63,20 @@ const FormEditPost: FC<IFormEditPost> = ({ defaultValues }) => {
         style={{ width: "160px" }}
         name="topic"
         dropdownItems={topics.map((topic) => topic.name)}
+        disabled={isLoading}
       />
 
       <TextArea
         defaultValue={defaultValues?.content}
         placeholder="Content"
         name="content"
+        disabled={isLoading}
       />
       <div className={s.buttons}>
-        <Button>Submit</Button>
-        <BorderButton onClick={handleDeleteClick}>Delete</BorderButton>
+        <Button disabled={isLoading}>Submit</Button>
+        <BorderButton onClick={handleDeleteClick} disabled={isLoading}>
+          Delete
+        </BorderButton>
       </div>
     </Form>
   );
