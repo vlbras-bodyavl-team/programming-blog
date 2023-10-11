@@ -1,5 +1,13 @@
 import { Topic } from 'src/topics/entities/topic.entity';
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/users/entities/user.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('posts')
 export class Post {
@@ -12,9 +20,17 @@ export class Post {
   @Column({ type: 'text' })
   content: string;
 
-  @ManyToOne(() => Topic, (topic) => topic.posts, { cascade: true})
+  @ManyToOne(() => Topic, (topic) => topic.posts, { onDelete: 'CASCADE' })
   topic: Topic;
-  
+
   @CreateDateColumn()
   createdAt: Date;
+
+  @ManyToOne(() => User, { nullable: true, onDelete: 'SET NULL'})
+  @JoinColumn({ name: 'createdBy' })
+  createdBy: User;
+
+  @ManyToOne(() => User, { nullable: true, onDelete: 'SET NULL'})
+  @JoinColumn({ name: 'updatedBy' })
+  updatedBy?: User;
 }
