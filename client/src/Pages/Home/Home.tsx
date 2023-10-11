@@ -1,29 +1,41 @@
-import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
+import {
+  LoaderFunctionArgs,
+  useLoaderData,
+  useNavigation,
+} from "react-router-dom";
 import { Post } from "../../Components/UI";
 import { IPost } from "../../interfaces";
 import { getPostsForTopic } from "../../services";
 import { Button } from "../../Components/UI";
 import { Link } from "react-router-dom";
+import { LoadingPosts } from "../../Widget";
 
 interface IHomeProps {
   isAdmin?: boolean;
 }
 const Home = ({ isAdmin }: IHomeProps) => {
   const posts = useLoaderData() as IPost[];
+  const isLoading = useNavigation().state === "loading";
 
   return (
-    <ul>
-      {posts?.map((post, i) => (
-        <li key={i}>
-          <Post post={post} id={`${i}`} />
-          {isAdmin && (
-            <Link to={`/admin/edit-post/${post.id}`}>
-              <Button>Edit</Button>
-            </Link>
-          )}
-        </li>
-      ))}
-    </ul>
+    <>
+      {isLoading ? (
+        <LoadingPosts count={5} />
+      ) : (
+        <ul>
+          {posts?.map((post, i) => (
+            <li key={i}>
+              <Post post={post} id={`${i}`} />
+              {isAdmin && (
+                <Link to={`/admin/edit-post/${post.id}`}>
+                  <Button>Edit</Button>
+                </Link>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 };
 

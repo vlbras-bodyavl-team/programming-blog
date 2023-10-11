@@ -3,6 +3,7 @@ import {
   Link,
   redirect,
   useActionData,
+  useNavigation,
 } from "react-router-dom";
 import axios from "axios";
 import { signUp } from "../../services";
@@ -22,17 +23,31 @@ const FormSignUp = () => {
     passwordError?: string;
   };
 
+  const navigation = useNavigation();
+  const isLoading =
+    navigation.state === "submitting" || navigation.state === "loading";
+
   return (
     <FormContainer>
       <Form method="post">
         <FormBlock>
-          <Input type="email" placeholder="Enter email" name="email" />
+          <Input
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            disabled={isLoading}
+          />
           <Text color="#d62424" fontSize="14px">
             {errors?.emailError}
           </Text>
         </FormBlock>
         <FormBlock>
-          <Input type="password" name="password" placeholder="Password" />
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            disabled={isLoading}
+          />
           <Text color="#d62424" fontSize="14px">
             {errors?.passwordError}
           </Text>
@@ -42,10 +57,11 @@ const FormSignUp = () => {
             type="password"
             placeholder="Confirm Password"
             name="confirmPassword"
+            disabled={isLoading}
           />
         </FormBlock>
 
-        <Button>Submit</Button>
+        <Button disabled={isLoading}>Submit</Button>
         <div>
           <Text color="#808080">Already have an account? </Text>
           <Link to="/signin" className="link-primary">
