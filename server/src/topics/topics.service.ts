@@ -19,8 +19,14 @@ export class TopicsService {
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
-  findAll(): Promise<Topic[]> {
-    return this.topicsRepository.query(/*sql*/ `
+  async findAll(): Promise<Topic[]> {
+    const cachedTopics = await this.cacheManager.get<Topic[]>('topics');
+
+    if (cachedTopics) {
+      return cachedTopics;
+    }
+
+    const topics = await this.topicsRepository.query(/*sql*/ `
       SELECT
         t.id,
         t.name,
@@ -38,10 +44,15 @@ export class TopicsService {
       GROUP BY t.id, t.name
       ORDER BY t."createdAt" ASC;
     `);
+
+    await this.cacheManager.set('topics', topics);
+
+    return topics;
   }
 
   async findOne(id: string): Promise<Topic> {
     const topic = await this.topicsRepository.findOneBy({ id });
+    
     if (!topic) {
       throw new NotFoundException('Topic not found');
     }
@@ -63,20 +74,15 @@ export class TopicsService {
 
   async remove(id: string): Promise<void> {
     const topic = await this.findOne(id);
-    
-    await this.cacheManager.del('topics');
     await this.topicsRepository.remove(topic);
+    await this.cacheManager.del('topics');
   }
 
   async preload(name: string): Promise<Topic> {
     const existingTopic = await this.topicsRepository.findOneBy({ name });
-
-    await this.cacheManager.del('topics');
-
     if (existingTopic) {
       return existingTopic;
     }
-
     const newTopic = this.topicsRepository.create({ name });
     return this.topicsRepository.save(newTopic);
   }
