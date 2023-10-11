@@ -4,3 +4,4 @@ export { default as Header } from "./Header/Header";
 export { default as SideDrawer } from "./SideDrawer/SideDrawer";
 export { default as FormAddPost } from "./FormAddPost/FormAddPost";
 export { default as FormEditPost } from "./FormEditPost/FormEditPost";
+export { default as LoadingPosts } from "./LoadingPosts/LoadingPosts";

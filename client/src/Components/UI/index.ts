@@ -13,3 +13,4 @@ export { default as FormBlock } from "./FormElements/FormBlock/FormBlock";
 export { default as Text } from "./Text/Text";
 export { default as Label } from "./AdminFormElements/Label/Label";
 export { default as BorderButton } from "./Buttons/BorderButton/BorderButton";
+export { default as SkeletonPost } from "./SkeletonPost/SkeletonPost";

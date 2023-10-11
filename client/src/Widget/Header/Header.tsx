@@ -26,10 +26,6 @@ const links: { title: string; href: string }[] = [
     title: "API",
     href: `${import.meta.env.VITE_API_URL}/api`,
   },
-  {
-    title: "Documentation",
-    href: import.meta.env.VITE_DOCS_URL,
-  },
 ];
 
 const Header = () => {

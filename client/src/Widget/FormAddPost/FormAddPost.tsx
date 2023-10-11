@@ -41,7 +41,7 @@ const FormAddPost = () => {
 
       <TextArea placeholder="Content" name="content" disabled={isLoading} />
       <div className={s.buttons}>
-        <Button disabled={isLoading}>Submit</Button>
+        <Button disabled={isLoading}>Create</Button>
       </div>
     </Form>
   );

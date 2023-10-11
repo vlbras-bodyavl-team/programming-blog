@@ -4,7 +4,11 @@ const SkeletonPost = () => {
   return (
     <div className={s.container}>
       <div className={s.title}></div>
-      <div className={s.content}></div>
+      <div className={s.content}>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   );
 };
