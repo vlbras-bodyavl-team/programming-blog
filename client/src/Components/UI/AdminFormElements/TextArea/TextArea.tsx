@@ -1,6 +1,6 @@
 import { TextareaHTMLAttributes } from "react";
 import s from "./TextArea.module.scss";
-import { useAppSelector } from "../../../store/store";
+import { useAppSelector } from "../../../../store/store";
 
 interface ITextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 

@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, useRef, useState } from "react";
 import s from "./InputAdminForm.module.scss";
-import { useAppSelector } from "../../../store/store";
+import { useAppSelector } from "../../../../store/store";
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   dropdownItems?: string[];
