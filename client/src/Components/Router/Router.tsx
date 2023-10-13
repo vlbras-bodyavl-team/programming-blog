@@ -3,21 +3,27 @@ import {
   createBrowserRouter,
   redirect,
 } from "react-router-dom";
-import { BasicLayout, AuthLayout } from "../Layouts";
-import { AddPost, Home, SignIn, SignUp, Error } from "../../Pages";
+import { BasicLayout, AuthLayout, AdminLayout } from "../Layouts";
+import {
+  AddPost,
+  Home,
+  SignIn,
+  SignUp,
+  Error,
+  AdminPanel,
+  EditPost,
+} from "../../Pages";
 import { homeLoader } from "../../Pages/Home/Home";
 import { useAppDispatch } from "../../store/store";
 import { getTopics } from "../../services";
 import { setTopics } from "../../store/features/topicsSlice";
 import { ITopic } from "../../interfaces";
-import EditPost, {
-  editPostAction,
-  editPostLoader,
-} from "../../Pages/EditPost/EditPost";
+import { editPostAction, editPostLoader } from "../../Pages/EditPost/EditPost";
 import { catchUnauthorizedError } from "../../utils/router";
 import { formSignInAction } from "../../Widget/FormSignIn/FormSignIn";
 import { formSignUpAction } from "../../Widget/FormSignUp/FormSignUp";
 import { addPostAction } from "../../Pages/AddPost/AddPost";
+import { adminPanelLoader } from "../../Pages/AdminPanel/AdminPanel";
 
 const Router = () => {
   const dispatch = useAppDispatch();
@@ -65,26 +71,36 @@ const Router = () => {
           element: <Home />,
           loader: homeLoader,
         },
+      ],
+    },
+    {
+      element: <AdminLayout />,
+      path: "admin",
+      loader: async () => {
+        try {
+          await fetchTopics();
+
+          return null;
+        } catch (error) {
+          return catchUnauthorizedError(error);
+        }
+      },
+      children: [
         {
-          path: "admin",
-          children: [
-            {
-              path: "topic/:id/posts",
-              element: <Home isAdmin={true} />,
-              loader: homeLoader,
-            },
-            {
-              path: "add-post",
-              element: <AddPost />,
-              action: addPostAction,
-            },
-            {
-              path: "edit-post/:id",
-              element: <EditPost />,
-              loader: editPostLoader,
-              action: editPostAction,
-            },
-          ],
+          path: "topic/:id/posts",
+          element: <AdminPanel />,
+          loader: adminPanelLoader,
+        },
+        {
+          path: "add-post",
+          element: <AddPost />,
+          action: addPostAction,
+        },
+        {
+          path: "edit-post/:id",
+          element: <EditPost />,
+          loader: editPostLoader,
+          action: editPostAction,
         },
       ],
     },

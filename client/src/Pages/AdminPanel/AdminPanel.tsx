@@ -3,13 +3,13 @@ import {
   useLoaderData,
   useNavigation,
 } from "react-router-dom";
-import { Post } from "../../Components/UI";
-import { IPost } from "../../interfaces";
-import { getPostsForTopic } from "../../services";
+import { AdminPost } from "../../Components/UI";
+import { IAdminPost } from "../../interfaces";
+import { getPostsForTopicAdmin } from "../../services";
 import { LoadingPosts } from "../../Widget";
 
-const Home = () => {
-  const posts = useLoaderData() as IPost[];
+const AdminPanel = () => {
+  const posts = useLoaderData() as IAdminPost[];
   const isLoading = useNavigation().state === "loading";
 
   return (
@@ -20,7 +20,7 @@ const Home = () => {
         <ul>
           {posts?.map((post, i) => (
             <li key={i}>
-              <Post post={post} id={`${i}`} />
+              <AdminPost post={post} id={`${i}`} />
             </li>
           ))}
         </ul>
@@ -29,9 +29,9 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default AdminPanel;
 
-export const homeLoader = async ({ params }: LoaderFunctionArgs<any>) => {
-  const posts = await getPostsForTopic(params.id);
+export const adminPanelLoader = async ({ params }: LoaderFunctionArgs<any>) => {
+  const posts = await getPostsForTopicAdmin(params.id);
   return posts;
 };

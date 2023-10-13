@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  width: 100%;
+  padding-top: 70px;
+  .outlet {
+    width: 100%;
+    padding: 30px 5px;
+    transition: margin 300ms ease-out;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    .outlet.open {
+      margin-left: 300px;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    .outlet {
+      padding: 40px 140px 0 80px;
+    }
+  }
+}

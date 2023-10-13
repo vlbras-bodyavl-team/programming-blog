@@ -2,20 +2,18 @@ import axios from "axios";
 import { IPost } from "../../interfaces";
 import { getTokensFromStorage } from "../../utils";
 
-export const getPost = async (id: string): Promise<IPost> => {
+export const getPostsForTopicAdmin = async (
+  topicId: string | undefined
+): Promise<IPost[]> => {
   const token = getTokensFromStorage()?.accessToken;
 
   const response = await axios.get(
-    `${import.meta.env.VITE_API_URL}/admins/posts/${id}`,
+    `${import.meta.env.VITE_API_URL}/admins/topics/${topicId}/posts`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
   );
-  const responsePost: IPost = {
-    ...response.data,
-    topic: response.data.topic.name,
-  };
-  return responsePost;
+  return response.data;
 };

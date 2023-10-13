@@ -1,15 +1,44 @@
 .container {
   margin-bottom: 20px;
+  padding: 15px;
   scroll-margin-top: 70px;
   border-radius: 21px;
   background: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   .content {
     white-space: pre-line;
-    margin-top: 10px;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     opacity: 0.8;
+  }
+  .tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .info {
+      display: flex;
+      gap: 10px;
+    }
+    .info > * {
+      border-radius: 7px;
+      font-size: 15px;
+      padding: 4px 6px;
+      background: #d2d2d2;
+    }
+    .buttons {
+      display: flex;
+      gap: 15px;
+    }
+  }
+}
+
+.container.dark {
+  background: #282828;
+  .info > * {
+    background: #454545;
   }
 }

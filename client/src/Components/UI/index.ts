@@ -14,3 +14,7 @@ export { default as Text } from "./Text/Text";
 export { default as Label } from "./AdminFormElements/Label/Label";
 export { default as BorderButton } from "./Buttons/BorderButton/BorderButton";
 export { default as SkeletonPost } from "./SkeletonPost/SkeletonPost";
+export { default as AdminPost } from "./AdminPost/AdminPost";
+export { default as AdminTopic } from "./AdminTopic/AdminTopic";
+export { default as SmallButton } from "./Buttons/SmallButton/SmallButton";
+export { default as DeleteIconButton } from "./Buttons/DeleteIconButton/DeleteIconButton";

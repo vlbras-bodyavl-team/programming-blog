@@ -6,7 +6,7 @@ export const deletePost = async (id: string): Promise<IPost> => {
   const token = getTokensFromStorage()?.accessToken;
 
   const response = await axios.delete(
-    `${import.meta.env.VITE_API_URL}/posts/${id}`,
+    `${import.meta.env.VITE_API_URL}/admins/posts/${id}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
