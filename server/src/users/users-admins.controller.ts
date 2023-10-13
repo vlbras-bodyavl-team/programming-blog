@@ -15,11 +15,13 @@ import { User } from './entities/user.entity';
 import { RoleGuard } from 'src/core/guards/role.guard';
 import { Role } from 'src/core/decorators/role.decorator';
 import { Roles } from 'src/core/enums/roles.enum';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('users')
 @UseGuards(RoleGuard)
 @Role(Roles.ADMIN)
-@Controller('users')
-export class UsersController {
+@Controller('admins/users')
+export class UsersAdminsController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
