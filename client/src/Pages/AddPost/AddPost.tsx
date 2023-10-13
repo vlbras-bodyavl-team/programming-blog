@@ -18,7 +18,7 @@ export const addPostAction: ActionFunction = async ({ request }) => {
 
     await addPost(data);
 
-    return redirect("/");
+    return redirect("/admin");
   } catch (error) {
     if (axios.isAxiosError(error)) {
       alert(error.response?.data.message);

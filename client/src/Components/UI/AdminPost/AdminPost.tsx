@@ -3,7 +3,7 @@ import { DeleteIconButton, SmallButton, Title } from "..";
 import { IAdminPost } from "../../../interfaces";
 import s from "./AdminPost.module.scss";
 import { useAppSelector } from "../../../store/store";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deletePost } from "../../../services";
 import axios from "axios";
 
@@ -13,12 +13,13 @@ interface IAdminPostProps extends HTMLAttributes<HTMLDivElement> {
 
 const AdminPost: FC<IAdminPostProps> = ({ post, ...props }) => {
   const isDark = useAppSelector((state) => state.theme.isDarkMode);
-
-  const params = useParams() as { id: string };
+  const navigate = useNavigate();
 
   const handleDeleteClick = async () => {
     try {
-      await deletePost(params.id);
+      await deletePost(post.id);
+
+      navigate(".", { replace: true });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         alert(error.response?.data.message);
@@ -39,7 +40,7 @@ const AdminPost: FC<IAdminPostProps> = ({ post, ...props }) => {
         </div>
         <div className={s.buttons}>
           <SmallButton>
-            <Link to={`admin/edit-post/${post.id}`}>Edit Post</Link>
+            <Link to={`/admin/edit-post/${post.id}`}>Edit Post</Link>
           </SmallButton>
           <DeleteIconButton onClick={handleDeleteClick} />
         </div>

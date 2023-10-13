@@ -87,6 +87,22 @@ const Router = () => {
       },
       children: [
         {
+          index: true,
+          loader: async () => {
+            try {
+              const topics = await fetchTopics();
+              if (!topics) {
+                console.log("no posts yet");
+                return null;
+              }
+
+              return redirect(`/admin/topic/${topics[0].id}/posts`);
+            } catch (error) {
+              return catchUnauthorizedError(error);
+            }
+          },
+        },
+        {
           path: "topic/:id/posts",
           element: <AdminPanel />,
           loader: adminPanelLoader,
