@@ -8,7 +8,7 @@ export const addPost = async (post: {
 }): Promise<AxiosResponse<any, any>> => {
   const token = getTokensFromStorage()?.accessToken;
   const response = await axios.post(
-    `${import.meta.env.VITE_API_URL}/posts`,
+    `${import.meta.env.VITE_API_URL}/admins/posts`,
     post,
     {
       headers: {

@@ -1,0 +1,16 @@
+.button {
+  border-radius: 7px;
+  background: #1e1e1e;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  height: 27px;
+  padding: 0 20px;
+  min-width: 110px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.button.dark {
+  background: #181818;
+}

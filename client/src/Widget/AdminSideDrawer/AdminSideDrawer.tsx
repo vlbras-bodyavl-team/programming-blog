@@ -1,14 +1,14 @@
-import s from "./SideDrawer.module.scss";
+import s from "./AdminSideDrawer.module.scss";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { Topic } from "../../Components/UI";
 import { useMediaQuery } from "react-responsive";
 import { toggle } from "../../store/features/isOpenDrawerSlice";
 import axios from "axios";
 import { logout } from "../../services";
 import { removeTokensFromStorage } from "../../utils";
 import { useNavigate } from "react-router-dom";
+import { AdminTopic } from "../../Components/UI";
 
-const SideDrawer = () => {
+const AdminSideDrawer = () => {
   const isOpen = useAppSelector((state) => state.isOpenDrawer.value);
   const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
   const topics = useAppSelector((state) => state.topics.topics);
@@ -38,7 +38,11 @@ const SideDrawer = () => {
       <div className={isDarkMode ? `${s.content} ${s.dark}` : s.content}>
         <ul className={s.list}>
           {topics.map((topic, i) => (
-            <Topic key={i} topic={topic} handlePostClick={handlePostClick} />
+            <AdminTopic
+              key={i}
+              topic={topic}
+              handlePostClick={handlePostClick}
+            />
           ))}
         </ul>
         <h4 onClick={handleLogoutClick} className={s.logout}>
@@ -49,4 +53,4 @@ const SideDrawer = () => {
   );
 };
 
-export default SideDrawer;
+export default AdminSideDrawer;
