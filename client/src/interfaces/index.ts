@@ -17,6 +17,14 @@ export interface IPost {
   topic: string;
 }
 
+export interface IAdminPost extends IPost {
+  createdAt: Date;
+  createdBy: {
+    id: string;
+    email: string;
+  };
+}
+
 export interface ITopic {
   id: string;
   name: string;
