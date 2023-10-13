@@ -33,7 +33,7 @@ const FormEditPost: FC<IFormEditPost> = ({ defaultValues }) => {
     try {
       await deletePost(params.id);
 
-      navigate("/");
+      navigate("/admin");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         alert(error.response?.data.message);
