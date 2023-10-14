@@ -9,6 +9,8 @@ import { IAdminPost } from "../../interfaces";
 import { getPostsForTopicAdmin } from "../../services";
 import { LoadingPosts } from "../../Widget";
 import { isAxiosError } from "axios";
+import s from "./AdminPanel.module.scss";
+import { catchUnauthorizedError } from "../../utils/router";
 
 const AdminPanel = () => {
   const posts = useLoaderData() as IAdminPost[];
@@ -19,7 +21,7 @@ const AdminPanel = () => {
       {isLoading ? (
         <LoadingPosts count={5} />
       ) : (
-        <ul>
+        <ul className={s.posts}>
           {posts?.map((post, i) => (
             <li key={i}>
               <AdminPost post={post} id={`${i}`} />
@@ -38,11 +40,10 @@ export const adminPanelLoader = async ({ params }: LoaderFunctionArgs<any>) => {
     const posts = await getPostsForTopicAdmin(params.id);
     return posts;
   } catch (error) {
-    if (isAxiosError(error) && error.response?.status === 400) {
-      return redirect("/admin");
-    } else if (isAxiosError(error)) {
-      alert(error.response?.data.message);
-      return null;
+    if (isAxiosError(error)) {
+      if (error.response?.status === 400) return redirect("/admin");
+      console.log(error.response?.data.message);
+      return catchUnauthorizedError(error);
     } else throw error;
   }
 };

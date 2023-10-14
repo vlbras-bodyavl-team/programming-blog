@@ -6,7 +6,8 @@ import axios from "axios";
 import { logout } from "../../services";
 import { removeTokensFromStorage } from "../../utils";
 import { useNavigate } from "react-router-dom";
-import { AdminTopic } from "../../Components/UI";
+import { AdminTopic, Button } from "../../Components/UI";
+import { Link } from "react-router-dom";
 
 const AdminSideDrawer = () => {
   const isOpen = useAppSelector((state) => state.isOpenDrawer.value);
@@ -36,6 +37,9 @@ const AdminSideDrawer = () => {
   return (
     <div className={isOpen ? `${s.drawer} ${s.open}` : s.drawer}>
       <div className={isDarkMode ? `${s.content} ${s.dark}` : s.content}>
+        <Button>
+          <Link to="/admin/add-post">Add Post</Link>
+        </Button>
         <ul className={s.list}>
           {topics.map((topic, i) => (
             <AdminTopic

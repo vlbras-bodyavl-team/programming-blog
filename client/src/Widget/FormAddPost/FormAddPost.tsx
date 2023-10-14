@@ -3,8 +3,8 @@ import {
   Title,
   InputFormAdmin,
   TextArea,
-  Button,
   Label,
+  DarkButton,
 } from "../../Components/UI";
 import { useAppSelector } from "../../store/store";
 import s from "./FormAddPost.module.scss";
@@ -41,7 +41,7 @@ const FormAddPost = () => {
 
       <TextArea placeholder="Content" name="content" disabled={isLoading} />
       <div className={s.buttons}>
-        <Button disabled={isLoading}>Create</Button>
+        <DarkButton disabled={isLoading}>Create</DarkButton>
       </div>
     </Form>
   );
