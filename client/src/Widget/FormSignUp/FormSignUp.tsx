@@ -9,7 +9,7 @@ import axios from "axios";
 import { signUp } from "../../services";
 import { JwtTokens } from "../../interfaces";
 import {
-  Button,
+  DarkButton,
   Form,
   FormBlock,
   FormContainer,
@@ -61,7 +61,7 @@ const FormSignUp = () => {
           />
         </FormBlock>
 
-        <Button disabled={isLoading}>Submit</Button>
+        <DarkButton disabled={isLoading}>Submit</DarkButton>
         <div>
           <Text color="#808080">Already have an account? </Text>
           <Link to="/signin" className="link-primary">

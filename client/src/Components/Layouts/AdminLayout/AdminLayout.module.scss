@@ -4,7 +4,7 @@
   padding-top: 70px;
   .outlet {
     width: 100%;
-    padding: 30px 5px;
+    padding: 30px 20px;
     transition: margin 300ms ease-out;
   }
 }
@@ -20,7 +20,7 @@
 @media screen and (min-width: 1024px) {
   .container {
     .outlet {
-      padding: 40px 140px 0 80px;
+      padding: 40px 160px 0 100px;
     }
   }
 }

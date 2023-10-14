@@ -5,13 +5,17 @@ import { getTokens } from "../../services";
 
 export const catchUnauthorizedError = async (error: unknown) => {
   try {
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
-      if (!getTokensFromStorage()) return redirect("/signin");
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 403) return redirect("/signin");
 
-      const tokens = await getTokens();
+      if (error.response?.status === 401) {
+        if (!getTokensFromStorage()) return redirect("/signin");
 
-      setAccessToken(tokens.accessToken);
-      setRefreshToken(tokens.refreshToken);
+        const tokens = await getTokens();
+
+        setAccessToken(tokens.accessToken);
+        setRefreshToken(tokens.refreshToken);
+      }
     } else {
       return redirect("/signin");
     }
