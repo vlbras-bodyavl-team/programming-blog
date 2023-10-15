@@ -1,12 +1,15 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import s from "./BorderButton.module.scss";
-
-interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: ReactNode;
+import { useAppSelector } from "../../../../store/store";
+interface BorderButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
 }
-const BorderButton = ({ children, ...props }: IButtonProps) => {
+
+const BorderButton = ({ children, ...rest }: BorderButtonProps) => {
+  const isDark = useAppSelector((state) => state.theme.isDarkMode);
+
   return (
-    <button className={s.button} {...props}>
+    <button className={isDark ? `${s.button} ${s.dark}` : s.button} {...rest}>
       {children}
     </button>
   );

@@ -12,6 +12,7 @@ import {
   Error,
   AdminPanel,
   EditPost,
+  Users,
 } from "../../Pages";
 import { homeLoader } from "../../Pages/Home/Home";
 import { useAppDispatch } from "../../store/store";
@@ -118,6 +119,10 @@ const Router = () => {
           element: <EditPost />,
           loader: editPostLoader,
           action: editPostAction,
+        },
+        {
+          path: "users",
+          element: <Users />,
         },
       ],
     },

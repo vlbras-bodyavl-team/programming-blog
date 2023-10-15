@@ -5,7 +5,7 @@ import {
   Label,
   InputFormAdmin,
   TextArea,
-  BorderButton,
+  RedBorderButton,
   DarkButton,
   Preloader,
 } from "../../Components/UI";
@@ -87,13 +87,13 @@ const FormEditPost: FC<IFormEditPost> = ({ defaultValues }) => {
       />
       <div className={s.buttons}>
         <DarkButton disabled={isLoading}>Submit</DarkButton>
-        <BorderButton
+        <RedBorderButton
           type="button"
           onClick={handleDeleteClick}
           disabled={isLoading}
         >
           Delete
-        </BorderButton>
+        </RedBorderButton>
       </div>
     </Form>
   );

@@ -6,7 +6,7 @@ import axios from "axios";
 import { logout } from "../../services";
 import { removeTokensFromStorage } from "../../utils";
 import { useNavigate } from "react-router-dom";
-import { AdminTopic, Button } from "../../Components/UI";
+import { AdminTopic, BorderButton, Button } from "../../Components/UI";
 import { Link } from "react-router-dom";
 
 const AdminSideDrawer = () => {
@@ -18,7 +18,7 @@ const AdminSideDrawer = () => {
 
   const isTablet = useMediaQuery({ query: "screen and (max-width: 767px)" });
 
-  const handlePostClick = () => {
+  const handleDrawerAutoClose = () => {
     if (isTablet) dispatch(toggle());
   };
 
@@ -37,16 +37,23 @@ const AdminSideDrawer = () => {
   return (
     <div className={isOpen ? `${s.drawer} ${s.open}` : s.drawer}>
       <div className={isDarkMode ? `${s.content} ${s.dark}` : s.content}>
-        <Link to="/admin/add-post">
-          <Button onClick={() => dispatch(toggle())}>Add Post</Button>
-        </Link>
+        <div className={s.buttons}>
+          <Link to="/admin/add-post">
+            <Button onClick={handleDrawerAutoClose}>Add Post</Button>
+          </Link>
+          <Link to="/admin/users">
+            <BorderButton onClick={handleDrawerAutoClose}>
+              Manage Users
+            </BorderButton>
+          </Link>
+        </div>
 
         <ul className={s.list}>
           {topics.map((topic, i) => (
             <AdminTopic
               key={i}
               topic={topic}
-              handlePostClick={handlePostClick}
+              handlePostClick={handleDrawerAutoClose}
             />
           ))}
         </ul>
