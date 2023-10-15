@@ -15,6 +15,7 @@ export const catchUnauthorizedError = async (error: unknown) => {
 
         setAccessToken(tokens.accessToken);
         setRefreshToken(tokens.refreshToken);
+        return null;
       }
     } else {
       return redirect("/signin");

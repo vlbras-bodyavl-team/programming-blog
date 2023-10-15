@@ -17,22 +17,21 @@
   }
   .tools {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .info {
-      display: flex;
-      gap: 10px;
-    }
+    flex-direction: column;
+    align-items: end;
+    gap: 10px;
     .info > * {
       border-radius: 7px;
       font-size: 15px;
       padding: 4px 6px;
       background: #d2d2d2;
     }
-    .buttons {
-      display: flex;
-      gap: 15px;
-    }
+  }
+  .tools > * {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: end;
   }
 }
 
@@ -40,5 +39,23 @@
   background: #282828;
   .info > * {
     background: #454545;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    .tools {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .info {
+      flex-direction: row;
+      gap: 10px;
+    }
+    .buttons {
+      flex-direction: row;
+      gap: 15px;
+    }
   }
 }

@@ -37,9 +37,10 @@ const AdminSideDrawer = () => {
   return (
     <div className={isOpen ? `${s.drawer} ${s.open}` : s.drawer}>
       <div className={isDarkMode ? `${s.content} ${s.dark}` : s.content}>
-        <Button>
-          <Link to="/admin/add-post">Add Post</Link>
-        </Button>
+        <Link to="/admin/add-post">
+          <Button onClick={() => dispatch(toggle())}>Add Post</Button>
+        </Link>
+
         <ul className={s.list}>
           {topics.map((topic, i) => (
             <AdminTopic
