@@ -3,10 +3,9 @@ import {
   useLoaderData,
   useNavigation,
 } from "react-router-dom";
-import { Post } from "../../Components/UI";
+import { Post, Preloader } from "../../Components/UI";
 import { IPost } from "../../interfaces";
 import { getPostsForTopic } from "../../services";
-import { LoadingPosts } from "../../Widget";
 
 const Home = () => {
   const posts = useLoaderData() as IPost[];
@@ -15,7 +14,7 @@ const Home = () => {
   return (
     <>
       {isLoading ? (
-        <LoadingPosts count={5} />
+        <Preloader />
       ) : (
         <ul>
           {posts?.map((post, i) => (

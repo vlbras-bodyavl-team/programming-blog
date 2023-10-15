@@ -74,7 +74,24 @@ const Router = () => {
       ],
     },
     {
+      path: "admin",
+      loader: async () => {
+        try {
+          const topics = await fetchTopics();
+          if (!topics) {
+            console.log("no posts yet");
+            return null;
+          }
+
+          return redirect(`/admin/topic/${topics[0].id}/posts`);
+        } catch (error) {
+          return catchUnauthorizedError(error);
+        }
+      },
+    },
+    {
       element: <AdminLayout />,
+      errorElement: <Error />,
       path: "admin",
       loader: async () => {
         try {
@@ -86,22 +103,6 @@ const Router = () => {
         }
       },
       children: [
-        {
-          index: true,
-          loader: async () => {
-            try {
-              const topics = await fetchTopics();
-              if (!topics) {
-                console.log("no posts yet");
-                return null;
-              }
-
-              return redirect(`/admin/topic/${topics[0].id}/posts`);
-            } catch (error) {
-              return catchUnauthorizedError(error);
-            }
-          },
-        },
         {
           path: "topic/:id/posts",
           element: <AdminPanel />,
@@ -122,6 +123,7 @@ const Router = () => {
     },
     {
       element: <AuthLayout />,
+      errorElement: <Error />,
       children: [
         {
           path: "signin",

@@ -4,10 +4,9 @@ import {
   useLoaderData,
   useNavigation,
 } from "react-router-dom";
-import { AdminPost } from "../../Components/UI";
+import { AdminPost, Preloader } from "../../Components/UI";
 import { IAdminPost } from "../../interfaces";
 import { getPostsForTopicAdmin } from "../../services";
-import { LoadingPosts } from "../../Widget";
 import { isAxiosError } from "axios";
 import s from "./AdminPanel.module.scss";
 import { catchUnauthorizedError } from "../../utils/router";
@@ -19,7 +18,7 @@ const AdminPanel = () => {
   return (
     <>
       {isLoading ? (
-        <LoadingPosts count={5} />
+        <Preloader />
       ) : (
         <ul className={s.posts}>
           {posts?.map((post, i) => (
@@ -41,7 +40,9 @@ export const adminPanelLoader = async ({ params }: LoaderFunctionArgs<any>) => {
     return posts;
   } catch (error) {
     if (isAxiosError(error)) {
-      if (error.response?.status === 400) return redirect("/admin");
+      if (error.response?.status === 400 || error.response?.status === 404)
+        return redirect("/admin");
+
       console.log(error.response?.data.message);
       return catchUnauthorizedError(error);
     } else throw error;

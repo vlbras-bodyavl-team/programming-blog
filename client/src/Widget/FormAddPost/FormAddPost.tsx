@@ -5,6 +5,7 @@ import {
   TextArea,
   Label,
   DarkButton,
+  Preloader,
 } from "../../Components/UI";
 import { useAppSelector } from "../../store/store";
 import s from "./FormAddPost.module.scss";
@@ -18,7 +19,10 @@ const FormAddPost = () => {
 
   return (
     <Form method="post" className={s.container}>
-      <Title>Add Post</Title>
+      <div className={s.titleLoader}>
+        <Title>Add Post</Title>
+        {isLoading && <Preloader width={24} />}
+      </div>
 
       <Label htmlFor="title">Title:</Label>
       <InputFormAdmin
@@ -27,6 +31,7 @@ const FormAddPost = () => {
         name="title"
         style={{ width: "300px" }}
         disabled={isLoading}
+        required
       />
 
       <Label htmlFor="topic">Topic:</Label>
@@ -37,9 +42,15 @@ const FormAddPost = () => {
         name="topic"
         dropdownItems={topics.map((topic) => topic.name)}
         disabled={isLoading}
+        required
       />
 
-      <TextArea placeholder="Content" name="content" disabled={isLoading} />
+      <TextArea
+        placeholder="Content"
+        name="content"
+        disabled={isLoading}
+        required
+      />
       <div className={s.buttons}>
         <DarkButton disabled={isLoading}>Create</DarkButton>
       </div>

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Form, useNavigate, useNavigation, useParams } from "react-router-dom";
 import {
   Title,
@@ -7,6 +7,7 @@ import {
   TextArea,
   BorderButton,
   DarkButton,
+  Preloader,
 } from "../../Components/UI";
 import { IPost } from "../../interfaces";
 import s from "./FormEditPost.module.scss";
@@ -20,6 +21,7 @@ interface IFormEditPost {
 
 const FormEditPost: FC<IFormEditPost> = ({ defaultValues }) => {
   const topics = useAppSelector((store) => store.topics.topics);
+  const [isDeletingPost, setIsDeletingPost] = useState(false);
 
   const params = useParams() as { id: string };
 
@@ -27,12 +29,17 @@ const FormEditPost: FC<IFormEditPost> = ({ defaultValues }) => {
 
   const navigation = useNavigation();
   const isLoading =
-    navigation.state === "submitting" || navigation.state === "loading";
+    navigation.state === "submitting" ||
+    navigation.state === "loading" ||
+    isDeletingPost;
 
   const handleDeleteClick = async () => {
     try {
+      setIsDeletingPost(true);
+
       await deletePost(params.id);
 
+      setIsDeletingPost(false);
       navigate("/admin");
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -43,7 +50,10 @@ const FormEditPost: FC<IFormEditPost> = ({ defaultValues }) => {
 
   return (
     <Form method="post" className={s.container}>
-      <Title>Edit Post</Title>
+      <div className={s.titleLoader}>
+        <Title>Edit Post</Title>
+        {isLoading && <Preloader width={24} />}
+      </div>
 
       <Label htmlFor="title">Title:</Label>
       <InputFormAdmin
@@ -53,6 +63,7 @@ const FormEditPost: FC<IFormEditPost> = ({ defaultValues }) => {
         name="title"
         style={{ width: "300px" }}
         disabled={isLoading}
+        required
       />
 
       <Label htmlFor="topic">Topic:</Label>
@@ -64,6 +75,7 @@ const FormEditPost: FC<IFormEditPost> = ({ defaultValues }) => {
         name="topic"
         dropdownItems={topics.map((topic) => topic.name)}
         disabled={isLoading}
+        required
       />
 
       <TextArea
@@ -71,10 +83,15 @@ const FormEditPost: FC<IFormEditPost> = ({ defaultValues }) => {
         placeholder="Content"
         name="content"
         disabled={isLoading}
+        required
       />
       <div className={s.buttons}>
         <DarkButton disabled={isLoading}>Submit</DarkButton>
-        <BorderButton onClick={handleDeleteClick} disabled={isLoading}>
+        <BorderButton
+          type="button"
+          onClick={handleDeleteClick}
+          disabled={isLoading}
+        >
           Delete
         </BorderButton>
       </div>
