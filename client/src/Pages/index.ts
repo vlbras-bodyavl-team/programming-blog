@@ -5,3 +5,4 @@ export { default as Home } from "./Home/Home";
 export { default as SignIn } from "./SignIn/SignIn";
 export { default as SignUp } from "./SignUp/SignUp";
 export { default as AdminPanel } from "./AdminPanel/AdminPanel";
+export { default as Users } from "./Users/Users";

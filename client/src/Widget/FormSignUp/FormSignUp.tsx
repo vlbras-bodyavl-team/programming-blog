@@ -14,6 +14,7 @@ import {
   FormBlock,
   FormContainer,
   Input,
+  Preloader,
   Text,
 } from "../../Components/UI";
 
@@ -60,8 +61,8 @@ const FormSignUp = () => {
             disabled={isLoading}
           />
         </FormBlock>
-
         <DarkButton disabled={isLoading}>Submit</DarkButton>
+        {isLoading && <Preloader width={20} />}
         <div>
           <Text color="#808080">Already have an account? </Text>
           <Link to="/signin" className="link-primary">
