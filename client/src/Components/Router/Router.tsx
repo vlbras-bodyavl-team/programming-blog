@@ -25,6 +25,7 @@ import { formSignInAction } from "../../Widget/FormSignIn/FormSignIn";
 import { formSignUpAction } from "../../Widget/FormSignUp/FormSignUp";
 import { addPostAction } from "../../Pages/AddPost/AddPost";
 import { adminPanelLoader } from "../../Pages/AdminPanel/AdminPanel";
+import { usersLoader } from "../../Pages/Users/Users";
 
 const Router = () => {
   const dispatch = useAppDispatch();
@@ -123,6 +124,7 @@ const Router = () => {
         {
           path: "users",
           element: <Users />,
+          loader: usersLoader,
         },
       ],
     },

@@ -30,3 +30,11 @@ export interface ITopic {
   name: string;
   posts: IPost[];
 }
+
+export interface IUser {
+  id: string;
+  email: string;
+  password: string;
+  role: string;
+  token: string;
+}

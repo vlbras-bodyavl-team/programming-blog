@@ -5,3 +5,4 @@ export { default as SideDrawer } from "./SideDrawer/SideDrawer";
 export { default as FormAddPost } from "./FormAddPost/FormAddPost";
 export { default as FormEditPost } from "./FormEditPost/FormEditPost";
 export { default as AdminSideDrawer } from "./AdminSideDrawer/AdminSideDrawer";
+export { default as UsersTable } from "./UsersTable/UsersTable";
