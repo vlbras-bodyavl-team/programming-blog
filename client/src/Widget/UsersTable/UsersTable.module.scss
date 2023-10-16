@@ -1,0 +1,47 @@
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 50px 0;
+  thead {
+    th {
+      div {
+        margin: auto;
+        max-width: 320px;
+        border-radius: 18px;
+        background: rgba(240, 240, 240, 0.6);
+        padding: 10px 0;
+        font-size: 25px;
+        font-style: normal;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+  }
+  tbody:before {
+    content: "-";
+    display: block;
+    line-height: 35px;
+    color: transparent;
+  }
+
+  tbody {
+    tr {
+      border-top: 3px solid #f0f0f0;
+      td {
+        padding: 25px 0;
+        text-align: center;
+      }
+      .email {
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .role {
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
