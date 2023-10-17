@@ -26,3 +26,5 @@ export { default as BorderButton } from "./Buttons/BorderButton/BorderButton";
 export { default as RedBorderButton } from "./Buttons/RedBorderButton/RedBorderButton";
 
 export { default as Preloader } from "./Preloader/Preloader";
+
+export { default as Dropdown } from "./Dropdowns/Dropdown/Dropdown";

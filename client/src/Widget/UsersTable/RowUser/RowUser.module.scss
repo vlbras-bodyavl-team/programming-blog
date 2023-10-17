@@ -1,0 +1,29 @@
+.tr {
+  border-top: 3px solid #f0f0f0;
+  border-bottom: 3px solid #f0f0f0;
+  td {
+    padding: 25px 0;
+    text-align: center;
+  }
+  .email {
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .dropdownAndLoading {
+    display: flex;
+  }
+  .role {
+    span {
+      font-size: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    img {
+      cursor: pointer;
+      margin-left: 15px;
+      width: 20px;
+      position: absolute;
+    }
+  }
+}
