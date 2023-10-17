@@ -1,0 +1,57 @@
+.container {
+  cursor: pointer;
+  margin: auto;
+  position: relative;
+  width: 205px;
+  user-select: none;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 7px;
+  padding: 5px 0;
+  border: 1px solid #5c5c5c;
+  background: #fff;
+  color: #000;
+
+  .value {
+    margin: auto;
+  }
+
+  .arrow {
+    width: 20px;
+    position: absolute;
+    right: 10px;
+    transition: transform 100ms ease-in-out;
+  }
+  .options {
+    background-color: #fff;
+    overflow: hidden;
+    border: 1px solid #5c5c5c;
+    border-radius: 7px;
+    width: 100%;
+
+    position: absolute;
+    top: calc(100%);
+    left: 0;
+    display: none;
+    li {
+      width: 100%;
+      padding: 5px 0;
+    }
+    li:hover {
+      background: #5c5c5c;
+      color: #fff;
+    }
+  }
+}
+
+.container.open {
+  .arrow {
+    transform: rotate(180deg);
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

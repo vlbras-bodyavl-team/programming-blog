@@ -1,3 +1,5 @@
+import { Roles } from "../types";
+
 export interface ISignIn {
   email: string;
   password: string;
@@ -35,6 +37,6 @@ export interface IUser {
   id: string;
   email: string;
   password: string;
-  role: string;
+  role: Roles;
   token: string;
 }

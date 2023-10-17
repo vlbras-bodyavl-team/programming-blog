@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { IUser } from "../../interfaces";
 import s from "./UsersTable.module.scss";
+import RowUser from "./RowUser/RowUser";
 
 interface IUsersTableProps {
   users: IUser[];
@@ -24,11 +25,7 @@ const UsersTable: FC<IUsersTableProps> = ({ users }) => {
       </thead>
       <tbody>
         {users.map((user) => (
-          <tr key={user.id}>
-            <td className={s.email}>{user.email}</td>
-            <td>********</td>
-            <td className={s.role}>{user.role}</td>
-          </tr>
+          <RowUser key={user.id} user={user} />
         ))}
       </tbody>
     </table>

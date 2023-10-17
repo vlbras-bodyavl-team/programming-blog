@@ -24,24 +24,4 @@
     line-height: 35px;
     color: transparent;
   }
-
-  tbody {
-    tr {
-      border-top: 3px solid #f0f0f0;
-      td {
-        padding: 25px 0;
-        text-align: center;
-      }
-      .email {
-        font-size: 20px;
-        font-weight: 600;
-        text-transform: uppercase;
-      }
-      .role {
-        font-size: 20px;
-        font-weight: 600;
-        text-transform: uppercase;
-      }
-    }
-  }
 }
