@@ -6,7 +6,7 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Index('IDX_EMAIL', { unique: true })
+  @Index('UIDX_users_email', { unique: true })
   @Column({ unique: true })
   email: string;
 
@@ -16,7 +16,6 @@ export class User {
   @Column({ default: Roles.CUSTOMER })
   role: Roles;
 
-  @Index('IDX_TOKEN')
   @Column({ nullable: true })
   token?: string;
 }

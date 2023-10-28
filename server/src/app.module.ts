@@ -9,21 +9,12 @@ import { PostsModule } from "./posts/posts.module";
 import { IsUUIDGuard } from "./core/guards/is-uuid.guard";
 import { CacheModule } from "@nestjs/cache-manager";
 import * as redisStore from "cache-manager-redis-store";
+import { dataSourceOptions } from "./database/database.config";
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: "postgres",
-      host: process.env.POSTGRES_HOST,
-      port: +process.env.POSTGRES_PORT,
-      username: process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_PASSWORD,
-      database: process.env.POSTGRES_DB,
-      autoLoadEntities: true,
-      synchronize: true,
-      logging: true,
-    }),
+    TypeOrmModule.forRoot(dataSourceOptions),
     CacheModule.register({
       ttl: parseInt(process.env.REDIS_TTL),
       isGlobal: true,
