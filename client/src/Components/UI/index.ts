@@ -24,6 +24,7 @@ export { default as SmallButton } from "./Buttons/SmallButton/SmallButton";
 export { default as DeleteIconButton } from "./Buttons/DeleteIconButton/DeleteIconButton";
 export { default as BorderButton } from "./Buttons/BorderButton/BorderButton";
 export { default as RedBorderButton } from "./Buttons/RedBorderButton/RedBorderButton";
+export { default as AddButton } from "./Buttons/AddButton/AddButton";
 
 export { default as Preloader } from "./Preloader/Preloader";
 
