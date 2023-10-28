@@ -13,7 +13,7 @@ export class Topic {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Index('IDX_NAME', { unique: true })
+  @Index('UIDX_topics_name', { unique: true })
   @Column({ unique: true })
   name: string;
 
