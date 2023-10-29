@@ -25,7 +25,11 @@ export { default as DeleteIconButton } from "./Buttons/DeleteIconButton/DeleteIc
 export { default as BorderButton } from "./Buttons/BorderButton/BorderButton";
 export { default as RedBorderButton } from "./Buttons/RedBorderButton/RedBorderButton";
 export { default as AddButton } from "./Buttons/AddButton/AddButton";
+export { default as ApplyButton } from "./Buttons/ApplyButton/ApplyButton";
+export { default as CancelButton } from "./Buttons/CancelButton/CancelButton";
 
 export { default as Preloader } from "./Preloader/Preloader";
 
 export { default as Dropdown } from "./Dropdowns/Dropdown/Dropdown";
+
+export { default as InputSmall } from "./InputSmall/InputSmall";
