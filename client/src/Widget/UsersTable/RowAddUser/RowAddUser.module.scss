@@ -1,0 +1,12 @@
+.tr {
+  border-top: 3px solid #f0f0f0;
+  border-bottom: 3px solid #f0f0f0;
+  td {
+    padding: 25px 0;
+    text-align: center;
+    .rolesButtonsContainer {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

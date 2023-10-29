@@ -5,8 +5,8 @@ import { DropdownOption } from "../../Components/UI/Dropdowns/Dropdown/Dropdown"
 import { Roles } from "../../types";
 
 interface IRolesDropdownProps {
-  user: IUser;
-  onSelect?: (value: Roles) => Promise<void>;
+  user?: IUser;
+  onSelect?: (value: Roles) => Promise<void> | void;
 }
 
 const options: DropdownOption[] = [
@@ -22,7 +22,7 @@ const options: DropdownOption[] = [
 
 const RolesDropdown: FC<IRolesDropdownProps> = ({ user, onSelect }) => {
   const [value, setValue] = useState<DropdownOption>(
-    options.find((option) => option.value === user.role) || options[0]
+    options.find((option) => option.value === user?.role) || options[0]
   );
 
   const handleChange = async (value: DropdownOption) => {

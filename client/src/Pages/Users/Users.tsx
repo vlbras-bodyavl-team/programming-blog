@@ -4,14 +4,12 @@ import s from "./Users.module.scss";
 import { catchUnauthorizedError } from "../../utils/router";
 import { getUsers } from "../../services";
 import { IUser } from "../../interfaces";
-import { AddButton } from "../../Components/UI";
 
 const Users = () => {
   const users = useLoaderData() as IUser[];
 
   return (
     <div className={s.container}>
-      <AddButton />
       <UsersTable users={users} />
     </div>
   );
