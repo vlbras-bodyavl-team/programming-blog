@@ -1,15 +1,29 @@
 version: '3.8'
 services:
   postgres:
-    image: postgres:latest
-    container_name: ${POSTGRES_DB}
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_HOST_AUTH_METHOD: "trust"
     env_file:
       - .env
     ports:
-      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+      - "${DB_PORT}:${DB_PORT}"
 
   redis:
-    image: redis:latest
+    image: redis:alpine
     container_name: redis
     ports:
       - "${REDIS_PORT}:${REDIS_PORT}"
+
+  app:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: 947772499710.dkr.ecr.eu-central-1.amazonaws.com/programming-blog:latest 
+    container_name: ${NAME}
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      - postgres
+      - redis
