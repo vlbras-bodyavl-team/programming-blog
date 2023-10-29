@@ -47,14 +47,14 @@ jobs:
 
           # SSH into EC2 and run Docker commands
           ssh -o StrictHostKeyChecking=no -i deploy_key.pem ec2-user@${{ secrets.AWS_EC2_HOST }} << EOF
-            # Login to ECR
-            $(aws ecr get-login --no-include-email --region ${{ secrets.AWS_REGION }})
+            # Get Docker login command from ECR and execute it
+            eval $(aws ecr get-login --no-include-email --region ${{ secrets.AWS_REGION }})
 
             # Pull the latest image
             docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
             # # (Optional) Stop the current container
-            # docker stop my-container
+            # docker stop my-container || true
 
             # # Run the new container
             # docker run -d --name my-container $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
