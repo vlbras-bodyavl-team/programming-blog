@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -16,6 +17,7 @@ import { RoleGuard } from 'src/core/guards/role.guard';
 import { Role } from 'src/core/decorators/role.decorator';
 import { Roles } from 'src/core/enums/roles.enum';
 import { ApiTags } from '@nestjs/swagger';
+import { UserFilterDto } from './dto/users-filter.dto';
 
 @ApiTags('users')
 @UseGuards(RoleGuard)
@@ -30,8 +32,8 @@ export class UsersAdminsController {
   }
 
   @Get()
-  findAll(): Promise<User[]> {
-    return this.usersService.findAll();
+  findAll(@Query() usersFilterDto: UserFilterDto): Promise<User[]> {
+    return this.usersService.findAll(usersFilterDto);
   }
 
   @Get(':id')
