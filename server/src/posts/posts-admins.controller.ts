@@ -13,8 +13,8 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Post as PostEntity } from './entities/post.entity';
 import { RoleGuard } from 'src/core/guards/role.guard';
-import { Role } from 'src/core/decorators/role.decorator';
-import { Roles } from 'src/core/enums/roles.enum';
+import { Roles } from 'src/core/decorators/role.decorator';
+import { Role } from 'src/core/enums/role.enum';
 import {
   ApiForbiddenResponse,
   ApiTags,
@@ -26,7 +26,7 @@ import { UserId } from 'src/core/decorators/user-id.decorator';
 @ApiUnauthorizedResponse({ description: 'Unauthorized' })
 @ApiForbiddenResponse({ description: 'Forbidden' })
 @UseGuards(RoleGuard)
-@Role(Roles.ADMIN)
+@Roles(Role.ADMIN)
 @Controller('admins')
 export class PostsAdminsController {
   constructor(private readonly postsService: PostsService) {}
@@ -39,6 +39,7 @@ export class PostsAdminsController {
     return this.postsService.create(createPostDto, userId);
   }
 
+  @Roles(Role.ADMIN, Role.MODERATOR)
   @Get('topics/:id/posts')
   findAll(@Param('id') topicId: string): Promise<PostEntity[]> {
     return this.postsService.findAll(topicId, 'profiles');

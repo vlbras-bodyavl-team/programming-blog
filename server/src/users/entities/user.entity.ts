@@ -1,4 +1,4 @@
-import { Roles } from 'src/core/enums/roles.enum';
+import { Role } from 'src/core/enums/role.enum';
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
@@ -6,17 +6,16 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Index('IDX_EMAIL', { unique: true })
+  @Index('UIDX_users_email', { unique: true })
   @Column({ unique: true })
   email: string;
 
   @Column()
   password: string;
 
-  @Column({ default: Roles.CUSTOMER })
-  role: Roles;
+  @Column({ default: Role.CUSTOMER })
+  role: Role;
 
-  @Index('IDX_TOKEN')
   @Column({ nullable: true })
   token?: string;
 }

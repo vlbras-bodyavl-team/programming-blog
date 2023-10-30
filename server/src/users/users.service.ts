@@ -7,8 +7,9 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { hash } from 'argon2';
+import { UserFilterDto } from './dto/users-filter.dto';
 
 @Injectable()
 export class UsersService {
@@ -25,14 +26,18 @@ export class UsersService {
         password: hashedPassword,
       });
       return await this.usersRepository.save(user);
-    } 
-    catch (error) {
+    } catch (error) {
       throw new ConflictException('User already exists');
     }
   }
 
-  findAll(): Promise<User[]> {
-    return this.usersRepository.find();
+  findAll(usersFilterDto?: UserFilterDto): Promise<User[]> {
+    const { email } = usersFilterDto;
+    const whereClause = {};
+    if (email) {
+      whereClause['email'] = Like(`${email}%`);
+    }
+    return this.usersRepository.find({ where: whereClause });
   }
 
   async findOne(id: string): Promise<User> {
@@ -51,8 +56,7 @@ export class UsersService {
     try {
       this.usersRepository.merge(user, updateUserDto);
       return await this.usersRepository.save(user);
-    } 
-    catch (error) {
+    } catch (error) {
       throw new ConflictException('User already exists');
     }
   }

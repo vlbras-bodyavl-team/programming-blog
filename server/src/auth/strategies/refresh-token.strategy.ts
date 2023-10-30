@@ -10,6 +10,8 @@ export class RefreshTokenStrategy extends PassportStrategy(Strategy, 'refresh-to
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: process.env.JWT_SECRET,
+      audience: process.env.JWT_AUDIENCE,
+      issuer: process.env.JWT_ISSUER,
       passReqToCallback: true,
     });
   }

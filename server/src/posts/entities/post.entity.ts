@@ -28,7 +28,7 @@ export class Post {
 
   @ManyToOne(() => User, { nullable: true, onDelete: 'SET NULL'})
   @JoinColumn({ name: 'createdBy' })
-  createdBy: User;
+  createdBy?: User;
 
   @ManyToOne(() => User, { nullable: true, onDelete: 'SET NULL'})
   @JoinColumn({ name: 'updatedBy' })
