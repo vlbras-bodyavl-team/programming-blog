@@ -54,7 +54,10 @@ export class PostsService {
         ${
           type === 'profiles'
             ? /*sql*/ `
-          , p."createdAt",
+          , to_char(
+            "createdAt"::timestamp, 
+            'HH24:MI DD.MM.YYYY'
+          ) AS "createdAt",
           json_build_object(
             'id', u.id,
             'email', u.email

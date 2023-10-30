@@ -1,8 +1,8 @@
-import { Roles } from '../enums/roles.enum';
+import { Role } from '../enums/role.enum';
 
 export interface JwtPayload {
   id: string;
-  role: Roles;
+  role: Role;
 }
 
 export interface JwtPayloadWithRefreshToken extends JwtPayload {
