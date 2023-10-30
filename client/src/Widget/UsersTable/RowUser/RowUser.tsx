@@ -4,8 +4,8 @@ import pencil from "../../../assets/images/pencil.png";
 import pencilWhite from "../../../assets/images/pencilWhite.png";
 import { FC, useState } from "react";
 import { RolesDropdown } from "../..";
-import { Preloader } from "../../../Components/UI";
-import { updateUserRole } from "../../../services";
+import { DeleteIconButton, Preloader } from "../../../Components/UI";
+import { deleteUser, updateUserRole } from "../../../services";
 import { Roles } from "../../../types";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../store/store";
@@ -32,6 +32,15 @@ const RowUser: FC<IRowUserProps> = ({ user }) => {
     navigate("/admin/users", { replace: true });
   };
 
+  const handleDeleteClick = async () => {
+    try {
+      await deleteUser(user.id);
+      navigate("/admin/users", { replace: true });
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return (
     <tr className={s.tr}>
       <td className={s.email}>{user.email}</td>
@@ -43,14 +52,19 @@ const RowUser: FC<IRowUserProps> = ({ user }) => {
             {isLoading && <Preloader />}
           </div>
         ) : (
-          <div className={s.role}>
-            <span>{user.role}</span>
-            <img
-              src={isDark ? pencilWhite : pencil}
-              alt=""
-              onClick={() => setIsUpdatingRole(true)}
-            />
-          </div>
+          <>
+            <div className={s.roleContainer}>
+              <div className={s.role}>
+                <span>{user.role}</span>
+                <img
+                  src={isDark ? pencilWhite : pencil}
+                  alt=""
+                  onClick={() => setIsUpdatingRole(true)}
+                />
+              </div>
+              <DeleteIconButton onClick={handleDeleteClick} />
+            </div>
+          </>
         )}
       </td>
     </tr>

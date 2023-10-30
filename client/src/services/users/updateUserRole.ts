@@ -10,15 +10,11 @@ export const updateUserRole = async (
 
   const data = { role };
 
-  const response = await axios.patch(
-    `${import.meta.env.VITE_API_URL}/admins/users/${userId}`,
-    data,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  );
+  const response = await axios.patch(`/admins/users/${userId}`, data, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 
   return response.data;
 };
