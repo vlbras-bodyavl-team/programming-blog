@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'server'
+      - "server/**"
 
 jobs:
   build-and-push:
@@ -64,4 +64,3 @@ jobs:
 
           # Cleanup deploy key
           rm -f deploy_key.pem
-
