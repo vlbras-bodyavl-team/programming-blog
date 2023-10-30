@@ -21,6 +21,10 @@ export interface IPost {
 
 export interface IAdminPost extends IPost {
   createdAt: string;
+  updatedBy?: {
+    id: string;
+    email: string;
+  };
   createdBy: {
     id: string;
     email: string;

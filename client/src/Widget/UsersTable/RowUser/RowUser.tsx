@@ -55,7 +55,9 @@ const RowUser: FC<IRowUserProps> = ({ user }) => {
           <>
             <div className={s.roleContainer}>
               <div className={s.role}>
-                <span>{user.role}</span>
+                <span className={user.role === "admin" ? s.admin : ""}>
+                  {user.role}
+                </span>
                 <img
                   src={isDark ? pencilWhite : pencil}
                   alt=""

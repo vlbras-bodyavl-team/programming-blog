@@ -51,10 +51,12 @@
   .container {
     .tools {
       flex-direction: row;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       .info {
         flex-direction: row;
+        flex-wrap: wrap;
         gap: 10px;
       }
     }

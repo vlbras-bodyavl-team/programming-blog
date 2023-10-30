@@ -35,8 +35,13 @@ const AdminPost: FC<IAdminPostProps> = ({ post, ...props }) => {
       <article className={s.content}>{post.content}</article>
       <div className={s.tools}>
         <div className={s.info}>
+          {post.updatedBy?.email ? (
+            <div className={s.updatedBy}>
+              Updated by {post.updatedBy?.email}
+            </div>
+          ) : null}
           <div className={s.createdBy}>Created By {post.createdBy?.email}</div>
-          <div className={s.createdAt}>Created At {post.createdAt}</div>
+          <div className={s.createdAt}>Created At {post?.createdAt}</div>
         </div>
         <div className={s.buttons}>
           <SmallButton>
