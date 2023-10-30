@@ -14,14 +14,14 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { RoleGuard } from 'src/core/guards/role.guard';
-import { Role } from 'src/core/decorators/role.decorator';
-import { Roles } from 'src/core/enums/roles.enum';
+import { Roles } from 'src/core/decorators/role.decorator';
+import { Role } from 'src/core/enums/role.enum';
 import { ApiTags } from '@nestjs/swagger';
 import { UserFilterDto } from './dto/users-filter.dto';
 
 @ApiTags('users')
 @UseGuards(RoleGuard)
-@Role(Roles.ADMIN)
+@Roles(Role.ADMIN)
 @Controller('admins/users')
 export class UsersAdminsController {
   constructor(private readonly usersService: UsersService) {}
@@ -31,6 +31,7 @@ export class UsersAdminsController {
     return this.usersService.create(createUserDto);
   }
 
+  @Roles(Role.ADMIN, Role.MODERATOR)
   @Get()
   findAll(@Query() usersFilterDto: UserFilterDto): Promise<User[]> {
     return this.usersService.findAll(usersFilterDto);

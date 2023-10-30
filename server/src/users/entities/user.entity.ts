@@ -1,4 +1,4 @@
-import { Roles } from 'src/core/enums/roles.enum';
+import { Role } from 'src/core/enums/role.enum';
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
@@ -13,8 +13,8 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ default: Roles.CUSTOMER })
-  role: Roles;
+  @Column({ default: Role.CUSTOMER })
+  role: Role;
 
   @Column({ nullable: true })
   token?: string;
