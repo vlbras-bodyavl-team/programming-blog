@@ -18,6 +18,10 @@ const options: DropdownOption[] = [
     value: "customer",
     label: "Customer",
   },
+  {
+    value: "moderator",
+    label: "Moderator",
+  },
 ];
 
 const RolesDropdown: FC<IRolesDropdownProps> = ({ user, onSelect }) => {

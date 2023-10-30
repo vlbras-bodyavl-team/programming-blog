@@ -47,11 +47,12 @@ const RowAddUser: FC<IRowAddUserProps> = ({ onCancelClick }) => {
       await addUser(email, password, role);
       setIsLoading(false);
 
-      navigate("/admin/users", { replace: true });
+      navigate(".", { replace: true });
       onCancelClick && onCancelClick();
     } catch (error) {
       setIsLoading(false);
       alert(error);
+      onCancelClick && onCancelClick();
     }
   };
 

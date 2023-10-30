@@ -23,13 +23,21 @@ const RowUser: FC<IRowUserProps> = ({ user }) => {
   const navigate = useNavigate();
 
   const handleSelect = async (value: Roles) => {
-    setIsLoading(true);
+    try {
+      setIsLoading(true);
 
-    await updateUserRole(user.id, value);
+      await updateUserRole(user.id, value);
 
-    setIsUpdatingRole(false);
-    setIsLoading(false);
-    navigate("/admin/users", { replace: true });
+      setIsUpdatingRole(false);
+      setIsLoading(false);
+
+      navigate(".", { replace: true });
+    } catch (error) {
+      alert(error);
+
+      setIsLoading(false);
+      setIsUpdatingRole(false);
+    }
   };
 
   const handleDeleteClick = async () => {
