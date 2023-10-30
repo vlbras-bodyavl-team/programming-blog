@@ -1,11 +1,10 @@
 import axios from "axios";
 import { getTokensFromStorage } from "../../utils";
-import { IUser } from "../../interfaces";
 
-export const getUsers = async (): Promise<IUser[]> => {
+export const deleteUser = async (id: string) => {
   const token = getTokensFromStorage()?.accessToken;
 
-  const response = await axios.get(`/admins/users`, {
+  const response = await axios.delete(`admins/users/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
