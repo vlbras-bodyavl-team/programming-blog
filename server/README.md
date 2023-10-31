@@ -1,6 +1,6 @@
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+
 
 ## Installation
 
@@ -32,4 +32,11 @@ $ pnpm run start:dev
 
 # production mode
 $ pnpm run start:prod
+```
+
+## Other
+```bash
+$ npm run migration:generate --name=
+
+$ pnpm migration:run
 ```
