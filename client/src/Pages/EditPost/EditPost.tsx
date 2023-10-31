@@ -10,6 +10,7 @@ import { FormEditPost } from "../../Widget";
 import { catchUnauthorizedError } from "../../utils/router";
 import { IPost } from "../../interfaces";
 import { isAxiosError } from "axios";
+import { catchModeratorError } from "../../utils";
 
 const EditPost = () => {
   const post = useLoaderData() as IPost;
@@ -48,7 +49,7 @@ export const editPostLoader = async ({ params }: LoaderFunctionArgs<any>) => {
     }
   } catch (error) {
     if (isAxiosError(error)) {
-      alert(error.response?.data.message);
+      catchModeratorError(error);
       return redirect("..");
     }
   }

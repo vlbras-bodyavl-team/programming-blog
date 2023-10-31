@@ -9,6 +9,7 @@ import { deleteUser, updateUserRole } from "../../../services";
 import { Roles } from "../../../types";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../store/store";
+import { catchModeratorError } from "../../../utils";
 
 interface IRowUserProps {
   user: IUser;
@@ -33,7 +34,7 @@ const RowUser: FC<IRowUserProps> = ({ user }) => {
 
       navigate(".", { replace: true });
     } catch (error) {
-      alert(error);
+      catchModeratorError(error, navigate);
 
       setIsLoading(false);
       setIsUpdatingRole(false);
@@ -45,7 +46,7 @@ const RowUser: FC<IRowUserProps> = ({ user }) => {
       await deleteUser(user.id);
       navigate("/admin/users", { replace: true });
     } catch (error) {
-      alert(error);
+      catchModeratorError(error, navigate);
     }
   };
 
