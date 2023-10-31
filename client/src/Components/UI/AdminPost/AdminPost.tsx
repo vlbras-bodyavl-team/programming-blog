@@ -5,7 +5,7 @@ import s from "./AdminPost.module.scss";
 import { useAppSelector } from "../../../store/store";
 import { Link, useNavigate } from "react-router-dom";
 import { deletePost } from "../../../services";
-import axios from "axios";
+import { catchModeratorError } from "../../../utils";
 
 interface IAdminPostProps extends HTMLAttributes<HTMLDivElement> {
   post: IAdminPost;
@@ -21,9 +21,7 @@ const AdminPost: FC<IAdminPostProps> = ({ post, ...props }) => {
 
       navigate(".", { replace: true });
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        alert(error.response?.data.message);
-      } else throw error;
+      catchModeratorError(error, navigate);
     }
   };
   return (

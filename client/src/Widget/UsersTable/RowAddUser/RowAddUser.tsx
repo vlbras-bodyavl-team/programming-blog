@@ -10,6 +10,7 @@ import {
 import { Roles } from "../../../types";
 import { addUser } from "../../../services";
 import { useNavigate } from "react-router-dom";
+import { catchModeratorError } from "../../../utils";
 interface IRowAddUserProps {
   onCancelClick?: () => void;
 }
@@ -51,7 +52,7 @@ const RowAddUser: FC<IRowAddUserProps> = ({ onCancelClick }) => {
       onCancelClick && onCancelClick();
     } catch (error) {
       setIsLoading(false);
-      alert(error);
+      catchModeratorError(error, navigate);
       onCancelClick && onCancelClick();
     }
   };
