@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'server/**'
+      - '.github'
       
 jobs:
   build-and-push:
@@ -49,14 +50,8 @@ jobs:
 
           # SSH into EC2 and run Docker commands
           ssh -o StrictHostKeyChecking=no -i deploy_key.pem ec2-user@${{ secrets.AWS_EC2_HOST }} << EOF
-            # Get Docker login command from ECR and execute it
-            docker login -u AWS -p $(aws ecr get-login-password --region ${{ secrets.AWS_REGION }}) $ECR_REGISTRY
-
-            # Pull the latest image
-            docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
             # (Optional) Stop the current container
-            docker rm -f $(docker ps -aq)
+            docker rm -f \$(docker ps -aq)
 
             # Run the new container
             docker run -p 80:3000 --name programming-blog $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
