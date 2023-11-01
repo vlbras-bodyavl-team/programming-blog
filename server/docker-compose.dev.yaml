@@ -15,3 +15,15 @@ services:
     container_name: redis
     ports:
       - '${REDIS_PORT}:${REDIS_PORT}'
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image: ${ECR_REGISTRY}/${NAME}:latest
+    container_name: ${NAME}
+    ports:
+      - '${PORT}:${PORT}'
+    depends_on:
+      - postgres
+      - redis

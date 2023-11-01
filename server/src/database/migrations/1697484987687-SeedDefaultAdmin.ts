@@ -1,11 +1,13 @@
+import { Role } from 'src/core/enums/role.enum';
+import { User } from 'src/users/entities/user.entity';
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export class SeedDefaultAdmin1697484987687 implements MigrationInterface {
   async up(queryRunner: QueryRunner): Promise<void> {
-    const adminData = {
-      email: 'default@progblog.com',
+    const adminData: Partial<User> = {
+      email: 'default-admin@progblog.com',
       password: '$argon2id$v=19$m=65536,t=3,p=4$NzfcNdFWG77EWmwEP+GfCg$oflnIcPG2XlQGt3GWPX+poBHvV6z7ZL24IDd54Jv/7k',
-      role: 'admin',
+      role: Role.ADMIN,
     };
 
     await queryRunner.query(/*sql*/ `
@@ -18,7 +20,7 @@ export class SeedDefaultAdmin1697484987687 implements MigrationInterface {
 
   async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(/*sql*/ `
-      DELETE FROM users WHERE email = 'default@progblog.com'
+      DELETE FROM users WHERE email = 'default-admin@progblog.com'
     `);
   }
 }
