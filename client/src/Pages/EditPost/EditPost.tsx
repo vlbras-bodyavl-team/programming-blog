@@ -2,12 +2,15 @@ import { getPost, updatePost } from "../../services";
 import {
   ActionFunction,
   LoaderFunctionArgs,
+  redirect,
   useLoaderData,
 } from "react-router-dom";
 import { FormEditPost } from "../../Widget";
 
 import { catchUnauthorizedError } from "../../utils/router";
 import { IPost } from "../../interfaces";
+import { isAxiosError } from "axios";
+import { catchModeratorError } from "../../utils";
 
 const EditPost = () => {
   const post = useLoaderData() as IPost;
@@ -45,7 +48,10 @@ export const editPostLoader = async ({ params }: LoaderFunctionArgs<any>) => {
       return post;
     }
   } catch (error) {
-    return catchUnauthorizedError(error);
+    if (isAxiosError(error)) {
+      catchModeratorError(error);
+      return redirect("..");
+    }
   }
 };
 

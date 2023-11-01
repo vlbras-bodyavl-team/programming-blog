@@ -33,3 +33,5 @@ export { default as Preloader } from "./Preloader/Preloader";
 export { default as Dropdown } from "./Dropdowns/Dropdown/Dropdown";
 
 export { default as InputSmall } from "./InputSmall/InputSmall";
+
+export { default as Info } from "./Info/Info";
