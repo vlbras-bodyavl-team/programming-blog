@@ -23,6 +23,5 @@ async function bootstrap() {
     `😎 Application is running on port ${process.env.APP_PORT}`,
     `bootstrap`
   );
-  Logger.log(`Hello World!`)
 }
 bootstrap();

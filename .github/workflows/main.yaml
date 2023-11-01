@@ -52,6 +52,9 @@ jobs:
             # (Optional) Stop the current container
             docker rm -f \$(docker ps -aq)
 
+            # Pull image from Amazon ECR
+            docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
             # Run the new container
             docker run -p 80:3000 --name programming-blog $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
