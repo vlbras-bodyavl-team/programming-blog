@@ -56,7 +56,7 @@ jobs:
             docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
             # Run the new container
-            docker run -p 80:3000 --name programming-blog $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            docker run -d -p 80:3000 --name programming-blog $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
             # Run migrations
             docker exec programming-blog npx typeorm -d dist/database/database.config.js migration:run
