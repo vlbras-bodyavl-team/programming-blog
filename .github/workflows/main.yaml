@@ -56,10 +56,10 @@ jobs:
             docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
             # # (Optional) Stop the current container
-            # docker stop my-container || true
+            docker rm -f $(docker ps -aq)
 
             # # Run the new container
-            # docker run -d --name my-container $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            docker run -p 80:3000 --name programming-blog $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           EOF
 
           # Cleanup deploy key
