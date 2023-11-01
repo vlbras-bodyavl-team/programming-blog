@@ -55,11 +55,14 @@ jobs:
             # Pull the latest image
             docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-            # # (Optional) Stop the current container
-            # docker stop my-container || true
+            # (Optional) Stop the current container
+            docker rm -f $(docker ps -aq)
 
-            # # Run the new container
-            # docker run -d --name my-container $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            # Run the new container
+            docker run -p 80:3000 --name programming-blog $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+            # Run migrations
+            docker exec programming-blog npx typeorm -d dist/database/database.config.js migration:run
           EOF
 
           # Cleanup deploy key
