@@ -21,9 +21,9 @@ services:
       context: .
       dockerfile: Dockerfile
     # image: ${ECR_REGISTRY}/${NAME}:latest
-    container_name: ${NAME}
+    container_name: ${APP_NAME}
     ports:
-      - '${PORT}:${PORT}'
+      - '${APP_PORT}:${APP_PORT}'
     depends_on:
       - postgres
       - redis
