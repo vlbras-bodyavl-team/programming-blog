@@ -2,7 +2,7 @@ import { LoaderFunction, useLoaderData } from "react-router-dom";
 import { UsersTable } from "../../Widget";
 import s from "./Users.module.scss";
 import { catchUnauthorizedError } from "../../utils/router";
-import { getUsers } from "../../services";
+import { getUsers, getUsersWithEmail } from "../../services";
 import { IUser } from "../../interfaces";
 
 const Users = () => {
@@ -15,8 +15,13 @@ const Users = () => {
   );
 };
 
-export const usersLoader: LoaderFunction = async () => {
+export const usersLoader: LoaderFunction = async ({ request }) => {
   try {
+    const email = new URL(request.url).searchParams.get("email");
+    if (email) {
+      const users = await getUsersWithEmail(email);
+      return users;
+    }
     const users = await getUsers();
     return users;
   } catch (error) {
