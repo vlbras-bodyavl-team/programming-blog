@@ -27,6 +27,7 @@ export { default as RedBorderButton } from "./Buttons/RedBorderButton/RedBorderB
 export { default as AddButton } from "./Buttons/AddButton/AddButton";
 export { default as ApplyButton } from "./Buttons/ApplyButton/ApplyButton";
 export { default as CancelButton } from "./Buttons/CancelButton/CancelButton";
+export { default as EditIconButton } from "./Buttons/EditIconButton/EditIconButton";
 
 export { default as Preloader } from "./Preloader/Preloader";
 

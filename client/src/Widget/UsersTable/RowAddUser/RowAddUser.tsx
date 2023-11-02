@@ -11,6 +11,7 @@ import { Roles } from "../../../types";
 import { addUser } from "../../../services";
 import { useNavigate } from "react-router-dom";
 import { catchModeratorError } from "../../../utils";
+import { validateEmail, validatePassword } from "../../../utils/validation";
 interface IRowAddUserProps {
   onCancelClick?: () => void;
 }
@@ -24,13 +25,16 @@ const RowAddUser: FC<IRowAddUserProps> = ({ onCancelClick }) => {
   const navigate = useNavigate();
 
   const validateValues = () => {
-    if (!email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
-      alert("Email Not Valid");
+    const emailError = validateEmail(email);
+    const passwordError = validatePassword(password);
+
+    if (emailError) {
+      alert(emailError.emailError);
       return false;
     }
 
-    if (!password.match(/^[a-zA-Z0-9]{8,22}$/)) {
-      alert("Password length must best min 8 Chracters and Max 22 Chracters");
+    if (passwordError) {
+      alert(passwordError.passwordError);
       return false;
     }
 

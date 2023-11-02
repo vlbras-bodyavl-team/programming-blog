@@ -5,9 +5,17 @@
     padding: 25px 0;
     text-align: center;
   }
+  .buttonContainer {
+    display: inline;
+    margin-left: 15px;
+    position: absolute;
+  }
   .email {
-    font-size: 20px;
-    font-weight: 600;
+    position: relative;
+    span {
+      font-size: 18px;
+      font-weight: 600;
+    }
   }
   .dropdownAndLoading {
     display: flex;
@@ -15,21 +23,16 @@
   .roleContainer {
     display: flex;
     justify-content: end;
+    position: relative;
     .role {
       margin: auto;
       span {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 600;
         text-transform: uppercase;
       }
       span.admin {
         color: #d70000;
-      }
-      img {
-        cursor: pointer;
-        margin-left: 15px;
-        width: 20px;
-        position: absolute;
       }
     }
   }

@@ -21,8 +21,11 @@ export const catchUnauthorizedError = async (error: unknown) => {
       return redirect("/signin");
     }
   } catch (error) {
-    if (axios.isAxiosError(error))
-      if (error.response?.status === 401 || error.response?.status === 403)
+    if (axios.isAxiosError(error)) {
+      let errors = [401, 403, 404];
+      console.log(error.response?.status);
+      if (errors.includes(error.response?.status as number))
         return redirect("/signin");
+    }
   }
 };
