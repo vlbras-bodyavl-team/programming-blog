@@ -1,56 +1,79 @@
 .container {
   max-width: 1300px;
   margin: auto;
-  overflow: scroll;
+
   .header {
-    padding: 10px 0;
+    padding: 20px 0;
     display: flex;
-    justify-content: end;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 20px;
+    padding: 0 20px;
+    margin-bottom: 30px;
+    .rightContainer {
+      display: flex;
+      justify-content: end;
+    }
+    > * {
+      flex-basis: 50%;
+    }
   }
-  .table {
-    width: 100%;
-    margin: 0 auto;
-    min-width: 970px;
-    table-layout: fixed;
-    border-collapse: collapse;
-    border-spacing: 50px 0;
-    thead {
-      th {
-        div {
-          margin: auto;
-          position: relative;
-          max-width: 320px;
-          border-radius: 18px;
-          background: rgba(240, 240, 240, 0.6);
-          padding: 10px 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 10px;
-          span {
-            font-size: 22px;
-            font-style: normal;
-            font-weight: 700;
-            text-transform: uppercase;
-          }
-          .info {
-            width: 22px;
-            position: absolute;
-            top: calc(50% - 11px);
-            right: 20px;
-            transition: all 100ms ease-in-out;
-          }
-          .info:hover {
-            scale: 1.2;
+
+  .tableContainer {
+    overflow: scroll;
+    .table {
+      width: 100%;
+      margin: 0 auto;
+      margin-bottom: 70px;
+      min-width: 970px;
+      table-layout: fixed;
+      border-collapse: collapse;
+      border-spacing: 50px 0;
+      thead {
+        th {
+          div {
+            margin: auto;
+            position: relative;
+            max-width: 320px;
+            border-radius: 18px;
+            background: rgba(240, 240, 240, 0.6);
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            span {
+              font-size: 22px;
+              font-style: normal;
+              font-weight: 700;
+              text-transform: uppercase;
+            }
+            .info {
+              width: 22px;
+              position: absolute;
+              top: calc(50% - 11px);
+              right: 20px;
+              transition: all 100ms ease-in-out;
+            }
+            .info:hover {
+              scale: 1.2;
+            }
           }
         }
       }
+      tbody:before {
+        content: "-";
+        display: block;
+        line-height: 35px;
+        color: transparent;
+      }
     }
-    tbody:before {
-      content: "-";
-      display: block;
-      line-height: 35px;
-      color: transparent;
+    .noFound {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: #282828;
+      margin-top: 50px;
     }
   }
 }
