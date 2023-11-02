@@ -17,6 +17,7 @@ import {
   Preloader,
   Text,
 } from "../../Components/UI";
+import { validateEmail, validatePassword } from "../../utils/validation";
 
 const FormSignIn = () => {
   const errors = useActionData() as {
@@ -76,15 +77,15 @@ export const formSignInAction: ActionFunction = async ({ request }) => {
       password: string;
     };
 
-    if (!data.email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
-      return { emailError: "Email Not Valid" };
+    const emailError = validateEmail(data.email);
+    const passwordError = validatePassword(data.password);
+
+    if (emailError) {
+      return emailError;
     }
 
-    if (!data.password.match(/^[a-zA-Z0-9]{8,22}$/)) {
-      return {
-        passwordError:
-          "Password length must best min 8 Chracters and Max 22 Chracters",
-      };
+    if (passwordError) {
+      return passwordError;
     }
 
     const response = await signIn(data.email, data.password);

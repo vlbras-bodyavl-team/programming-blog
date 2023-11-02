@@ -7,3 +7,4 @@ export { default as FormEditPost } from "./FormEditPost/FormEditPost";
 export { default as AdminSideDrawer } from "./AdminSideDrawer/AdminSideDrawer";
 export { default as UsersTable } from "./UsersTable/UsersTable";
 export { default as RolesDropdown } from "./RolesDropdown/RolesDropdown";
+export { default as Fallback } from "./Fallback/Fallback";

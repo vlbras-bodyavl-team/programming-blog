@@ -1,6 +1,7 @@
 .container {
   max-width: 1300px;
   margin: auto;
+  overflow: scroll;
   .header {
     padding: 10px 0;
     display: flex;
@@ -9,7 +10,7 @@
   .table {
     width: 100%;
     margin: 0 auto;
-
+    min-width: 970px;
     table-layout: fixed;
     border-collapse: collapse;
     border-spacing: 50px 0;
@@ -27,7 +28,7 @@
           align-items: center;
           gap: 10px;
           span {
-            font-size: 25px;
+            font-size: 22px;
             font-style: normal;
             font-weight: 700;
             text-transform: uppercase;
@@ -35,6 +36,7 @@
           .info {
             width: 22px;
             position: absolute;
+            top: calc(50% - 11px);
             right: 20px;
             transition: all 100ms ease-in-out;
           }

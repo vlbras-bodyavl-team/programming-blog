@@ -26,6 +26,7 @@ import { formSignUpAction } from "../../Widget/FormSignUp/FormSignUp";
 import { addPostAction } from "../../Pages/AddPost/AddPost";
 import { adminPanelLoader } from "../../Pages/AdminPanel/AdminPanel";
 import { usersLoader } from "../../Pages/Users/Users";
+import { Fallback } from "../../Widget";
 
 const Router = () => {
   const dispatch = useAppDispatch();
@@ -145,7 +146,7 @@ const Router = () => {
       ],
     },
   ]);
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} fallbackElement={<Fallback />} />;
 };
 
 export default Router;
