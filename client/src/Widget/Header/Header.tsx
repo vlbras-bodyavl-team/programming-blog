@@ -12,6 +12,7 @@ import { logout } from "../../services";
 import { removeTokensFromStorage } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const links: { title: string; href: string }[] = [
   {
@@ -58,7 +59,9 @@ const Header = () => {
       >
         <ReactSVG src={isLaptop ? burger : menu} />
       </button>
-      <ReactSVG src={logo} className={s.logo} />
+      <Link to={"/"} className={s.logo}>
+        <ReactSVG src={logo} />
+      </Link>
       <div className={s.links}>
         {links.map((link, index) => (
           <HeaderLink key={index} href={link.href}>
