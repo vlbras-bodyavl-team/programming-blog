@@ -25,7 +25,7 @@ const SearchBar: FC<ISearchBarProps> = ({ onSearch, initialValue }) => {
       placeholder="Search..."
       className={isDark ? `${s.input} ${s.dark}` : s.input}
       value={searchValue}
-      onChange={(e) => setSearchValue(e.target.value)}
+      onChange={(e) => [setSearchValue(e.target.value)]}
     />
   );
 };
