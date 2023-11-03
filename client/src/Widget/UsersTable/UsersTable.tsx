@@ -7,7 +7,7 @@ import { AddButton, Info, SearchBar, Title } from "../../Components/UI";
 import info from "../../assets/images/info.png";
 import infoDark from "../../assets/images/infoDark.png";
 import { useAppSelector } from "../../store/store";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 interface IUsersTableProps {
   users: IUser[];
@@ -24,16 +24,14 @@ const UsersTable: FC<IUsersTableProps> = ({ users }) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const navigate = useNavigate();
-
   const isDark = useAppSelector((state) => state.theme.isDarkMode);
 
   const handleSearch = (value: string) => {
     if (!value.trim()) {
-      setSearchParams({});
-      navigate(".", { replace: true });
+      searchParams.get("email") && setSearchParams({});
+      return;
     }
-    setSearchParams({ email: value });
+    searchParams.get("email") !== value && setSearchParams({ email: value });
   };
 
   return (
