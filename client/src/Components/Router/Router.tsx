@@ -105,6 +105,7 @@ const Router = () => {
           return catchUnauthorizedError(error);
         }
       },
+      shouldRevalidate: () => false,
       children: [
         {
           path: "topic/:id/posts",
