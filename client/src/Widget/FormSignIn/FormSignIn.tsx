@@ -55,7 +55,7 @@ const FormSignIn = () => {
           </Text>
         </FormBlock>
         <DarkButton type="submit" disabled={isLoading}>
-          Submit
+          Sign In
         </DarkButton>
         {isLoading && <Preloader width={20} />}
         <div>

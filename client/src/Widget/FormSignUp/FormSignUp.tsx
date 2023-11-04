@@ -62,7 +62,7 @@ const FormSignUp = () => {
             disabled={isLoading}
           />
         </FormBlock>
-        <DarkButton disabled={isLoading}>Submit</DarkButton>
+        <DarkButton disabled={isLoading}>Sign Up</DarkButton>
         {isLoading && <Preloader width={20} />}
         <div>
           <Text color="#808080">Already have an account? </Text>
