@@ -12,6 +12,7 @@ import { addUser } from "../../../services";
 import { useNavigate } from "react-router-dom";
 import { catchModeratorError } from "../../../utils";
 import { validateEmail, validatePassword } from "../../../utils/validation";
+import { isAxiosError } from "axios";
 interface IRowAddUserProps {
   onCancelClick?: () => void;
 }
@@ -57,6 +58,9 @@ const RowAddUser: FC<IRowAddUserProps> = ({ onCancelClick }) => {
     } catch (error) {
       setIsLoading(false);
       catchModeratorError(error, navigate);
+      if (isAxiosError(error) && error.response?.status === 409) {
+        error.response.data.message && alert(error.response.data.message);
+      } else throw error;
       onCancelClick && onCancelClick();
     }
   };
