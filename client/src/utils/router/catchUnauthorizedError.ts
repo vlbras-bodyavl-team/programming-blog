@@ -15,7 +15,8 @@ export const catchUnauthorizedError = async (error: unknown) => {
 
         setAccessToken(tokens.accessToken);
         setRefreshToken(tokens.refreshToken);
-        return null;
+
+        return redirect(".");
       }
     } else {
       return redirect("/signin");
@@ -23,7 +24,6 @@ export const catchUnauthorizedError = async (error: unknown) => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       let errors = [401, 403, 404];
-      console.log(error.response?.status);
       if (errors.includes(error.response?.status as number))
         return redirect("/signin");
     }

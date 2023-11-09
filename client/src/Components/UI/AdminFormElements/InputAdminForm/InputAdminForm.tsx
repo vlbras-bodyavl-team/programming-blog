@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useRef, useState } from "react";
+import { InputHTMLAttributes, useState } from "react";
 import s from "./InputAdminForm.module.scss";
 import { useAppSelector } from "../../../../store/store";
 
@@ -13,7 +13,7 @@ const InputFormAdmin = ({
   ...props
 }: IInputProps) => {
   const isDark = useAppSelector((state) => state.theme.isDarkMode);
-  const inputRef = useRef<HTMLInputElement>(null);
+
   const [value, setValue] = useState(initialValue || "");
 
   return (
@@ -22,10 +22,9 @@ const InputFormAdmin = ({
       style={props.style}
     >
       <input
-        autoComplete="off"
         className={s.input}
+        autoComplete="off"
         type="text"
-        ref={inputRef}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onBlur={(e) => {
@@ -35,6 +34,7 @@ const InputFormAdmin = ({
         }}
         {...props}
       />
+
       {dropdownItems && (
         <ul className={s.dropdown}>
           {dropdownItems
