@@ -1,7 +1,6 @@
 .container {
   max-width: 1300px;
   margin: auto;
-
   .header {
     padding: 20px 0;
     display: flex;
@@ -19,8 +18,24 @@
     }
   }
 
+  .tableContainer::-webkit-scrollbar {
+    width: 6px;
+  }
+  .tableContainer::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 5px;
+  }
+  .tableContainer:hover::-webkit-scrollbar-thumb {
+    background: rgba($color: #939393, $alpha: 0.5);
+  }
+  .tableContainer::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+
   .tableContainer {
     overflow: scroll;
+    position: relative;
+
     .table {
       width: 100%;
       margin: 0 auto;

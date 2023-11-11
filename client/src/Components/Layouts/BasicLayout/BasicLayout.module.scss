@@ -5,7 +5,7 @@
   .outlet {
     width: 100%;
     padding: 30px 20px;
-    transition: margin 300ms ease-out;
+    transition: margin 300ms ease-out, padding 300ms ease-out;
   }
 }
 
@@ -19,6 +19,9 @@
 
 @media screen and (min-width: 1024px) {
   .container {
+    .outlet.open {
+      padding: 40px 50px 0 50px;
+    }
     .outlet {
       padding: 40px 160px 0 100px;
     }
