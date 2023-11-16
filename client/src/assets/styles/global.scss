@@ -10,6 +10,7 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
+  transition: background-color 0.4s ease-in-out;
 }
 
 body {
