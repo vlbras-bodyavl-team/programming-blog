@@ -6,7 +6,8 @@ export class SeedDefaultCustomer1698843184392 implements MigrationInterface {
   async up(queryRunner: QueryRunner): Promise<void> {
     const customerData: Partial<User> = {
       email: 'default-customer@progblog.com',
-      password: '$argon2id$v=19$m=65536,t=3,p=4$NzfcNdFWG77EWmwEP+GfCg$oflnIcPG2XlQGt3GWPX+poBHvV6z7ZL24IDd54Jv/7k',
+      password:
+        '$argon2id$v=19$m=65536,t=3,p=4$NzfcNdFWG77EWmwEP+GfCg$oflnIcPG2XlQGt3GWPX+poBHvV6z7ZL24IDd54Jv/7k',
       role: Role.CUSTOMER,
     };
 

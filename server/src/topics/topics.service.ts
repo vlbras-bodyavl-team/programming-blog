@@ -52,7 +52,7 @@ export class TopicsService {
 
   async findOne(id: string): Promise<Topic> {
     const topic = await this.topicsRepository.findOneBy({ id });
-    
+
     if (!topic) {
       throw new NotFoundException('Topic not found');
     }
@@ -66,8 +66,7 @@ export class TopicsService {
       await this.topicsRepository.save(topic);
       await this.cacheManager.del('topics');
       return updatedTopic;
-    } 
-    catch (error) {
+    } catch (error) {
       throw new ConflictException('Topic already exists');
     }
   }

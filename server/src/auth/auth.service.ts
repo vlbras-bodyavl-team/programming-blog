@@ -20,7 +20,10 @@ export class AuthService {
 
   async signUp(signUpDto: SignUpDto): Promise<Tokens> {
     const { id, role } = await this.usersService.create(signUpDto);
-    const { accessToken, refreshToken } = await this.generateTokens({ id, role });
+    const { accessToken, refreshToken } = await this.generateTokens({
+      id,
+      role,
+    });
 
     return { accessToken, refreshToken };
   }
@@ -34,7 +37,10 @@ export class AuthService {
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid password');
     }
-    const { accessToken, refreshToken } = await this.generateTokens({ id, role });
+    const { accessToken, refreshToken } = await this.generateTokens({
+      id,
+      role,
+    });
 
     return { accessToken, refreshToken };
   }
@@ -44,7 +50,9 @@ export class AuthService {
   }
 
   async refreshTokens(userId: string, token: string): Promise<Tokens> {
-    const { token: hashedRefreshToken, role } = await this.usersService.findOne(userId);
+    const { token: hashedRefreshToken, role } = await this.usersService.findOne(
+      userId,
+    );
 
     if (!hashedRefreshToken) {
       throw new ForbiddenException('Invalid refresh token');
@@ -54,8 +62,11 @@ export class AuthService {
     if (!isRefreshTokenValid) {
       throw new ForbiddenException('Invalid refresh token');
     }
-    const { accessToken, refreshToken } = await this.generateTokens({ id: userId, role });
-    
+    const { accessToken, refreshToken } = await this.generateTokens({
+      id: userId,
+      role,
+    });
+
     return { accessToken, refreshToken };
   }
 
