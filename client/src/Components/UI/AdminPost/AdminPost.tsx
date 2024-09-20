@@ -6,6 +6,7 @@ import { useAppSelector } from "../../../store/store";
 import { Link, useNavigate } from "react-router-dom";
 import { deletePost } from "../../../services";
 import { catchModeratorError } from "../../../utils";
+import { convertHtmlPost } from "../../../utils/convert-html-post";
 
 interface IAdminPostProps extends HTMLAttributes<HTMLDivElement> {
   post: IAdminPost;
@@ -30,7 +31,7 @@ const AdminPost: FC<IAdminPostProps> = ({ post, ...props }) => {
       {...props}
     >
       <Title>{post.title}</Title>
-      <article className={s.content}>{post.content}</article>
+      <article className={s.content}>{convertHtmlPost(post.content)}</article>
       <div className={s.tools}>
         <div className={s.info}>
           {post.updatedBy?.email ? (

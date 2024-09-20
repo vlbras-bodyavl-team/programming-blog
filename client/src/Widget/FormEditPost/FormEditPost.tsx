@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Form, useNavigate, useNavigation, useParams } from "react-router-dom";
 import {
   Title,
@@ -14,6 +14,7 @@ import s from "./FormEditPost.module.scss";
 import { useAppSelector } from "../../store/store";
 import { deletePost } from "../../services";
 import axios from "axios";
+import { convertHtmlPost } from "../../utils/convert-html-post";
 
 interface IFormEditPost {
   defaultValues?: IPost;
@@ -24,6 +25,10 @@ const FormEditPost: FC<IFormEditPost> = ({ defaultValues }) => {
   const [isDeletingPost, setIsDeletingPost] = useState(false);
 
   const params = useParams() as { id: string };
+
+  useEffect(() => {
+    console.log(convertHtmlPost(defaultValues?.content || ""));
+  }, [defaultValues]);
 
   const navigate = useNavigate();
 
@@ -79,7 +84,7 @@ const FormEditPost: FC<IFormEditPost> = ({ defaultValues }) => {
       />
 
       <TextArea
-        defaultValue={defaultValues?.content}
+        defaultValue={convertHtmlPost(defaultValues?.content || "")}
         placeholder="Content"
         name="content"
         disabled={isLoading}
