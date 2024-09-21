@@ -62,7 +62,7 @@ jobs:
             docker exec programming-blog npx typeorm -d dist/database/database.config.js migration:run
 
             # Run seeds
-            docker exec programming-blog ts-node -r tsconfig-paths/register ./src/database/seeds/run-seed.ts
+            docker exec programming-blog npx ts-node -r tsconfig-paths/register ./src/database/seeds/run-seed.ts
           EOF
 
           # Cleanup deploy key

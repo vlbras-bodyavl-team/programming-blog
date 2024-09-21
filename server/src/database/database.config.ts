@@ -15,6 +15,13 @@ export const dataSourceOptions: DataSourceOptions = {
   migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
   synchronize: false,
   logging: true,
+  ssl:
+    process.env.POSTGRES_SSL_ENABLED === 'true'
+      ? {
+          rejectUnauthorized:
+            process.env.POSTGRES_REJECT_UNAUTHORIZED === 'true',
+        }
+      : undefined,
 };
 
 const dataSource = new DataSource(dataSourceOptions);
