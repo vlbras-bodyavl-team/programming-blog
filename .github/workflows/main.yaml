@@ -49,6 +49,9 @@ jobs:
 
           # SSH into EC2 and run Docker commands
           ssh -o StrictHostKeyChecking=no -i deploy_key.pem ubuntu@${{ secrets.AWS_EC2_HOST }} << EOF
+            # Authenticate Docker with ECR
+            aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin $ECR_REGISTRY
+
             # (Optional) Stop the current container
             [ "$(docker ps -a -q)" ] && docker rm -f \$(docker ps -aq)
 
