@@ -50,7 +50,7 @@ jobs:
           # SSH into EC2 and run Docker commands
           ssh -o StrictHostKeyChecking=no -i deploy_key.pem ubuntu@${{ secrets.AWS_EC2_HOST }} << EOF
             # (Optional) Stop the current container
-            docker rm -f \$(docker ps -aq)
+            [ "$(docker ps -a -q)" ] && docker rm -f \$(docker ps -aq)
 
             # Pull image from Amazon ECR
             docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
