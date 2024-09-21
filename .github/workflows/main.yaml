@@ -48,7 +48,7 @@ jobs:
           chmod 600 deploy_key.pem
 
           # SSH into EC2 and run Docker commands
-          ssh -o StrictHostKeyChecking=no -i deploy_key.pem ec2-user@${{ secrets.AWS_EC2_HOST }} << EOF
+          ssh -o StrictHostKeyChecking=no -i deploy_key.pem ubuntu@${{ secrets.AWS_EC2_HOST }} << EOF
             # (Optional) Stop the current container
             docker rm -f \$(docker ps -aq)
 
