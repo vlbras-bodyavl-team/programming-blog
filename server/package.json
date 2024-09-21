@@ -1,12 +1,12 @@
 {
   "name": "programming-blog-server",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "push": "npm version patch && git push",
+    "push": "npm version patch && git add . && git commit -m \"Bump version to $(node -p \"require('./package.json').version\")\" && git push",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
