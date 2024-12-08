@@ -16,7 +16,7 @@ export const addUser = async (
   const token = getTokensFromStorage()?.accessToken;
 
   const response = await axios.post(
-    `${import.meta.env.VITE_API_URL}/admins/users`,
+    `${import.meta.env.VITE_API_URL}/admin/user`,
     data,
     {
       headers: {

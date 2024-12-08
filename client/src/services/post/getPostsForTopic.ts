@@ -8,7 +8,7 @@ export const getPostsForTopic = async (
   const token = getTokensFromStorage()?.accessToken;
 
   const response = await axios.get(
-    `${import.meta.env.VITE_API_URL}/topics/${topicId}/posts`,
+    `${import.meta.env.VITE_API_URL}/topic/${topicId}/post`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

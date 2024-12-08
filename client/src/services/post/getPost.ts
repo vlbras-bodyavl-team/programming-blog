@@ -6,7 +6,7 @@ export const getPost = async (id: string): Promise<IPost> => {
   const token = getTokensFromStorage()?.accessToken;
 
   const response = await axios.get(
-    `${import.meta.env.VITE_API_URL}/admins/posts/${id}`,
+    `${import.meta.env.VITE_API_URL}/admin/post/${id}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
