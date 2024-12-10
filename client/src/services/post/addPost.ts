@@ -1,11 +1,15 @@
 import axios, { AxiosResponse } from "axios";
 import { getTokensFromStorage } from "../../utils";
 
-export const addPost = async (post: {
+interface IAddPost {
   title: string;
-  topic: string;
+  topicName: string;
   content: string;
-}): Promise<AxiosResponse<any, any>> => {
+}
+
+export const addPost = async (
+  post: IAddPost
+): Promise<AxiosResponse<any, any>> => {
   const token = getTokensFromStorage()?.accessToken;
   const response = await axios.post(
     `${import.meta.env.VITE_API_URL}/admin/post`,

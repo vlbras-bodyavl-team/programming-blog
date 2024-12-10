@@ -39,7 +39,7 @@ const FormAddPost = () => {
         id="topic"
         placeholder="Topic"
         style={{ width: "160px" }}
-        name="topic"
+        name="topicName"
         dropdownItems={topics.map((topic) => topic.name)}
         disabled={isLoading}
         required

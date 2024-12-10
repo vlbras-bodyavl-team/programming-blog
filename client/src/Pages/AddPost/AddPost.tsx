@@ -12,7 +12,7 @@ export const addPostAction: ActionFunction = async ({ request }) => {
     const formData = await request.formData();
     const data = Object.fromEntries(formData.entries()) as {
       title: string;
-      topic: string;
+      topicName: string;
       content: string;
     };
 
